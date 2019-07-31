@@ -1,8 +1,8 @@
 import React from 'react';
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator, createAppContainer, createBottomTabNavigator } from "react-navigation";
 import Game from "./src/screens/Game"
 
-const AppNavigator = createStackNavigator({
+const AppNavigator = createBottomTabNavigator({
   Game: {
     screen: Game
   }
