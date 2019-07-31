@@ -19,15 +19,21 @@ class SingleCard extends Component {
     selected: false
   }
 
-  onPress = () => {
-    console.log("pressed")
-    this.setState({selected: !this.state.selected})
+  onPress = (index) => {
+    const { onSelect, onDeSelect } = this.props
+    this.setState({selected: !this.state.selected}, () => {
+        if(this.state.selected){
+            onSelect(index)
+        }else{
+            onDeSelect(index)
+        }
+    })
 }
   render() {
-    const { suit, value, num, selected } = this.props
+    const { suit, value, num } = this.props
     const suitRender = AllHtmlEntities.decode(type[suit].suit)
     return (
-      <TouchableOpacity onPress={this.onPress}
+      <TouchableOpacity onPress={() => this.onPress(num)}
         style={[styles.main,
         { left: num * 50, top: num * 7 },
         this.state.selected && styles.selected

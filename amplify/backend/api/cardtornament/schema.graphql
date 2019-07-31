@@ -4,6 +4,10 @@ type Game @model {
 	playerCount: Int!
 	winner: String
 	players: [String]
+	createdBy: String
+	startCards: Int
+	gameType: String
+	private: Boolean
 }
 
 type Card @model {
