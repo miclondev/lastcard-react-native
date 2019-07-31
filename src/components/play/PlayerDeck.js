@@ -22,13 +22,15 @@ class PlayerDeck extends Component {
     render(){
         return(
             <View style={styles.main}>
+                <View style={styles.inner}>
                 {
                     myCards.map(c => <SingleCard 
                     value={c.value}
                     key={c.num}
                     suit={c.suit}
                     num={c.num}/>)
-                } 
+                }
+                </View> 
             </View>
         )
     }
@@ -37,11 +39,15 @@ class PlayerDeck extends Component {
 const styles = StyleSheet.create({
     main: {
         flexDirection: 'row',
-        backgroundColor: 'grey',
+        //backgroundColor: 'grey',
         flex: 1,
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'flex-start',
-        marginBottom: -300
+        marginBottom: -200,
+        zIndex: 30,
+    },
+    inner: {
+       marginTop: 100
     }
 })
 

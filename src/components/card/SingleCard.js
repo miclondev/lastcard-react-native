@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import NumSuit from "./NumSuit"
 
 import entities from "html-entities"
@@ -19,26 +19,25 @@ class SingleCard extends Component {
     selected: false
   }
 
-  onPress = () => this.setState({selected: !this.state.selected})
-
+  onPress = () => {
+    console.log("pressed")
+    this.setState({selected: !this.state.selected})
+}
   render() {
     const { suit, value, num, selected } = this.props
     const suitRender = AllHtmlEntities.decode(type[suit].suit)
     return (
       <TouchableOpacity onPress={this.onPress}
-      style={[styles.main,
+        style={[styles.main,
         { left: num * 50, top: num * 7 },
         this.state.selected && styles.selected
         ]}
       >
-        
           <NumSuit value={value} suit={suitRender} color={type[suit].color} />
-        
             <View >
               <Text style={styles.type}>{suitRender}</Text>
             </View>
-          <NumSuit value={value} suit={suitRender} color={type[suit].color} />
-        
+          <NumSuit value={value} suit={suitRender} color={type[suit].color} /> 
       </TouchableOpacity>
     )
   }

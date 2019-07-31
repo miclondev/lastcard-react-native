@@ -1,7 +1,20 @@
 type Game @model {
 	id: ID!
 	title: String!
-	content: String!
-	price: Int
-	rating: Float
+	playerCount: Int!
+	winner: String
+	players: [String]
+}
+
+type Card @model {
+	value: Int
+	suit: Int
+	image: String
+}
+
+type PlayerStats @model {
+	id: ID!
+	gamesWon: Int
+	gemesLost: Int
+	ranking: Int
 }
