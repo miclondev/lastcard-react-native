@@ -6,6 +6,10 @@ class BackDeck extends Component {
         return(
             <View style={styles.main}>
                 <Text>BACKDECK</Text>
+                <Text>BACKDECK</Text>
+                <Text>BACKDECK</Text>
+                <Text>BACKDECK</Text>
+                <Text>BACKDECK</Text>
             </View>
         )
     }

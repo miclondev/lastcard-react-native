@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, Text, StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import NumSuit from "./NumSuit"
 import { Spring, animated } from 'react-spring/renderprops-native'
 import entities from "html-entities"
@@ -32,22 +32,24 @@ class SingleCard extends Component {
       })
   }
 }
+
   render() {
-    const { suit, value, num, absolute } = this.props
+    const { suit, value, num } = this.props 
     const suitRender = AllHtmlEntities.decode(type[suit].suit)
     return (
-      <Spring native from={{ top: 7 }} to={{top: this.state.selected ? -100: 7}}>
+      <Spring native from={{ top: 10 }} to={{
+        top: this.state.selected ? 10 : 100
+        }}>
         {props => (
-            <TouchableOpacity onPress={() => this.onPress(num)} style={{...styles.main, 
-            left: num * 50, top: num * 7, position: 'absolute' }}>
-            <AnimatedView style={{...props, ...styles.card}} >
+          <TouchableWithoutFeedback onPress={() => this.onPress(num)}>
+            <AnimatedView style={{...props, ...styles.card,left: num * 50, position: 'absolute' }} >
                   <NumSuit value={value} suit={suitRender} color={type[suit].color} />
                     <View >
                       <Text style={styles.type}>{suitRender}</Text>
                     </View> 
                   <NumSuit value={value} suit={suitRender} color={type[suit].color} /> 
                 </AnimatedView>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
           )}
       </Spring>
     )
@@ -61,17 +63,10 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderWidth: 2,
     backgroundColor: 'white',
-  },
-  touch: {
-    position: 'relative'
-  },
-  main: {
     height: 400,
     width: 240,
     margin: 5,
-    padding: 5,
-    justifyContent: 'space-between',
-    
+    padding: 5
   },
   type: {
     fontSize: 100,

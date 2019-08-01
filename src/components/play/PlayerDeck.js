@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, StyleSheet } from "react-native"
+import {View, Text, StyleSheet, ScrollView } from "react-native"
 import SingleCard from "../card/SingleCard"
 
 class PlayerDeck extends Component {
@@ -71,24 +71,40 @@ class PlayerDeck extends Component {
         }
     }
 
+    // rotateDeg = num => {
+    //     let total = this.state.available.length
+    //     let mid = total/2
+    //     if(num === mid) return 0
+    //     if(num > mid){
+    //         return num + 3
+    //     }else {
+    //         return num * -2
+    //     }
+    // }
+
     render(){
         console.log(this.state)
+       // console.log(this.rotateDeg(2))
         return(
-            <View style={styles.main}>
-                <View style={styles.inner}>
+            
+                <ScrollView contentContainerStyle={styles.main}
+                horizontal={true}
+                >
+                    {/* <Text>My Cards</Text> */}
                     {
-                        this.state.available.map(c => <SingleCard 
+                        this.state.available.map((c, i) => <SingleCard 
                         value={c.value}
                         key={c.num}
                         suit={c.suit}
                         num={c.num}
                         onSelect={this.onSelectCard}
                         onDeSelect={this.onDeSelectCard}
-                        absolute
+                        // deg={this.rotateDeg(i)}
+                        // index={i}
                         />)
                     }
-                </View> 
-            </View>
+              </ScrollView>
+         
         )
     }
 }
@@ -96,15 +112,10 @@ class PlayerDeck extends Component {
 const styles = StyleSheet.create({
     main: {
         flexDirection: 'row',
-        //backgroundColor: 'grey',
-        flex: 1,
-        alignItems: 'flex-start',
-        justifyContent: 'flex-start',
-        marginBottom: -200,
-       // zIndex: 30,
-    },
-    inner: {
-       marginTop: 100
+       // backgroundColor: 'blue',
+        width: 800,
+        // alignItems: 'flex-start',
+        // justifyContent: 'flex-start',
     }
 })
 
