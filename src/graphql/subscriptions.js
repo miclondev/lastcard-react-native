@@ -12,6 +12,12 @@ export const onCreateGame = `subscription OnCreateGame {
     startCards
     gameType
     private
+    finished
+    cards {
+      value
+      suit
+      image
+    }
   }
 }
 `;
@@ -26,6 +32,12 @@ export const onUpdateGame = `subscription OnUpdateGame {
     startCards
     gameType
     private
+    finished
+    cards {
+      value
+      suit
+      image
+    }
   }
 }
 `;
@@ -40,30 +52,12 @@ export const onDeleteGame = `subscription OnDeleteGame {
     startCards
     gameType
     private
-  }
-}
-`;
-export const onCreateCard = `subscription OnCreateCard {
-  onCreateCard {
-    value
-    suit
-    image
-  }
-}
-`;
-export const onUpdateCard = `subscription OnUpdateCard {
-  onUpdateCard {
-    value
-    suit
-    image
-  }
-}
-`;
-export const onDeleteCard = `subscription OnDeleteCard {
-  onDeleteCard {
-    value
-    suit
-    image
+    finished
+    cards {
+      value
+      suit
+      image
+    }
   }
 }
 `;
@@ -91,6 +85,69 @@ export const onDeletePlayerStats = `subscription OnDeletePlayerStats {
     gamesWon
     gemesLost
     ranking
+  }
+}
+`;
+export const onCreateHand = `subscription OnCreateHand {
+  onCreateHand {
+    id
+    myCards {
+      value
+      suit
+      image
+    }
+    available {
+      value
+      suit
+      image
+    }
+    selectedCards {
+      value
+      suit
+      image
+    }
+  }
+}
+`;
+export const onUpdateHand = `subscription OnUpdateHand {
+  onUpdateHand {
+    id
+    myCards {
+      value
+      suit
+      image
+    }
+    available {
+      value
+      suit
+      image
+    }
+    selectedCards {
+      value
+      suit
+      image
+    }
+  }
+}
+`;
+export const onDeleteHand = `subscription OnDeleteHand {
+  onDeleteHand {
+    id
+    myCards {
+      value
+      suit
+      image
+    }
+    available {
+      value
+      suit
+      image
+    }
+    selectedCards {
+      value
+      suit
+      image
+    }
   }
 }
 `;

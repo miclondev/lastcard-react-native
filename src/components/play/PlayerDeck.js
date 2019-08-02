@@ -83,7 +83,8 @@ class PlayerDeck extends Component {
     // }
 
     render(){
-        console.log(this.state)
+        console.log(this.props)
+        const { cards } = this.props
        // console.log(this.rotateDeg(2))
         return(
             
@@ -92,11 +93,11 @@ class PlayerDeck extends Component {
                 >
                     {/* <Text>My Cards</Text> */}
                     {
-                        this.state.available.map((c, i) => <SingleCard 
+                       cards.length > 0 && cards.map((c, i) => <SingleCard 
                         value={c.value}
-                        key={c.num}
-                        suit={c.suit}
-                        num={c.num}
+                        key={c.id}
+                        suit={c.icon}
+                        num={i}
                         onSelect={this.onSelectCard}
                         onDeSelect={this.onDeSelectCard}
                         // deg={this.rotateDeg(i)}

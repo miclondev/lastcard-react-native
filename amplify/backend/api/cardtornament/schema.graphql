@@ -1,5 +1,5 @@
 type Game @model {
-	id: ID!
+	id: ID
 	title: String!
 	playerCount: Int!
 	winner: String
@@ -8,17 +8,26 @@ type Game @model {
 	startCards: Int
 	gameType: String
 	private: Boolean
+	finished: Boolean
+	cards: [Card]
 }
 
-type Card @model {
+type Card {
 	value: Int
 	suit: Int
 	image: String
 }
 
 type PlayerStats @model {
-	id: ID!
+	id: ID
 	gamesWon: Int
 	gemesLost: Int
 	ranking: Int
+}
+
+type Hand @model {
+	id: ID
+	myCards: [Card]
+	available: [Card]
+	selectedCards: [Card]  
 }

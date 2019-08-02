@@ -1,0 +1,324 @@
+[
+    {
+        "id": 1,
+        "suit": "hearts",
+        "value": 2,
+        "icon": "&hearts;"
+    },
+    {
+        "id": 2,
+        "suit": "hearts",
+        "value": 3,
+        "icon": "&hearts;"
+    },
+    {
+        "id": 3,
+        "suit": "hearts",
+        "value": 4,
+        "icon": "&hearts;"
+    },
+    {
+        "id": 4,
+        "suit": "hearts",
+        "value": 5,
+        "icon": "&hearts;"
+    },
+    {
+        "id": 5,
+        "suit": "hearts",
+        "value": 6,
+        "icon": "&hearts;"
+    },
+    {
+        "id": 6,
+        "suit": "hearts",
+        "value": 7,
+        "icon": "&hearts;"
+    },
+    {
+        "id": 7,
+        "suit": "hearts",
+        "value": 8,
+        "icon": "&hearts;" 
+    },
+    {
+        "id": 8,
+        "suit": "hearts",
+        "value": 9,
+        "icon": "&hearts;"   
+    },
+    {
+        "id": 9,
+        "suit": "hearts",
+        "value": 10,
+        "icon": "&hearts;"    
+    },
+    {
+        "id": 10,
+        "suit": "hearts",
+        "value": "J",
+        "icon": "&hearts;"
+    },
+    {
+        "id": 11,
+        "suit": "hearts",
+        "value": "Q",
+        "icon": "&hearts;"
+    },
+    {
+        "id": 12,
+        "suit": "hearts",
+        "value": "K",
+        "icon": "&hearts;"
+    },
+    {
+        "id": 13,
+        "suit": "hearts",
+        "value": "A",
+        "icon": "&hearts;"
+    },
+    {
+        "id": 14,
+        "suit": "diamonds",
+        "value": 2,
+        "icon": "&diams;"
+    },
+    {
+        "id": 15,
+        "suit": "diamonds",
+        "value": 3,
+        "icon": "&diams;"
+    },
+    {
+        "id": 16,
+        "suit": "diamonds",
+        "value": 4,
+        "icon": "&diams;"
+    },
+    {
+        "id": 17,
+        "suit": "diamonds",
+        "value": 5,
+        "icon": "&diams;"
+    },
+    {
+        "id": 18,
+        "suit": "diamonds",
+        "value": 6,
+        "icon": "&diams;"
+    },
+    {
+        "id": 19,
+        "suit": "diamonds",
+        "value": 7,
+        "icon": "&diams;"
+    },
+    {
+        "id": 20,
+        "suit": "diamonds",
+        "value": 8,
+        "icon": "&diams;"
+    },
+    {
+        "id": 21,
+        "suit": "diamonds",
+        "value": 9,
+        "icon": "&diams;"
+    },
+    {
+        "id": 22,
+        "suit": "diamonds",
+        "value": 10,
+        "icon": "&diams;"
+    },
+    {
+        "id": 23,
+        "suit": "diamonds",
+        "value": "J",
+        "icon": "&diams;"
+    },
+    {
+        "id": 24,
+        "suit": "diamonds",
+        "value": "Q",
+        "icon": "&diams;"
+    },
+    {
+        "id": 25,
+        "suit": "diamonds",
+        "value": "K",
+        "icon": "&diams;"
+    },
+    {
+        "id": 26,
+        "suit": "diamonds",
+        "value": "A",
+        "icon": "&diams;"
+    },
+    {
+        "id": 27,
+        "suit": "clubs",
+        "value": 2,
+        "icon": "&clubs;"
+    },
+    {
+        "id": 28,
+        "suit": "clubs",
+        "value": 3,
+        "icon": "&clubs;"
+    },
+    {
+        "id": 29,
+        "suit": "clubs",
+        "value": 4,
+        "icon": "&clubs;"
+    },
+    {
+        "id": 30,
+        "suit": "clubs",
+        "value": 5,
+        "icon": "&clubs;"
+    },
+    {
+        "id": 31,
+        "suit": "clubs",
+        "value": 6,
+        "icon": "&clubs;"
+    },
+    {
+        "id": 32,
+        "suit": "clubs",
+        "value": 7,
+        "icon": "&clubs;"
+    },
+    {
+        "id": 33,
+        "suit": "clubs",
+        "value": 8,
+        "icon": "&clubs;"
+    },
+    {
+        "id": 34,
+        "suit": "clubs",
+        "value": 9,
+        "icon": "&clubs;"
+    },
+    {
+        "id": 35,
+        "suit": "clubs",
+        "value": 10,
+        "icon": "&clubs;"
+    },
+    {
+        "id": 36,
+        "suit": "clubs",
+        "value": "J",
+        "icon": "&clubs;"
+    },
+    {
+        "id": 37,
+        "suit": "clubs",
+        "value": "Q",
+        "icon": "&clubs;"
+    },
+    {
+        "id": 38,
+        "suit": "clubs",
+        "value": "K",
+        "icon": "&clubs;"
+    },
+    {
+        "id": 38,
+        "suit": "clubs",
+        "value": "A",
+        "icon": "&clubs;"
+    },
+    {
+        "id": 39,
+        "suit": "spades",
+        "value": 2,
+        "icon": "&spades;"
+    },
+    {
+        "id": 40,
+        "suit": "spades",
+        "value": 3,
+        "icon": "&spades;"
+    },
+    {
+        "id": 41,
+        "suit": "spades",
+        "value": 4,
+        "icon": "&spades;"
+    },
+    {
+        "id": 42,
+        "suit": "spades",
+        "value": 5,
+        "icon": "&spades;"
+    },
+    {
+        "id": 43,
+        "suit": "spades",
+        "value": 6,
+        "icon": "&spades;"
+    },
+    {
+        "id": 44,
+        "suit": "spades",
+        "value": 7,
+        "icon": "&spades;"
+    },
+    {
+        "id": 45,
+        "suit": "spades",
+        "value": 8,
+        "icon": "&spades;"
+    },
+    {
+        "id": 46,
+        "suit": "spades",
+        "value": 9,
+        "icon": "&spades;"
+    },
+    {
+        "id": 48,
+        "suit": "spades",
+        "value": 10,
+        "icon": "&spades;"
+    },
+    {
+        "id": 49,
+        "suit": "spades",
+        "value": "J",
+        "icon": "&spades;"
+    },
+    {
+        "id": 50,
+        "suit": "spades",
+        "value": "Q",
+        "icon": "&spades;"
+    },
+    {
+        "id": 51,
+        "suit": "spades",
+        "value": "K",
+        "icon": "&spades;"
+    },
+    {
+        "id": 52,
+        "suit": "spades",
+        "value": "A",
+        "icon": "&spades;"
+    },
+    {
+        "id": 53,
+        "suit": "joker",
+        "value": "black"
+    },
+    {
+        "id": 54,
+        "suit": "joker",
+        "value": "red"
+    }
+]

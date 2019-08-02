@@ -12,6 +12,12 @@ export const getGame = `query GetGame($id: ID!) {
     startCards
     gameType
     private
+    finished
+    cards {
+      value
+      suit
+      image
+    }
   }
 }
 `;
@@ -31,29 +37,12 @@ export const listGames = `query ListGames(
       startCards
       gameType
       private
-    }
-    nextToken
-  }
-}
-`;
-export const getCard = `query GetCard($id: ID!) {
-  getCard(id: $id) {
-    value
-    suit
-    image
-  }
-}
-`;
-export const listCards = `query ListCards(
-  $filter: ModelCardFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listCards(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      value
-      suit
-      image
+      finished
+      cards {
+        value
+        suit
+        image
+      }
     }
     nextToken
   }
@@ -79,6 +68,55 @@ export const listPlayerStatss = `query ListPlayerStatss(
       gamesWon
       gemesLost
       ranking
+    }
+    nextToken
+  }
+}
+`;
+export const getHand = `query GetHand($id: ID!) {
+  getHand(id: $id) {
+    id
+    myCards {
+      value
+      suit
+      image
+    }
+    available {
+      value
+      suit
+      image
+    }
+    selectedCards {
+      value
+      suit
+      image
+    }
+  }
+}
+`;
+export const listHands = `query ListHands(
+  $filter: ModelHandFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listHands(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      myCards {
+        value
+        suit
+        image
+      }
+      available {
+        value
+        suit
+        image
+      }
+      selectedCards {
+        value
+        suit
+        image
+      }
     }
     nextToken
   }

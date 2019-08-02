@@ -35,7 +35,10 @@ class SingleCard extends Component {
 
   render() {
     const { suit, value, num } = this.props 
-    const suitRender = AllHtmlEntities.decode(type[suit].suit)
+    
+    console.log(suit, value, num)
+
+    const suitRender = AllHtmlEntities.decode(suit)
     return (
       <Spring native from={{ top: 10 }} to={{
         top: this.state.selected ? 10 : 100
@@ -43,11 +46,11 @@ class SingleCard extends Component {
         {props => (
           <TouchableWithoutFeedback onPress={() => this.onPress(num)}>
             <AnimatedView style={{...props, ...styles.card,left: num * 50, position: 'absolute' }} >
-                  <NumSuit value={value} suit={suitRender} color={type[suit].color} />
+                  <NumSuit value={value} suit={suitRender}/>
                     <View >
                       <Text style={styles.type}>{suitRender}</Text>
                     </View> 
-                  <NumSuit value={value} suit={suitRender} color={type[suit].color} /> 
+                  <NumSuit value={value} suit={suitRender}/> 
                 </AnimatedView>
             </TouchableWithoutFeedback>
           )}
@@ -59,7 +62,7 @@ class SingleCard extends Component {
 const styles = StyleSheet.create({
   card: {
     borderColor: "#696969",
-    borderRadius: 20,
+    borderRadius: 10,
     borderStyle: "solid",
     borderWidth: 2,
     backgroundColor: 'white',

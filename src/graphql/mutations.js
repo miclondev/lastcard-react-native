@@ -12,6 +12,12 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     startCards
     gameType
     private
+    finished
+    cards {
+      value
+      suit
+      image
+    }
   }
 }
 `;
@@ -26,6 +32,12 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     startCards
     gameType
     private
+    finished
+    cards {
+      value
+      suit
+      image
+    }
   }
 }
 `;
@@ -40,30 +52,12 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     startCards
     gameType
     private
-  }
-}
-`;
-export const createCard = `mutation CreateCard($input: CreateCardInput!) {
-  createCard(input: $input) {
-    value
-    suit
-    image
-  }
-}
-`;
-export const updateCard = `mutation UpdateCard($input: UpdateCardInput!) {
-  updateCard(input: $input) {
-    value
-    suit
-    image
-  }
-}
-`;
-export const deleteCard = `mutation DeleteCard($input: DeleteCardInput!) {
-  deleteCard(input: $input) {
-    value
-    suit
-    image
+    finished
+    cards {
+      value
+      suit
+      image
+    }
   }
 }
 `;
@@ -91,6 +85,69 @@ export const deletePlayerStats = `mutation DeletePlayerStats($input: DeletePlaye
     gamesWon
     gemesLost
     ranking
+  }
+}
+`;
+export const createHand = `mutation CreateHand($input: CreateHandInput!) {
+  createHand(input: $input) {
+    id
+    myCards {
+      value
+      suit
+      image
+    }
+    available {
+      value
+      suit
+      image
+    }
+    selectedCards {
+      value
+      suit
+      image
+    }
+  }
+}
+`;
+export const updateHand = `mutation UpdateHand($input: UpdateHandInput!) {
+  updateHand(input: $input) {
+    id
+    myCards {
+      value
+      suit
+      image
+    }
+    available {
+      value
+      suit
+      image
+    }
+    selectedCards {
+      value
+      suit
+      image
+    }
+  }
+}
+`;
+export const deleteHand = `mutation DeleteHand($input: DeleteHandInput!) {
+  deleteHand(input: $input) {
+    id
+    myCards {
+      value
+      suit
+      image
+    }
+    available {
+      value
+      suit
+      image
+    }
+    selectedCards {
+      value
+      suit
+      image
+    }
   }
 }
 `;
