@@ -7,17 +7,15 @@ export const getGame = `query GetGame($id: ID!) {
     title
     playerCount
     winner
-    players
     createdBy
     startCards
     gameType
     private
     finished
-    cards {
-      value
-      suit
-      image
-    }
+    started
+    cards
+    onPlay
+    user
   }
 }
 `;
@@ -32,17 +30,15 @@ export const listGames = `query ListGames(
       title
       playerCount
       winner
-      players
       createdBy
       startCards
       gameType
       private
       finished
-      cards {
-        value
-        suit
-        image
-      }
+      started
+      cards
+      onPlay
+      user
     }
     nextToken
   }
@@ -76,21 +72,27 @@ export const listPlayerStatss = `query ListPlayerStatss(
 export const getHand = `query GetHand($id: ID!) {
   getHand(id: $id) {
     id
-    myCards {
-      value
-      suit
-      image
+    myCards
+    available
+    selectedCards
+    game {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
     }
-    available {
-      value
-      suit
-      image
-    }
-    selectedCards {
-      value
-      suit
-      image
-    }
+    gameId
+    user
+    playerNumber
   }
 }
 `;
@@ -102,21 +104,69 @@ export const listHands = `query ListHands(
   listHands(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      myCards {
-        value
-        suit
-        image
+      myCards
+      available
+      selectedCards
+      game {
+        id
+        title
+        playerCount
+        winner
+        createdBy
+        startCards
+        gameType
+        private
+        finished
+        started
+        cards
+        onPlay
+        user
       }
-      available {
-        value
-        suit
-        image
+      gameId
+      user
+      playerNumber
+    }
+    nextToken
+  }
+}
+`;
+export const handsByGame = `query HandsByGame(
+  $gameId: String
+  $user: ModelStringKeyConditionInput
+  $filter: ModelHandFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  handsByGame(
+    gameId: $gameId
+    user: $user
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      myCards
+      available
+      selectedCards
+      game {
+        id
+        title
+        playerCount
+        winner
+        createdBy
+        startCards
+        gameType
+        private
+        finished
+        started
+        cards
+        onPlay
+        user
       }
-      selectedCards {
-        value
-        suit
-        image
-      }
+      gameId
+      user
+      playerNumber
     }
     nextToken
   }

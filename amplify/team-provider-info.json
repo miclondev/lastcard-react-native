@@ -9,11 +9,6 @@
             "UnauthRoleName": "cardtornament-prod-20190730201954-unauthRole",
             "StackName": "cardtornament-prod-20190730201954",
             "StackId": "arn:aws:cloudformation:eu-west-1:799078344438:stack/cardtornament-prod-20190730201954/40b19050-b2ee-11e9-a4a2-06bacc45a76c"
-        },
-        "categories": {
-            "auth": {
-                "cardtornamentbdde3661bdde3661": {}
-            }
         }
     }
 }

@@ -1,20 +1,30 @@
-import React from 'react';
-import { createDrawerNavigator, createAppContainer, createBottomTabNavigator } from "react-navigation";
-import Game from "./src/screens/Game"
+import React, { Component } from 'react';
+import { ApolloProvider } from "react-apollo";
+import { Rehydrated } from "aws-appsync-react";
+import AWSAppSyncClient from "aws-appsync";
+import awsmobile from './aws-exports'
+import MainNav from './src/MainNav'
 
-const AppNavigator = createDrawerNavigator({
-  Game: {
-    screen: Game
+const client = new AWSAppSyncClient({
+  url: awsmobile.aws_appsync_graphqlEndpoint,
+  region: awsmobile.aws_appsync_region,
+  auth: {
+    type: awsmobile.aws_appsync_authenticationType,
+    apiKey: awsmobile.aws_appsync_apiKey
   }
-}, {
-  hideStatusBar: true,
-  drawerBackgroundColor: 'rgba(255,255,255,.9)',
-  overlayColor: '#6b52ae',
-  contentOptions: {
-    activeTintColor: '#fff',
-    activeBackgroundColor: '#6b52ae',
-  },
-});
+})
 
+class App extends Component {
+  render(){
+    return(
+      <ApolloProvider client={client}>
+        <Rehydrated>
+          <MainNav/>
+        </Rehydrated>
+      </ApolloProvider>
+    )
+  }
+}
 
-export default createAppContainer(AppNavigator);
+export default App
+

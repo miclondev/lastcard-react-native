@@ -7,6 +7,11 @@ import { Feather } from '@expo/vector-icons';
 
 import cardsDeck from "../data/cards.json"
 
+import { graphql, compose } from "react-apollo"
+import getGame from "../queries/game/getGame"
+import createHand from "../mutations/createHand"
+import updateGame from "../mutations/updateGame"
+
 const width = Dimensions.get('window').width
 
 
@@ -28,7 +33,8 @@ class Game extends Component {
         players: 2,
         p1Cards: [],
         p2Cards: [],
-        cardsOnPlay: []
+        cardsOnPlay: [],
+        loading: false
     }
 
     onPressPlay = () => this.setState({ canPlay: !this.state.canPlay })
@@ -46,7 +52,6 @@ class Game extends Component {
                 //initial card handOut
                 this.initialCardHandOut()
             })
-            
         }
         //sync with online
     }
@@ -63,39 +68,73 @@ class Game extends Component {
         return cards
     } 
 
-    initialCardHandOut = () => {
-        const { initialPlay, availableCards, players } = this.state
-
+    initialCardHandOut = async () => {
+        const { initialPlay, availableCards } = this.state
         let player1Cards = []
         let player2Cards = []
         let onPlay = []
-        let outCards = initialPlay*players
+
         let cards = [...availableCards]
-        //console.log(player1Cards.length, player2Cards.length, cards.length )
+
         for(let i = 0; i < initialPlay; i++){
-            player1Cards.push(cards[i])
-            cards.splice(i, 1)
-        }
-        for(let i = 0; i < initialPlay; i++){
-            player2Cards.push(cards[i])
+            player1Cards.push(cards[i].id)
             cards.splice(i, 1)
         }
 
-        onPlay.push(cards[0])
+        for(let i = 0; i < initialPlay; i++){
+            player2Cards.push(cards[i].id)
+            cards.splice(i, 1)
+        }
+
+        onPlay.push(cards[0].id)
+
         cards.splice(0, 1)
 
-        //console.log(player1Cards.length, player2Cards.length, cards.length)
+        let remainingCards = []
+        
+        for(let i=0; i< cards.length; i++){
+            remainingCards.push(cards[i].id)
+        }
 
-        this.setState({
-            p1Cards: player1Cards,
-            p2Cards: player2Cards,
-            availableCards: cards,
-            cardsOnPlay: onPlay
+       await this.props.createHand({
+            variables:{
+                game: 'game-id-123434',
+                gameId: "game-id014423",
+                user: 'user-1',
+                number: 1,
+                cards: player1Cards
+            }
         })
+        //.then(res => console.log(res))
+
+      await this.props.createHand({
+            variables:{
+                game: 'game-id-123434',
+                gameId: "game-id014423",
+                user: 'user-2',
+                number: 2,
+                cards: player2Cards
+            }
+        })
+        //.then(res => console.log(res))
+
+      await this.props.updateGame({
+            variables:{
+                id: "item-test-1",
+                cards: remainingCards,
+                onPlay,
+                started: true
+            }
+        })
+        //.then(res => console.log(res))
+
+        this.setState({ loading: false })
     }
 
+
     render(){
-       //console.log(this.state)
+        //console.log(this.props.currentGame.getGame)
+
         const { p1Cards, p2Cards, cardsOnPlay, availableCards} = this.state
 
         return(
@@ -121,7 +160,6 @@ class Game extends Component {
 
             <IconTouch name={this.state.canSwitch ? "toggle-left" : "toggle-right"}
                  action={this.onPressSwitch}/>
-
             </View>
        
         </View>
@@ -162,4 +200,20 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Game
+export default compose(
+    graphql(getGame,{
+    name: "currentGame",
+    options: {
+        variables: {
+            id: "item-test-1"
+        },
+        fetchPolicy: "network-only"
+    }
+    }),
+    graphql(createHand, {
+        name: "createHand"
+    }),
+    graphql(updateGame,{
+        name: "updateGame"
+    })
+)(Game)

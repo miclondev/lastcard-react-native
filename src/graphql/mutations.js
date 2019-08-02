@@ -7,17 +7,15 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     title
     playerCount
     winner
-    players
     createdBy
     startCards
     gameType
     private
     finished
-    cards {
-      value
-      suit
-      image
-    }
+    started
+    cards
+    onPlay
+    user
   }
 }
 `;
@@ -27,17 +25,15 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     title
     playerCount
     winner
-    players
     createdBy
     startCards
     gameType
     private
     finished
-    cards {
-      value
-      suit
-      image
-    }
+    started
+    cards
+    onPlay
+    user
   }
 }
 `;
@@ -47,17 +43,15 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     title
     playerCount
     winner
-    players
     createdBy
     startCards
     gameType
     private
     finished
-    cards {
-      value
-      suit
-      image
-    }
+    started
+    cards
+    onPlay
+    user
   }
 }
 `;
@@ -91,63 +85,81 @@ export const deletePlayerStats = `mutation DeletePlayerStats($input: DeletePlaye
 export const createHand = `mutation CreateHand($input: CreateHandInput!) {
   createHand(input: $input) {
     id
-    myCards {
-      value
-      suit
-      image
+    myCards
+    available
+    selectedCards
+    game {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
     }
-    available {
-      value
-      suit
-      image
-    }
-    selectedCards {
-      value
-      suit
-      image
-    }
+    gameId
+    user
+    playerNumber
   }
 }
 `;
 export const updateHand = `mutation UpdateHand($input: UpdateHandInput!) {
   updateHand(input: $input) {
     id
-    myCards {
-      value
-      suit
-      image
+    myCards
+    available
+    selectedCards
+    game {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
     }
-    available {
-      value
-      suit
-      image
-    }
-    selectedCards {
-      value
-      suit
-      image
-    }
+    gameId
+    user
+    playerNumber
   }
 }
 `;
 export const deleteHand = `mutation DeleteHand($input: DeleteHandInput!) {
   deleteHand(input: $input) {
     id
-    myCards {
-      value
-      suit
-      image
+    myCards
+    available
+    selectedCards
+    game {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
     }
-    available {
-      value
-      suit
-      image
-    }
-    selectedCards {
-      value
-      suit
-      image
-    }
+    gameId
+    user
+    playerNumber
   }
 }
 `;

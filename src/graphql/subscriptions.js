@@ -7,17 +7,15 @@ export const onCreateGame = `subscription OnCreateGame {
     title
     playerCount
     winner
-    players
     createdBy
     startCards
     gameType
     private
     finished
-    cards {
-      value
-      suit
-      image
-    }
+    started
+    cards
+    onPlay
+    user
   }
 }
 `;
@@ -27,17 +25,15 @@ export const onUpdateGame = `subscription OnUpdateGame {
     title
     playerCount
     winner
-    players
     createdBy
     startCards
     gameType
     private
     finished
-    cards {
-      value
-      suit
-      image
-    }
+    started
+    cards
+    onPlay
+    user
   }
 }
 `;
@@ -47,17 +43,15 @@ export const onDeleteGame = `subscription OnDeleteGame {
     title
     playerCount
     winner
-    players
     createdBy
     startCards
     gameType
     private
     finished
-    cards {
-      value
-      suit
-      image
-    }
+    started
+    cards
+    onPlay
+    user
   }
 }
 `;
@@ -91,63 +85,81 @@ export const onDeletePlayerStats = `subscription OnDeletePlayerStats {
 export const onCreateHand = `subscription OnCreateHand {
   onCreateHand {
     id
-    myCards {
-      value
-      suit
-      image
+    myCards
+    available
+    selectedCards
+    game {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
     }
-    available {
-      value
-      suit
-      image
-    }
-    selectedCards {
-      value
-      suit
-      image
-    }
+    gameId
+    user
+    playerNumber
   }
 }
 `;
 export const onUpdateHand = `subscription OnUpdateHand {
   onUpdateHand {
     id
-    myCards {
-      value
-      suit
-      image
+    myCards
+    available
+    selectedCards
+    game {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
     }
-    available {
-      value
-      suit
-      image
-    }
-    selectedCards {
-      value
-      suit
-      image
-    }
+    gameId
+    user
+    playerNumber
   }
 }
 `;
 export const onDeleteHand = `subscription OnDeleteHand {
   onDeleteHand {
     id
-    myCards {
-      value
-      suit
-      image
+    myCards
+    available
+    selectedCards
+    game {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
     }
-    available {
-      value
-      suit
-      image
-    }
-    selectedCards {
-      value
-      suit
-      image
-    }
+    gameId
+    user
+    playerNumber
   }
 }
 `;

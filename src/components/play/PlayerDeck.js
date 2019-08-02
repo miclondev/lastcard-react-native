@@ -2,34 +2,14 @@ import React, { Component } from "react"
 import {View, Text, StyleSheet, ScrollView } from "react-native"
 import SingleCard from "../card/SingleCard"
 
+import { graphql } from "react-apollo"
+import getHand from "../../queries/player/getHand"
+import cards from "../../data/cards.json"
+
 class PlayerDeck extends Component {
      
     state = {
-         selectedCards: [],
-         myCards: [
-            {value: 5, suit: 0, num: 0, order: 0},
-            {value: 3, suit: 2, num: 1, order: 1},
-            {value: 2, suit: 1, num: 2, order: 2},
-            {value: 9, suit: 3, num: 3, order: 3},
-            {value: 4, suit: 2, num: 4, order: 4},
-            {value: 6, suit: 1, num: 5, order: 5},
-            {value: 6, suit: 1, num: 6, order: 6},
-            {value: 8, suit: 3, num: 7, order: 7},
-            {value: 6, suit: 0, num: 8, order: 8},
-            {value: 7, suit: 1, num: 9, order: 9}
-        ],
-        available: [
-            {value: 5, suit: 0, num: 0, order: 0},
-            {value: 3, suit: 2, num: 1, order: 1},
-            {value: 2, suit: 1, num: 2, order: 2},
-            {value: 9, suit: 3, num: 3, order: 3},
-            {value: 4, suit: 2, num: 4, order: 4},
-            {value: 6, suit: 1, num: 5, order: 5},
-            {value: 4, suit: 1, num: 6, order: 6},
-            {value: 8, suit: 3, num: 7, order: 7},
-            {value: 6, suit: 0, num: 8, order: 8},
-            {value: 7, suit: 1, num: 9, order: 9}
-        ]
+        loading: false
     }
 
     onSelectCard = (index) => {
@@ -47,9 +27,9 @@ class PlayerDeck extends Component {
         this.setState(prevState => {
                 let card = prevState.selectedCards.findIndex(a => a.num === index)
                 return {
-                selectedCards: prevState.selectedCards.filter(c => c.num !== index),
-                myCards: [...prevState.myCards, prevState.selectedCards[card]]
-            }
+                    selectedCards: prevState.selectedCards.filter(c => c.num !== index),
+                     myCards: [...prevState.myCards, prevState.selectedCards[card]]
+                }
             }
         )
     }
@@ -71,32 +51,20 @@ class PlayerDeck extends Component {
         }
     }
 
-    // rotateDeg = num => {
-    //     let total = this.state.available.length
-    //     let mid = total/2
-    //     if(num === mid) return 0
-    //     if(num > mid){
-    //         return num + 3
-    //     }else {
-    //         return num * -2
-    //     }
-    // }
-
     render(){
         console.log(this.props)
-        const { cards } = this.props
+       // const { cards } = this.props
        // console.log(this.rotateDeg(2))
         return(
-            
                 <ScrollView contentContainerStyle={styles.main}
                 horizontal={true}
                 >
                     {/* <Text>My Cards</Text> */}
                     {
-                       cards.length > 0 && cards.map((c, i) => <SingleCard 
-                        value={c.value}
-                        key={c.id}
-                        suit={c.icon}
+                       this.props.myCards.length > 0 && this.props.myCards.map((c, i) => <SingleCard 
+                        value={cards[c].value}
+                        key={cards[c].id}
+                        suit={cards[c].icon}
                         num={i}
                         onSelect={this.onSelectCard}
                         onDeSelect={this.onDeSelectCard}
@@ -105,7 +73,6 @@ class PlayerDeck extends Component {
                         />)
                     }
               </ScrollView>
-         
         )
     }
 }
@@ -122,4 +89,15 @@ const styles = StyleSheet.create({
 
 
 
-export default PlayerDeck
+export default graphql(getHand,{
+    name: "playerHand",
+    options : {
+        variables: {
+            id: "11c3027d-cf27-40d7-bfd4-914285b33aea"
+        },
+        fetchPolicy: "network-only"
+    },
+    props: props => ({
+        myCards: props.playerHand.getHand ? props.playerHand.getHand.myCards : []
+    })
+})(PlayerDeck)

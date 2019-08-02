@@ -3,19 +3,15 @@ type Game @model {
 	title: String!
 	playerCount: Int!
 	winner: String
-	players: [String]
 	createdBy: String
 	startCards: Int
 	gameType: String
 	private: Boolean
 	finished: Boolean
-	cards: [Card]
-}
-
-type Card {
-	value: Int
-	suit: Int
-	image: String
+	started: Boolean
+	cards: [Int]
+	onPlay: [Int]
+	user: String
 }
 
 type PlayerStats @model {
@@ -25,9 +21,15 @@ type PlayerStats @model {
 	ranking: Int
 }
 
-type Hand @model {
+type Hand @model
+	@key(name: "ByGame", fields: ["gameId", "user"], queryField: "handsByGame")
+ {
 	id: ID
-	myCards: [Card]
-	available: [Card]
-	selectedCards: [Card]  
+	myCards: [Int]
+	available: [Int]
+	selectedCards: [Int] 
+	game: Game @connection
+	gameId: String
+	user: String
+	playerNumber: Int
 }
