@@ -1,228 +1,228 @@
 [
     {
-        "id": 1,
+        "id": 0,
         "suit": "hearts",
         "value": 2,
+        "icon": "&hearts;"
+    },
+    {
+        "id": 1,
+        "suit": "hearts",
+        "value": 3,
         "icon": "&hearts;"
     },
     {
         "id": 2,
         "suit": "hearts",
-        "value": 3,
+        "value": 4,
         "icon": "&hearts;"
     },
     {
         "id": 3,
         "suit": "hearts",
-        "value": 4,
+        "value": 5,
         "icon": "&hearts;"
     },
     {
         "id": 4,
         "suit": "hearts",
-        "value": 5,
+        "value": 6,
         "icon": "&hearts;"
     },
     {
         "id": 5,
         "suit": "hearts",
-        "value": 6,
+        "value": 7,
         "icon": "&hearts;"
     },
     {
         "id": 6,
         "suit": "hearts",
-        "value": 7,
-        "icon": "&hearts;"
-    },
-    {
-        "id": 7,
-        "suit": "hearts",
         "value": 8,
         "icon": "&hearts;" 
     },
     {
-        "id": 8,
+        "id": 7,
         "suit": "hearts",
         "value": 9,
         "icon": "&hearts;"   
     },
     {
-        "id": 9,
+        "id": 8,
         "suit": "hearts",
         "value": 10,
         "icon": "&hearts;"    
     },
     {
-        "id": 10,
+        "id": 9,
         "suit": "hearts",
         "value": "J",
+        "icon": "&hearts;"
+    },
+    {
+        "id": 10,
+        "suit": "hearts",
+        "value": "Q",
         "icon": "&hearts;"
     },
     {
         "id": 11,
         "suit": "hearts",
-        "value": "Q",
+        "value": "K",
         "icon": "&hearts;"
     },
     {
         "id": 12,
         "suit": "hearts",
-        "value": "K",
-        "icon": "&hearts;"
-    },
-    {
-        "id": 13,
-        "suit": "hearts",
         "value": "A",
         "icon": "&hearts;"
     },
     {
-        "id": 14,
+        "id": 13,
         "suit": "diamonds",
         "value": 2,
+        "icon": "&diams;"
+    },
+    {
+        "id": 14,
+        "suit": "diamonds",
+        "value": 3,
         "icon": "&diams;"
     },
     {
         "id": 15,
         "suit": "diamonds",
-        "value": 3,
+        "value": 4,
         "icon": "&diams;"
     },
     {
         "id": 16,
         "suit": "diamonds",
-        "value": 4,
+        "value": 5,
         "icon": "&diams;"
     },
     {
         "id": 17,
         "suit": "diamonds",
-        "value": 5,
+        "value": 6,
         "icon": "&diams;"
     },
     {
         "id": 18,
         "suit": "diamonds",
-        "value": 6,
+        "value": 7,
         "icon": "&diams;"
     },
     {
         "id": 19,
         "suit": "diamonds",
-        "value": 7,
+        "value": 8,
         "icon": "&diams;"
     },
     {
         "id": 20,
         "suit": "diamonds",
-        "value": 8,
+        "value": 9,
         "icon": "&diams;"
     },
     {
         "id": 21,
         "suit": "diamonds",
-        "value": 9,
+        "value": 10,
         "icon": "&diams;"
     },
     {
         "id": 22,
         "suit": "diamonds",
-        "value": 10,
+        "value": "J",
         "icon": "&diams;"
     },
     {
         "id": 23,
         "suit": "diamonds",
-        "value": "J",
+        "value": "Q",
         "icon": "&diams;"
     },
     {
         "id": 24,
         "suit": "diamonds",
-        "value": "Q",
+        "value": "K",
         "icon": "&diams;"
     },
     {
         "id": 25,
         "suit": "diamonds",
-        "value": "K",
-        "icon": "&diams;"
-    },
-    {
-        "id": 26,
-        "suit": "diamonds",
         "value": "A",
         "icon": "&diams;"
     },
     {
-        "id": 27,
+        "id": 26,
         "suit": "clubs",
         "value": 2,
         "icon": "&clubs;"
     },
     {
-        "id": 28,
+        "id": 27,
         "suit": "clubs",
         "value": 3,
         "icon": "&clubs;"
     },
     {
-        "id": 29,
+        "id": 28,
         "suit": "clubs",
         "value": 4,
         "icon": "&clubs;"
     },
     {
-        "id": 30,
+        "id": 29,
         "suit": "clubs",
         "value": 5,
         "icon": "&clubs;"
     },
     {
-        "id": 31,
+        "id": 30,
         "suit": "clubs",
         "value": 6,
         "icon": "&clubs;"
     },
     {
-        "id": 32,
+        "id": 31,
         "suit": "clubs",
         "value": 7,
         "icon": "&clubs;"
     },
     {
-        "id": 33,
+        "id": 32,
         "suit": "clubs",
         "value": 8,
         "icon": "&clubs;"
     },
     {
-        "id": 34,
+        "id": 33,
         "suit": "clubs",
         "value": 9,
         "icon": "&clubs;"
     },
     {
-        "id": 35,
+        "id": 34,
         "suit": "clubs",
         "value": 10,
         "icon": "&clubs;"
     },
     {
-        "id": 36,
+        "id": 35,
         "suit": "clubs",
         "value": "J",
         "icon": "&clubs;"
     },
     {
-        "id": 37,
+        "id": 36,
         "suit": "clubs",
         "value": "Q",
         "icon": "&clubs;"
     },
     {
-        "id": 38,
+        "id": 37,
         "suit": "clubs",
         "value": "K",
         "icon": "&clubs;"
@@ -282,42 +282,42 @@
         "icon": "&spades;"
     },
     {
-        "id": 48,
+        "id": 47,
         "suit": "spades",
         "value": 10,
         "icon": "&spades;"
     },
     {
-        "id": 49,
+        "id": 48,
         "suit": "spades",
         "value": "J",
         "icon": "&spades;"
     },
     {
-        "id": 50,
+        "id": 49,
         "suit": "spades",
         "value": "Q",
         "icon": "&spades;"
     },
     {
-        "id": 51,
+        "id": 50,
         "suit": "spades",
         "value": "K",
         "icon": "&spades;"
     },
     {
-        "id": 52,
+        "id": 51,
         "suit": "spades",
         "value": "A",
         "icon": "&spades;"
     },
     {
-        "id": 53,
+        "id": 52,
         "suit": "joker",
         "value": "black"
     },
     {
-        "id": 54,
+        "id": 53,
         "suit": "joker",
         "value": "red"
     }

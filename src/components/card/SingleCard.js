@@ -20,14 +20,14 @@ class SingleCard extends Component {
     selected: false
   }
 
-  onPress = (index) => {
-    const { onSelect, onDeSelect, noAction } = this.props
+  onPress = () => {
+    const { onSelect, onDeSelect, noAction, c  } = this.props
     if(!noAction){
       this.setState({selected: !this.state.selected}, () => {
           if(this.state.selected){
-              onSelect(index)
+              onSelect(c)
           }else{
-              onDeSelect(index)
+              onDeSelect(c)
           }
       })
   }
@@ -40,12 +40,12 @@ class SingleCard extends Component {
 
     const suitRender = AllHtmlEntities.decode(suit)
     return (
-      <Spring native from={{ top: 10 }} to={{
+      <Spring native from={{ top: 100 }} to={{
         top: this.state.selected ? 10 : 100
         }}>
         {props => (
-          <TouchableWithoutFeedback onPress={() => this.onPress(num)}>
-            <AnimatedView style={{...props, ...styles.card,left: num * 50, position: 'absolute' }} >
+          <TouchableWithoutFeedback onPress={() => this.onPress()}>
+            <AnimatedView style={{...props, ...styles.card,left: num * 50}} >
                   <NumSuit value={value} suit={suitRender}/>
                     <View >
                       <Text style={styles.type}>{suitRender}</Text>
@@ -62,21 +62,20 @@ class SingleCard extends Component {
 const styles = StyleSheet.create({
   card: {
     borderColor: "#696969",
-    borderRadius: 10,
+    borderRadius: 8,
     borderStyle: "solid",
-    borderWidth: 2,
+    borderWidth: 3,
     backgroundColor: 'white',
     height: 400,
     width: 240,
     margin: 5,
-    padding: 5
+    padding: 5,
+    position: 'absolute', 
+   // top: 100
   },
   type: {
     fontSize: 100,
     textAlign: 'center'
-  },
-  selected:{
-    top: -100
   }
 })
 

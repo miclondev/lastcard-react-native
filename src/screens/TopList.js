@@ -5,7 +5,9 @@ class TopList extends Component {
     render(){
         return(
             <View>
-                <Text>  TopList </Text>
+                <Text>  
+                    TopList
+                </Text>
             </View>
         )
     }

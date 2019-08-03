@@ -50,7 +50,7 @@ class Game extends Component {
                 initialized: true
             }, () => {
                 //initial card handOut
-                this.initialCardHandOut()
+              //  this.initialCardHandOut()
             })
         }
         //sync with online
@@ -135,20 +135,20 @@ class Game extends Component {
     render(){
         //console.log(this.props.currentGame.getGame)
 
-        const { p1Cards, p2Cards, cardsOnPlay, availableCards} = this.state
+        const { cardsOnPlay, availableCards} = this.state
 
         return(
         <View style={styles.main}>
             <View style={styles.top}>
-                <BackDeck cards={p2Cards}/>
+                <BackDeck/>
             </View>
 
             <View style={styles.mid}>
-                <MidPlay available={availableCards} onPlay={cardsOnPlay}/>
+                <MidPlay/>
             </View>
 
             <View style={styles.bottom}>
-                    <PlayerDeck cards={p1Cards}/>
+                    <PlayerDeck/>
             </View>
          
             <View style={styles.buttons}>
