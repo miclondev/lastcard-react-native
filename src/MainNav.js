@@ -2,17 +2,18 @@ import { createDrawerNavigator, createAppContainer, createBottomTabNavigator } f
 import Game from "./screens/Game"
 import GameList from "./screens/GameList"
 import UserAuth from "./screens/UserAuth"
+import checkAuth from './utils/auth'
 
 const AppNavigator = createDrawerNavigator({
-    auth: {
-      screen: UserAuth
-    },
     GameList: {
-      screen: GameList
+      screen: checkAuth(GameList)
     },
     Game: {
-      screen: Game
-    }
+      screen: checkAuth(Game)
+    },
+    Auth: {
+      screen: UserAuth
+    },
   }, {
     hideStatusBar: true,
     drawerBackgroundColor: 'rgba(255,255,255,.9)',

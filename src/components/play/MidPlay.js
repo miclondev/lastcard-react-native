@@ -17,7 +17,7 @@ class MidPlay extends Component {
                     {({ error, loading, data}) => {
                         if(error) console.log(error)
                         if(loading) return <Text>Loading....</Text>
-                        console.log(data)
+                       // console.log(data)
                         return(
                             <View style={styles.main}>
                                 

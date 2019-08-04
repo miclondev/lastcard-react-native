@@ -79,7 +79,7 @@ class PlayerDeck extends Component {
     }
 
     render(){
-       console.log(this.state)
+       //console.log(this.state)
        // const { cards } = this.props
        
         return(

@@ -4,6 +4,7 @@ import { Button } from "react-native-elements"
 
 class GameList extends Component {
     render(){
+        console.log(this.props)
         return(
             <View style={styles.main}>
                 <View style={styles.header}>

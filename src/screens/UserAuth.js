@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import { AuthSession } from 'expo';
 import jwtDecode from 'jwt-decode';
+import { AsyncStorage } from 'react-native';
 
 const auth0ClientId = 'f4WYtl8Js3BMEb375NISav30DqfcGEBY';
 const auth0Domain = 'https://dev-sjm7bapo.eu.auth0.com';
@@ -21,7 +22,7 @@ export default class App extends React.Component {
       // Retrieve the redirect URL, add this to the callback URL list
       // of your Auth0 application.
       const redirectUrl = AuthSession.getRedirectUrl();
-      console.log(`Redirect URL: ${redirectUrl}`);
+      //console.log(`Redirect URL: ${redirectUrl}`);
       
       // Structure the auth parameters and URL
       const queryParams = toQueryString({
@@ -35,16 +36,18 @@ export default class App extends React.Component {
       const authUrl = `${auth0Domain}/authorize` + queryParams;
       // Perform the authentication
       const response = await AuthSession.startAsync({ authUrl });
-      console.log('Authentication response', response);
+     // console.log('Authentication response', response);
   
-        console.log(response)
+      //  console.log(response)
 
       if (response.type === 'success') {
         this.handleResponse(response.params);
       }
     };
+
+    
   
-    handleResponse = (response) => {
+    handleResponse = async (response) => {
       if (response.error) {
         Alert('Authentication error', response.error_description || 'something went wrong');
         return;
@@ -52,17 +55,22 @@ export default class App extends React.Component {
   
       // Retrieve the JWT token and decode it
       const jwtToken = response.id_token;
-      const decoded = jwtDecode(jwtToken);
+
+      const decoded = await jwtDecode(jwtToken);
   
       const { name } = decoded;
-      
-      console.log(decoded)
+      console.log(name)
+        try {
+          await AsyncStorage.setItem("user", JSON.stringify(decoded))
+        } catch (e) {
+          console.log(e)
+          // saving error
+        }
 
       this.setState({ name });
     };
   
     render() {
-        console.log(AuthSession.getRedirectUrl())
       const { name } = this.state;
   
       return (

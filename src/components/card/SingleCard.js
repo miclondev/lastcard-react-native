@@ -36,7 +36,7 @@ class SingleCard extends Component {
   render() {
     const { suit, value, num } = this.props 
     
-    console.log(suit, value, num)
+    //console.log(suit, value, num)
 
     const suitRender = AllHtmlEntities.decode(suit)
     return (

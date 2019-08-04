@@ -11,6 +11,7 @@ import { graphql, compose } from "react-apollo"
 import getGame from "../queries/game/getGame"
 import createHand from "../mutations/createHand"
 import updateGame from "../mutations/updateGame"
+//import checkAuth from "../utils/auth"
 
 const width = Dimensions.get('window').width
 
@@ -40,7 +41,7 @@ class Game extends Component {
     onPressPlay = () => this.setState({ canPlay: !this.state.canPlay })
     onPressSwitch = () => this.setState({ canSwitch: !this.state.canSwitch})
 
-    componentDidMount(){
+    async componentDidMount  (){
         console.log("componentdidmount")
         if(this.state.availableCards.length === 0 && !this.state.initialized){            
             //shuffle cards
@@ -133,7 +134,7 @@ class Game extends Component {
 
 
     render(){
-        //console.log(this.props.currentGame.getGame)
+        console.log(this.props.user)
 
         const { cardsOnPlay, availableCards} = this.state
 
@@ -153,7 +154,7 @@ class Game extends Component {
          
             <View style={styles.buttons}>
 
-            <IconTouch name="check-square" action={this.props.navigation.toggleDrawer}/>
+            <IconTouch name="check-square" action={this.props.logOut}/>
 
             <IconTouch name={this.state.canPlay ? "share" : "power"}
                  action={this.onPressPlay}/>
