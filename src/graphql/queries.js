@@ -16,6 +16,7 @@ export const getGame = `query GetGame($id: ID!) {
     cards
     onPlay
     user
+    started_on
   }
 }
 `;
@@ -39,6 +40,7 @@ export const listGames = `query ListGames(
       cards
       onPlay
       user
+      started_on
     }
     nextToken
   }
@@ -89,6 +91,7 @@ export const getHand = `query GetHand($id: ID!) {
       cards
       onPlay
       user
+      started_on
     }
     gameId
     user
@@ -121,10 +124,45 @@ export const listHands = `query ListHands(
         cards
         onPlay
         user
+        started_on
       }
       gameId
       user
       playerNumber
+    }
+    nextToken
+  }
+}
+`;
+export const gamesByUser = `query GamesByUser(
+  $user: String
+  $started_on: ModelStringKeyConditionInput
+  $filter: ModelGameFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  gamesByUser(
+    user: $user
+    started_on: $started_on
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
+      started_on
     }
     nextToken
   }
@@ -163,6 +201,7 @@ export const handsByGame = `query HandsByGame(
         cards
         onPlay
         user
+        started_on
       }
       gameId
       user

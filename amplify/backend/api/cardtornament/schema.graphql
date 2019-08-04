@@ -1,4 +1,6 @@
-type Game @model {
+type Game @model
+@key(name: "ByUser", fields: ["user", "started_on"], queryField: "gamesByUser")
+ {
 	id: ID
 	title: String!
 	playerCount: Int!
@@ -12,6 +14,7 @@ type Game @model {
 	cards: [Int]
 	onPlay: [Int]
 	user: String
+	started_on: AWSDateTime
 }
 
 type PlayerStats @model {

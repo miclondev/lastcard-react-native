@@ -16,6 +16,7 @@ export const onCreateGame = `subscription OnCreateGame {
     cards
     onPlay
     user
+    started_on
   }
 }
 `;
@@ -34,6 +35,7 @@ export const onUpdateGame = `subscription OnUpdateGame {
     cards
     onPlay
     user
+    started_on
   }
 }
 `;
@@ -52,6 +54,7 @@ export const onDeleteGame = `subscription OnDeleteGame {
     cards
     onPlay
     user
+    started_on
   }
 }
 `;
@@ -102,6 +105,7 @@ export const onCreateHand = `subscription OnCreateHand {
       cards
       onPlay
       user
+      started_on
     }
     gameId
     user
@@ -129,6 +133,7 @@ export const onUpdateHand = `subscription OnUpdateHand {
       cards
       onPlay
       user
+      started_on
     }
     gameId
     user
@@ -156,6 +161,7 @@ export const onDeleteHand = `subscription OnDeleteHand {
       cards
       onPlay
       user
+      started_on
     }
     gameId
     user

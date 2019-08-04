@@ -16,6 +16,7 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     cards
     onPlay
     user
+    started_on
   }
 }
 `;
@@ -34,6 +35,7 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     cards
     onPlay
     user
+    started_on
   }
 }
 `;
@@ -52,6 +54,7 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     cards
     onPlay
     user
+    started_on
   }
 }
 `;
@@ -102,6 +105,7 @@ export const createHand = `mutation CreateHand($input: CreateHandInput!) {
       cards
       onPlay
       user
+      started_on
     }
     gameId
     user
@@ -129,6 +133,7 @@ export const updateHand = `mutation UpdateHand($input: UpdateHandInput!) {
       cards
       onPlay
       user
+      started_on
     }
     gameId
     user
@@ -156,6 +161,7 @@ export const deleteHand = `mutation DeleteHand($input: DeleteHandInput!) {
       cards
       onPlay
       user
+      started_on
     }
     gameId
     user
