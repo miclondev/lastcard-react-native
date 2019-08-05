@@ -36,3 +36,12 @@ type Hand @model
 	user: String
 	playerNumber: Int
 }
+
+type Messages @model
+@key(name: "GameMessages", fields: ['gameId, "sentOn"], queryField: "messagesByGame"){
+	id: ID
+	game: Game @connection
+	gameId: String
+	user: String
+	content: String
+}

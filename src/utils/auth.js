@@ -14,13 +14,13 @@ export default (ComposedComponent) => class CheckAuth extends Component {
         }
     }
 
-    async componentDidMount  (){
+    async componentDidMount (){
       await this.checkSignedIn()
-       await this.getUser()
+      await this.getUser()
     }
 
-    async componentDidUpdate  (){
-        await this.checkSignedIn()
+    componentDidUpdate() {
+        console.log("props of auth ",this.props.navigation.state)
     }
 
     checkSignedIn = async () => {
@@ -29,10 +29,11 @@ export default (ComposedComponent) => class CheckAuth extends Component {
                 if (value !== null) {
                     return this.setState({ loggedIn: true })
                 }else{
-                    return this.props.navigation.navigate("Auth")
+                    console.log("not signed in")
+                     this.props.navigation.navigate("Auth")
                 }
             } catch (e) {
-                return this.props.navigation.navigate("Auth")
+                  this.props.navigation.navigate("Auth")
             }
     }
 
@@ -68,7 +69,7 @@ export default (ComposedComponent) => class CheckAuth extends Component {
     }
 
     render() {
-        console.log(this.props)
+       console.log(this.props.navigation.state)
             return <ComposedComponent
                         {...this.props}
                         loggedIn={this.state.loggedIn}
