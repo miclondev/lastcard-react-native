@@ -169,3 +169,81 @@ export const onDeleteHand = `subscription OnDeleteHand {
   }
 }
 `;
+export const onCreateMessages = `subscription OnCreateMessages {
+  onCreateMessages {
+    id
+    game {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
+      started_on
+    }
+    gameId
+    user
+    content
+    sentOn
+  }
+}
+`;
+export const onUpdateMessages = `subscription OnUpdateMessages {
+  onUpdateMessages {
+    id
+    game {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
+      started_on
+    }
+    gameId
+    user
+    content
+    sentOn
+  }
+}
+`;
+export const onDeleteMessages = `subscription OnDeleteMessages {
+  onDeleteMessages {
+    id
+    game {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
+      started_on
+    }
+    gameId
+    user
+    content
+    sentOn
+  }
+}
+`;

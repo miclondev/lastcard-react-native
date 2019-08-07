@@ -134,6 +134,65 @@ export const listHands = `query ListHands(
   }
 }
 `;
+export const getMessages = `query GetMessages($id: ID!) {
+  getMessages(id: $id) {
+    id
+    game {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
+      started_on
+    }
+    gameId
+    user
+    content
+    sentOn
+  }
+}
+`;
+export const listMessagess = `query ListMessagess(
+  $filter: ModelMessagesFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMessagess(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      game {
+        id
+        title
+        playerCount
+        winner
+        createdBy
+        startCards
+        gameType
+        private
+        finished
+        started
+        cards
+        onPlay
+        user
+        started_on
+      }
+      gameId
+      user
+      content
+      sentOn
+    }
+    nextToken
+  }
+}
+`;
 export const gamesByUser = `query GamesByUser(
   $user: String
   $started_on: ModelStringKeyConditionInput
@@ -206,6 +265,47 @@ export const handsByGame = `query HandsByGame(
       gameId
       user
       playerNumber
+    }
+    nextToken
+  }
+}
+`;
+export const messagesByGame = `query MessagesByGame(
+  $gameId: String
+  $sentOn: ModelStringKeyConditionInput
+  $filter: ModelMessagesFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  messagesByGame(
+    gameId: $gameId
+    sentOn: $sentOn
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      game {
+        id
+        title
+        playerCount
+        winner
+        createdBy
+        startCards
+        gameType
+        private
+        finished
+        started
+        cards
+        onPlay
+        user
+        started_on
+      }
+      gameId
+      user
+      content
+      sentOn
     }
     nextToken
   }

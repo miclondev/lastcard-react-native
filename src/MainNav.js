@@ -17,6 +17,8 @@ const gameNavigator = createStackNavigator({
     Game: {
       screen: checkAuth(Game)
     }
+}, {
+ // initialRouteName: "NewGame"
 })
 
 const AppNavigator = createDrawerNavigator({

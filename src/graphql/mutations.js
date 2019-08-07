@@ -169,3 +169,81 @@ export const deleteHand = `mutation DeleteHand($input: DeleteHandInput!) {
   }
 }
 `;
+export const createMessages = `mutation CreateMessages($input: CreateMessagesInput!) {
+  createMessages(input: $input) {
+    id
+    game {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
+      started_on
+    }
+    gameId
+    user
+    content
+    sentOn
+  }
+}
+`;
+export const updateMessages = `mutation UpdateMessages($input: UpdateMessagesInput!) {
+  updateMessages(input: $input) {
+    id
+    game {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
+      started_on
+    }
+    gameId
+    user
+    content
+    sentOn
+  }
+}
+`;
+export const deleteMessages = `mutation DeleteMessages($input: DeleteMessagesInput!) {
+  deleteMessages(input: $input) {
+    id
+    game {
+      id
+      title
+      playerCount
+      winner
+      createdBy
+      startCards
+      gameType
+      private
+      finished
+      started
+      cards
+      onPlay
+      user
+      started_on
+    }
+    gameId
+    user
+    content
+    sentOn
+  }
+}
+`;

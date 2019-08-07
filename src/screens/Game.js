@@ -42,7 +42,9 @@ class Game extends Component {
     onPressSwitch = () => this.setState({ canSwitch: !this.state.canSwitch})
 
     async componentDidMount  (){
+
         console.log("componentdidmount")
+        
         if(this.state.availableCards.length === 0 && !this.state.initialized){            
             //shuffle cards
             const cards = this.shuffle(cardsDeck)
@@ -70,6 +72,7 @@ class Game extends Component {
     } 
 
     initialCardHandOut = async () => {
+
         const { initialPlay, availableCards } = this.state
         let player1Cards = []
         let player2Cards = []
@@ -134,14 +137,15 @@ class Game extends Component {
 
 
     render(){
-      //  console.log(this.props.user)
-
-        const { cardsOnPlay, availableCards} = this.state
+      //console.log(this.props)
+        const { navigation } = this.props;
+        const gameId = navigation.getParam('gameId', "e35a5ec6-a6a0-4e3a-bc00-0048e12cf1d1");
 
         return(
         <View style={styles.main}>
+
             <View style={styles.top}>
-                <BackDeck/>
+                <BackDeck gameId={gameId}/>
             </View>
 
             <View style={styles.mid}>
@@ -149,7 +153,7 @@ class Game extends Component {
             </View>
 
             <View style={styles.bottom}>
-                    <PlayerDeck/>
+                    <PlayerDeck gameId={gameId}/>
             </View>
          
             <View style={styles.buttons}>
@@ -204,11 +208,16 @@ const styles = StyleSheet.create({
 export default compose(
     graphql(getGame,{
     name: "currentGame",
-    options: {
-        variables: {
-            id: "item-test-1"
-        },
-        fetchPolicy: "network-only"
+    options: props => {
+        const { navigation } = props;
+        const itemId = navigation.getParam('gameId', "e35a5ec6-a6a0-4e3a-bc00-0048e12cf1d1");
+
+        console.log(itemId)
+
+        return { 
+            variables: { id: itemId },
+            fetchPolicy: "network-only"
+        }
     }
     }),
     graphql(createHand, {

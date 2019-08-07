@@ -5,7 +5,6 @@ type Game @model
 	title: String!
 	playerCount: Int!
 	winner: String
-	createdBy: String
 	startCards: Int
 	gameType: String
 	private: Boolean
@@ -38,10 +37,11 @@ type Hand @model
 }
 
 type Messages @model
-@key(name: "GameMessages", fields: ['gameId, "sentOn"], queryField: "messagesByGame"){
+@key(name: "GameMessages", fields: ["gameId", "sentOn"], queryField: "messagesByGame"){
 	id: ID
 	game: Game @connection
 	gameId: String
 	user: String
 	content: String
+	sentOn: AWSDateTime
 }
