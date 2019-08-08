@@ -25,7 +25,7 @@ class MidPlay extends Component {
 
                                     <CardBack
                                       rotate={-30}
-                                      backgroundColor="white"
+                                      backgroundColor="#D4D4D4"
                                     >
                                         <Text>
                                             2 

@@ -71,7 +71,9 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 5,
     position: 'absolute', 
+    backgroundColor: "#D4D4D4"
    // top: 100
+
   },
   type: {
     fontSize: 100,

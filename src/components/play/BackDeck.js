@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
     cards: {
         flexDirection: "row",
         //backgroundColor: 'red',
-        flex: 1
+        flex: 1,
+        marginLeft:50
         },
     card: {
         position: "absolute",

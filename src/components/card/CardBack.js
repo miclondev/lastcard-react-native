@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native"
 
 class CardBack extends Component {
     render(){
-        const { height =160, width= 100, rotate=10, backgroundColor ='orange', id=0, style } = this.props
+        const { height =160, width= 100, rotate=10, backgroundColor ='#FDE375', id=0, style } = this.props
         return(
             <View style={{...styles.main,
              height, width,

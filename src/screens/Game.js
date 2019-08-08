@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from "react-nati
 import PlayerDeck from "../components/play/PlayerDeck"
 import BackDeck from "../components/play/BackDeck"
 import MidPlay from "../components/play/MidPlay"
-import { Feather, Ionicons } from '@expo/vector-icons';
+import { Feather, Entypo } from '@expo/vector-icons';
 import Loading from "../components/Loading"
 
 import { Query } from "react-apollo"
@@ -16,15 +16,11 @@ const IconTouch = ({ name, action }) => (
     <TouchableOpacity
         onPress={() => action()}
     >
-        <Feather name={name} size={40} color="white" />
+        <Feather name={name} size={40} color="#FDE375" />
     </TouchableOpacity>
 )
 
 class Game extends Component {
-
-    static navigationOptions = {
-        header: null
-    }
 
     state = {
         canPlay: true,
@@ -39,8 +35,6 @@ class Game extends Component {
         cardsOnPlay: [],
         loading: true
     }
-
-    
 
     onPressPlay = () => this.setState({ canPlay: !this.state.canPlay })
     onPressSwitch = () => this.setState({ canSwitch: !this.state.canSwitch })
@@ -74,8 +68,8 @@ class Game extends Component {
                             </View>
 
                             <View style={styles.topBar}>
-                                    <Ionicons name="md-checkmark-circle" size={32} color="green" />
-                                    <Ionicons name="md-checkmark-circle" size={32} color="green" />
+                                    <Entypo name="circle-with-cross" size={52} color="#FDE375" />
+                                    <Entypo name="message" size={52} color="#FDE375" />
                             </View>
 
                             <View style={styles.buttons}>
@@ -120,7 +114,7 @@ const styles = StyleSheet.create({
     buttons: {
         backgroundColor: '#252833',
         height: 60,
-        width: width,
+        width,
         position: 'absolute',
         bottom: 0,
         //alignSelf: 'stretch',
@@ -130,11 +124,16 @@ const styles = StyleSheet.create({
         
     },
     topBar:{
+        paddingTop: 60,
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',
         position: 'absolute',
-        top: 0
+        top: 0,
+        width,
+        height: 60,
+        paddingLeft: 10,
+        paddingRight:10
     }
 })
 

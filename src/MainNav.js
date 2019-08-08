@@ -1,4 +1,4 @@
-import { createDrawerNavigator, createAppContainer, createStackNavigator } from "react-navigation";
+import { createDrawerNavigator, createAppContainer, createStackNavigator, createSwitchNavigator } from "react-navigation";
 
 import Game from "./screens/Game"
 import GameList from "./screens/GameList"
@@ -19,10 +19,15 @@ const gameNavigator = createStackNavigator({
       screen: checkAuth(NewGame)
     },
     Game: {
-      screen: checkAuth(Game)
+      screen: checkAuth(Game),
+      navigationOptions: () => ({
+       header: null
+        // headerMode: 'none',
+        // headerTransparent: true
+      })
     }
 }, {
-  initialRouteName: "Game"
+ initialRouteName: "Game"
 })
 
 const AppNavigator = createDrawerNavigator({
@@ -33,6 +38,8 @@ const AppNavigator = createDrawerNavigator({
       screen: UserAuth
     },
   }, {
+    header: null,
+    headerMode: 'none',
     hideStatusBar: false,
     drawerBackgroundColor: 'rgba(255,255,255,.9)',
     overlayColor: '#6b52ae',
