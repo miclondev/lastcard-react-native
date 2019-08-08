@@ -3,13 +3,17 @@ import { createDrawerNavigator, createAppContainer, createStackNavigator } from 
 import Game from "./screens/Game"
 import GameList from "./screens/GameList"
 import NewGame from "./screens/NewGame"
-
+import GameOptions from "./screens/gamescreens/GameOptions"
+import Loading from "./components/Loading"
 import UserAuth from "./screens/UserAuth"
 import checkAuth from './utils/auth'
 
 const gameNavigator = createStackNavigator({
     GameList: {
       screen: checkAuth(GameList)
+    },
+    GameOptions: {
+      screen: checkAuth(GameOptions)
     },
     NewGame: {
       screen: checkAuth(NewGame)
@@ -18,7 +22,7 @@ const gameNavigator = createStackNavigator({
       screen: checkAuth(Game)
     }
 }, {
- // initialRouteName: "NewGame"
+  initialRouteName: "Game"
 })
 
 const AppNavigator = createDrawerNavigator({

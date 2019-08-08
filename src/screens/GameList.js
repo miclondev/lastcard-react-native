@@ -1,59 +1,62 @@
 import React, { Component } from "react"
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { Button, ListItem } from "react-native-elements"
+import Loading from "../components/Loading"
 
 import { Query } from "react-apollo"
 import getUserGames from "../queries/game/getUserGames"
 
 class GameList extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         //console.log(this.props.userId)
     }
 
-    render(){
-        
+    render() {
+
         console.log(this.props.userId)
 
-        return(
-            <View style={styles.main}>
+        return (
+            <Query query={getUserGames} variables={{ user: this.props.userId }} fetchPolicy="network-only">
+                {({ error, loading, data }) => {
+                    //  if(error) return console.log(error) 
+                    if (loading) return <Loading />
+                    //console.log(data, error)
+                    return (
+                        <View style={styles.main}>
 
-                <View style={styles.header}>
-                    <Text> Your Games </Text>
-                    <Button
-                        icon={{
-                            name: "open-in-new",
-                            size: 15,
-                            color: "white"
-                        }}
-                        title="Create A New Game"
-                        onPress={() => this.props.navigation.navigate("NewGame")}
-                    />
-                </View>
+                            <View style={styles.header}>
+                                <Text> Your Games </Text>
+                                <Button
+                                    icon={{
+                                        name: "open-in-new",
+                                        size: 15,
+                                        color: "white"
+                                    }}
+                                    title="Create A New Game"
+                                    onPress={() => this.props.navigation.navigate("NewGame")}
+                                />
+                            </View>
 
-                <Query query={getUserGames} variables={{user: this.props.userId}} fetchPolicy="network-only">
-                        {({ error, loading, data}) => {
-                              //  if(error) return console.log(error) 
-                                if(loading) return <Text>Loading..</Text>
-                                //console.log(data, error)
-                                return(
-                                    <View>
-                                        {data.gamesByUser.items.map(g =>
-                                            <TouchableOpacity key={g.id} style={styles.game}
-                                            onPress={() => this.props.navigation.navigate("Game",{
-                                                gameId: g.id
-                                            })}
-                                            >
-                                                <ListItem
-                                                title={g.title}
-                                                />
-                                            </TouchableOpacity>
-                                        )}
-                                    </View>
-                                )
-                        }}
-                    </Query>
-            </View>
+
+                            <View>
+                                {data.gamesByUser.items.map(g =>
+                                    <TouchableOpacity key={g.id} style={styles.game}
+                                        onPress={() => this.props.navigation.navigate("GameOptions", {
+                                            gameId: g.id
+                                        })}
+                                    >
+                                        <ListItem
+                                            title={g.title}
+                                        />
+                                    </TouchableOpacity>
+                                )}
+                            </View>
+
+                        </View>
+                    )
+                }}
+            </Query>
         )
     }
 }
@@ -63,12 +66,13 @@ const styles = StyleSheet.create({
         //flex: 1,
         marginTop: 60,
         marginLeft: 5,
-        marginRight: 5
+        marginRight: 5,
+        backgroundColor: '#252833'
     },
     header: {
         alignItems: 'center',
         justifyContent: 'space-between',
-       // flex: 1,
+        // flex: 1,
         flexDirection: 'row'
 
     },

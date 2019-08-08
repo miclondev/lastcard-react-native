@@ -7,7 +7,6 @@ export const onCreateGame = `subscription OnCreateGame {
     title
     playerCount
     winner
-    createdBy
     startCards
     gameType
     private
@@ -17,6 +16,7 @@ export const onCreateGame = `subscription OnCreateGame {
     onPlay
     user
     started_on
+    players
   }
 }
 `;
@@ -26,7 +26,6 @@ export const onUpdateGame = `subscription OnUpdateGame {
     title
     playerCount
     winner
-    createdBy
     startCards
     gameType
     private
@@ -36,6 +35,7 @@ export const onUpdateGame = `subscription OnUpdateGame {
     onPlay
     user
     started_on
+    players
   }
 }
 `;
@@ -45,7 +45,6 @@ export const onDeleteGame = `subscription OnDeleteGame {
     title
     playerCount
     winner
-    createdBy
     startCards
     gameType
     private
@@ -55,33 +54,7 @@ export const onDeleteGame = `subscription OnDeleteGame {
     onPlay
     user
     started_on
-  }
-}
-`;
-export const onCreatePlayerStats = `subscription OnCreatePlayerStats {
-  onCreatePlayerStats {
-    id
-    gamesWon
-    gemesLost
-    ranking
-  }
-}
-`;
-export const onUpdatePlayerStats = `subscription OnUpdatePlayerStats {
-  onUpdatePlayerStats {
-    id
-    gamesWon
-    gemesLost
-    ranking
-  }
-}
-`;
-export const onDeletePlayerStats = `subscription OnDeletePlayerStats {
-  onDeletePlayerStats {
-    id
-    gamesWon
-    gemesLost
-    ranking
+    players
   }
 }
 `;
@@ -96,7 +69,6 @@ export const onCreateHand = `subscription OnCreateHand {
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -106,6 +78,7 @@ export const onCreateHand = `subscription OnCreateHand {
       onPlay
       user
       started_on
+      players
     }
     gameId
     user
@@ -124,7 +97,6 @@ export const onUpdateHand = `subscription OnUpdateHand {
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -134,6 +106,7 @@ export const onUpdateHand = `subscription OnUpdateHand {
       onPlay
       user
       started_on
+      players
     }
     gameId
     user
@@ -152,7 +125,6 @@ export const onDeleteHand = `subscription OnDeleteHand {
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -162,6 +134,7 @@ export const onDeleteHand = `subscription OnDeleteHand {
       onPlay
       user
       started_on
+      players
     }
     gameId
     user
@@ -177,7 +150,6 @@ export const onCreateMessages = `subscription OnCreateMessages {
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -187,6 +159,7 @@ export const onCreateMessages = `subscription OnCreateMessages {
       onPlay
       user
       started_on
+      players
     }
     gameId
     user
@@ -203,7 +176,6 @@ export const onUpdateMessages = `subscription OnUpdateMessages {
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -213,6 +185,7 @@ export const onUpdateMessages = `subscription OnUpdateMessages {
       onPlay
       user
       started_on
+      players
     }
     gameId
     user
@@ -229,7 +202,6 @@ export const onDeleteMessages = `subscription OnDeleteMessages {
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -239,11 +211,69 @@ export const onDeleteMessages = `subscription OnDeleteMessages {
       onPlay
       user
       started_on
+      players
     }
     gameId
     user
     content
     sentOn
+  }
+}
+`;
+export const onCreateProfile = `subscription OnCreateProfile {
+  onCreateProfile {
+    id
+    name
+    image
+    userID
+    followers
+    following
+    friends {
+      name
+      image
+      id
+    }
+    gamesWon
+    gemesLost
+    ranking
+  }
+}
+`;
+export const onUpdateProfile = `subscription OnUpdateProfile {
+  onUpdateProfile {
+    id
+    name
+    image
+    userID
+    followers
+    following
+    friends {
+      name
+      image
+      id
+    }
+    gamesWon
+    gemesLost
+    ranking
+  }
+}
+`;
+export const onDeleteProfile = `subscription OnDeleteProfile {
+  onDeleteProfile {
+    id
+    name
+    image
+    userID
+    followers
+    following
+    friends {
+      name
+      image
+      id
+    }
+    gamesWon
+    gemesLost
+    ranking
   }
 }
 `;

@@ -7,7 +7,6 @@ export const getGame = `query GetGame($id: ID!) {
     title
     playerCount
     winner
-    createdBy
     startCards
     gameType
     private
@@ -17,6 +16,7 @@ export const getGame = `query GetGame($id: ID!) {
     onPlay
     user
     started_on
+    players
   }
 }
 `;
@@ -31,7 +31,6 @@ export const listGames = `query ListGames(
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -41,31 +40,7 @@ export const listGames = `query ListGames(
       onPlay
       user
       started_on
-    }
-    nextToken
-  }
-}
-`;
-export const getPlayerStats = `query GetPlayerStats($id: ID!) {
-  getPlayerStats(id: $id) {
-    id
-    gamesWon
-    gemesLost
-    ranking
-  }
-}
-`;
-export const listPlayerStatss = `query ListPlayerStatss(
-  $filter: ModelPlayerStatsFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listPlayerStatss(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      gamesWon
-      gemesLost
-      ranking
+      players
     }
     nextToken
   }
@@ -82,7 +57,6 @@ export const getHand = `query GetHand($id: ID!) {
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -92,6 +66,7 @@ export const getHand = `query GetHand($id: ID!) {
       onPlay
       user
       started_on
+      players
     }
     gameId
     user
@@ -115,7 +90,6 @@ export const listHands = `query ListHands(
         title
         playerCount
         winner
-        createdBy
         startCards
         gameType
         private
@@ -125,6 +99,7 @@ export const listHands = `query ListHands(
         onPlay
         user
         started_on
+        players
       }
       gameId
       user
@@ -142,7 +117,6 @@ export const getMessages = `query GetMessages($id: ID!) {
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -152,6 +126,7 @@ export const getMessages = `query GetMessages($id: ID!) {
       onPlay
       user
       started_on
+      players
     }
     gameId
     user
@@ -173,7 +148,6 @@ export const listMessagess = `query ListMessagess(
         title
         playerCount
         winner
-        createdBy
         startCards
         gameType
         private
@@ -183,11 +157,57 @@ export const listMessagess = `query ListMessagess(
         onPlay
         user
         started_on
+        players
       }
       gameId
       user
       content
       sentOn
+    }
+    nextToken
+  }
+}
+`;
+export const getProfile = `query GetProfile($id: ID!) {
+  getProfile(id: $id) {
+    id
+    name
+    image
+    userID
+    followers
+    following
+    friends {
+      name
+      image
+      id
+    }
+    gamesWon
+    gemesLost
+    ranking
+  }
+}
+`;
+export const listProfiles = `query ListProfiles(
+  $filter: ModelProfileFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listProfiles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      image
+      userID
+      followers
+      following
+      friends {
+        name
+        image
+        id
+      }
+      gamesWon
+      gemesLost
+      ranking
     }
     nextToken
   }
@@ -212,7 +232,6 @@ export const gamesByUser = `query GamesByUser(
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -222,6 +241,7 @@ export const gamesByUser = `query GamesByUser(
       onPlay
       user
       started_on
+      players
     }
     nextToken
   }
@@ -251,7 +271,6 @@ export const handsByGame = `query HandsByGame(
         title
         playerCount
         winner
-        createdBy
         startCards
         gameType
         private
@@ -261,6 +280,7 @@ export const handsByGame = `query HandsByGame(
         onPlay
         user
         started_on
+        players
       }
       gameId
       user
@@ -291,7 +311,6 @@ export const messagesByGame = `query MessagesByGame(
         title
         playerCount
         winner
-        createdBy
         startCards
         gameType
         private
@@ -301,6 +320,7 @@ export const messagesByGame = `query MessagesByGame(
         onPlay
         user
         started_on
+        players
       }
       gameId
       user

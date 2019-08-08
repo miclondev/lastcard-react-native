@@ -7,7 +7,6 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     title
     playerCount
     winner
-    createdBy
     startCards
     gameType
     private
@@ -17,6 +16,7 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     onPlay
     user
     started_on
+    players
   }
 }
 `;
@@ -26,7 +26,6 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     title
     playerCount
     winner
-    createdBy
     startCards
     gameType
     private
@@ -36,6 +35,7 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     onPlay
     user
     started_on
+    players
   }
 }
 `;
@@ -45,7 +45,6 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     title
     playerCount
     winner
-    createdBy
     startCards
     gameType
     private
@@ -55,33 +54,7 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     onPlay
     user
     started_on
-  }
-}
-`;
-export const createPlayerStats = `mutation CreatePlayerStats($input: CreatePlayerStatsInput!) {
-  createPlayerStats(input: $input) {
-    id
-    gamesWon
-    gemesLost
-    ranking
-  }
-}
-`;
-export const updatePlayerStats = `mutation UpdatePlayerStats($input: UpdatePlayerStatsInput!) {
-  updatePlayerStats(input: $input) {
-    id
-    gamesWon
-    gemesLost
-    ranking
-  }
-}
-`;
-export const deletePlayerStats = `mutation DeletePlayerStats($input: DeletePlayerStatsInput!) {
-  deletePlayerStats(input: $input) {
-    id
-    gamesWon
-    gemesLost
-    ranking
+    players
   }
 }
 `;
@@ -96,7 +69,6 @@ export const createHand = `mutation CreateHand($input: CreateHandInput!) {
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -106,6 +78,7 @@ export const createHand = `mutation CreateHand($input: CreateHandInput!) {
       onPlay
       user
       started_on
+      players
     }
     gameId
     user
@@ -124,7 +97,6 @@ export const updateHand = `mutation UpdateHand($input: UpdateHandInput!) {
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -134,6 +106,7 @@ export const updateHand = `mutation UpdateHand($input: UpdateHandInput!) {
       onPlay
       user
       started_on
+      players
     }
     gameId
     user
@@ -152,7 +125,6 @@ export const deleteHand = `mutation DeleteHand($input: DeleteHandInput!) {
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -162,6 +134,7 @@ export const deleteHand = `mutation DeleteHand($input: DeleteHandInput!) {
       onPlay
       user
       started_on
+      players
     }
     gameId
     user
@@ -177,7 +150,6 @@ export const createMessages = `mutation CreateMessages($input: CreateMessagesInp
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -187,6 +159,7 @@ export const createMessages = `mutation CreateMessages($input: CreateMessagesInp
       onPlay
       user
       started_on
+      players
     }
     gameId
     user
@@ -203,7 +176,6 @@ export const updateMessages = `mutation UpdateMessages($input: UpdateMessagesInp
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -213,6 +185,7 @@ export const updateMessages = `mutation UpdateMessages($input: UpdateMessagesInp
       onPlay
       user
       started_on
+      players
     }
     gameId
     user
@@ -229,7 +202,6 @@ export const deleteMessages = `mutation DeleteMessages($input: DeleteMessagesInp
       title
       playerCount
       winner
-      createdBy
       startCards
       gameType
       private
@@ -239,11 +211,69 @@ export const deleteMessages = `mutation DeleteMessages($input: DeleteMessagesInp
       onPlay
       user
       started_on
+      players
     }
     gameId
     user
     content
     sentOn
+  }
+}
+`;
+export const createProfile = `mutation CreateProfile($input: CreateProfileInput!) {
+  createProfile(input: $input) {
+    id
+    name
+    image
+    userID
+    followers
+    following
+    friends {
+      name
+      image
+      id
+    }
+    gamesWon
+    gemesLost
+    ranking
+  }
+}
+`;
+export const updateProfile = `mutation UpdateProfile($input: UpdateProfileInput!) {
+  updateProfile(input: $input) {
+    id
+    name
+    image
+    userID
+    followers
+    following
+    friends {
+      name
+      image
+      id
+    }
+    gamesWon
+    gemesLost
+    ranking
+  }
+}
+`;
+export const deleteProfile = `mutation DeleteProfile($input: DeleteProfileInput!) {
+  deleteProfile(input: $input) {
+    id
+    name
+    image
+    userID
+    followers
+    following
+    friends {
+      name
+      image
+      id
+    }
+    gamesWon
+    gemesLost
+    ranking
   }
 }
 `;

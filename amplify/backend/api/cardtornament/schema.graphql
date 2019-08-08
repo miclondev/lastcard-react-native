@@ -14,13 +14,7 @@ type Game @model
 	onPlay: [Int]
 	user: String
 	started_on: AWSDateTime
-}
-
-type PlayerStats @model {
-	id: ID
-	gamesWon: Int
-	gemesLost: Int
-	ranking: Int
+	players: [String]
 }
 
 type Hand @model
@@ -44,4 +38,23 @@ type Messages @model
 	user: String
 	content: String
 	sentOn: AWSDateTime
+}
+
+type Profile @model{
+	id: ID
+	name: String
+	image: String
+	userID: String
+	followers: Int
+	following: Int
+	friends: [Person]
+	gamesWon: Int
+	gemesLost: Int
+	ranking: Int
+}
+
+type Person {
+	name: String
+	image: String
+	id: String
 }
