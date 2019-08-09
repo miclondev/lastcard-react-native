@@ -37,6 +37,7 @@ class Game extends Component {
     }
 
     onPressPlay = () => this.setState({ canPlay: !this.state.canPlay })
+
     onPressSwitch = () => this.setState({ canSwitch: !this.state.canSwitch })
 
     async componentDidMount() {

@@ -123,7 +123,7 @@ class GameOptions extends Component {
         
         
         return (
-            <View>
+            <View style={styles.body}>
                 <Query query={getGame} variables={{ id: gameId }}>
                     {({ error, loading, data }) => {
                         console.log(error)
@@ -180,6 +180,10 @@ class GameOptions extends Component {
 }
 
 const styles = StyleSheet.create({
+    body: {
+        backgroundColor: '#2E2633',
+        flex: 1
+    },
     main: {
         flexDirection: "column",
         //flex: 2,
@@ -187,6 +191,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-around",
         padding: 20,
         //height: 500
+        backgroundColor: '#2E2633',
     },
     button: {
         marginBottom: 50
