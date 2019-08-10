@@ -7,7 +7,6 @@ query GetGame($id: ID!) {
             title
             playerCount
             winner
-            createdBy
             startCards
             gameType
             private

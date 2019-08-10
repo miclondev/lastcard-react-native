@@ -1,23 +1,43 @@
 import React, { Component } from "react"
-import {View, Text, StyleSheet, ScrollView } from "react-native"
+import {View, Text, StyleSheet, ScrollView, Dimensions, TouchableOpacity } from "react-native"
 import SingleCard from "../card/SingleCard"
 
-import { graphql, Query, withApollo } from "react-apollo"
+import {  withApollo } from "react-apollo"
 import getHand from "../../queries/player/getHand"
 import cards from "../../data/cards.json"
+
+
+import {  Entypo } from '@expo/vector-icons';
+
+const width = Dimensions.get('window').width
 
 class PlayerDeck extends Component {
      
     state = {
+        action: "Select Cards",
         loading: false,
         myCards: [],
         selectedCards: [],
-        currentCards: []
+        currentCards: [],
+        sort: false
     }
 
     componentDidMount(){
         if(this.state.myCards.length === 0) { 
             this.getCurrentCards()
+        }
+    }
+
+
+    onPressAction = () => {
+        const { action } = this.state
+
+        if(action === "Sort Cards"){
+            this.setState({ sort: !this.state.sort, action: "Play Cards" })
+        }
+        
+        if(action === "Play Cards"){
+            //play cards
         }
     }
 
@@ -41,7 +61,8 @@ class PlayerDeck extends Component {
                 let selectedCards = [...prevState.selectedCards, num]
                 return {
                     myCards: cards,
-                    selectedCards
+                    selectedCards,
+                    action: "Sort Cards"
                  }
             }
         )
@@ -81,32 +102,53 @@ class PlayerDeck extends Component {
     render(){
        //console.log(this.state)
        // const { cards } = this.props
+       let data = []
+       if(this.state.sort){
+            data = this.state.selectedCards
+       }else{
+           data = this.state.myCards
+       }
        
         return(
+            <View style={{ flex:1}}>
                 <ScrollView contentContainerStyle={styles.main}
-                horizontal={true}
-                >
-                            
-                                {
-                                    this.state.currentCards.map((c, i) =>( 
-                                            <SingleCard 
-                                                value={cards[c].value}
-                                                key={i}
-                                                suit={cards[c].icon}
-                                                num={i}
-                                                c={c}
-                                                onSelect={this.onSelectCard}
-                                                onDeSelect={this.onDeSelectCard}
-                                            />
+                    horizontal={true}
+                    >
+                                
+                                    {
+                                        this.state.currentCards.map((c, i) =>( 
+                                                <SingleCard 
+                                                    value={cards[c].value}
+                                                    key={i}
+                                                    suit={cards[c].icon}
+                                                    num={i}
+                                                    c={c}
+                                                    onSelect={this.onSelectCard}
+                                                    onDeSelect={this.onDeSelectCard}
+                                                />
+                                            )
                                         )
-                                    )
-                                }
-                           
-                    
-                    {/* <Text>My Cards</Text> */}
-                     
-                    
-              </ScrollView>
+                                    }
+                        
+                </ScrollView>
+
+
+
+
+
+                <View style={styles.buttons}>
+                                <Entypo name="message" size={40} color="#EFFFCD" />
+                                
+                                <TouchableOpacity style={styles.action} onPress={() => this.onPressAction()}>
+                                    <Text style={styles.actionText}>{this.state.action}</Text>
+                                </TouchableOpacity>
+
+                                <Entypo name="message" size={40} color="#EFFFCD" />
+                </View>
+
+
+
+              </View>
         )
     }
 }
@@ -116,6 +158,30 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         //backgroundColor: 'blue',
         width: 800
+    },
+    buttons: {
+        backgroundColor: '#2E2633',
+        height: 60,
+        width,
+        position: 'absolute',
+        bottom: 0,
+        //alignSelf: 'stretch',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        
+    },
+    action: {
+        backgroundColor: "#99173C",
+        width: 170,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 30
+    },
+    actionText: {
+        color: 'white',
+        fontWeight: '400'
     }
 })
 

@@ -4,6 +4,12 @@ import { AuthSession } from 'expo';
 import jwtDecode from 'jwt-decode';
 import { AsyncStorage } from 'react-native';
 
+
+import getUser from "../queries/user/getUser"
+
+import createProfile from "../mutations/createUser"
+import { withApollo } from "react-apollo"
+
 const auth0ClientId = 'f4WYtl8Js3BMEb375NISav30DqfcGEBY';
 const auth0Domain = 'https://dev-sjm7bapo.eu.auth0.com';
 
@@ -13,9 +19,11 @@ function toQueryString(params) {
       .join('&');
 }
 
-export default class App extends React.Component {
+class UserAuth extends React.Component {
     state = {
       name: null,
+      id: null,
+      image: null
     };
   
     login = async () => {
@@ -41,9 +49,25 @@ export default class App extends React.Component {
       //  console.log(response)
 
       if (response.type === 'success') {
-        this.handleResponse(response.params);
+        await this.handleResponse(response.params);
+        this.createUserProfile()
       }
+
     };
+
+
+    createUserProfile = () => {
+       const { id, name, image } = this.state
+       console.log(id, name, image)
+
+      this.props.client.query({
+        query: getUser,
+        variables: {
+           id
+        }
+      }).then(res => console.log(res))
+
+    }
 
     
   
@@ -58,16 +82,46 @@ export default class App extends React.Component {
 
       const decoded = await jwtDecode(jwtToken);
   
-      const { name } = decoded;
-      console.log(name)
+      const { name, sub, picture } = decoded;
+      console.log(sub, name)
+
         try {
           await AsyncStorage.setItem("user", JSON.stringify(decoded))
+      
+          //console.log(res)
+
+          
+          // .then(res => {
+          //   console.log(res)
+            // if(res.getProfile){
+
+            //   this.props.navigation.navigate("Profile")
+            
+            // }else{
+              
+            //   console.log(sub, name, picture)
+
+            //   this.props.client.mutate({
+            //     mutation: createProfile,
+            //     variables: {
+            //       id: sub,
+            //       userID: sub,
+            //       name,
+            //       image: picture
+            //     }
+            //   }).then(res => {
+            //     console.log(res)
+            //     this.props.navigation.navigate("Profile")
+            //   })
+
+            // }
+          
+          // })
         } catch (e) {
           console.log(e)
           // saving error
         }
-
-      this.setState({ name });
+      this.setState({ name, id: sub, image: picture });
     };
   
     render() {
@@ -99,3 +153,6 @@ export default class App extends React.Component {
     },
   });
   
+
+
+export default withApollo(UserAuth)

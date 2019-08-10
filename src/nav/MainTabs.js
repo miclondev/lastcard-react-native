@@ -5,6 +5,7 @@ import GameNav from "./GameNav"
 import Notifications from "../screens/Notifications"
 import Friends from "../screens/Friends"
 import TopList from "../screens/TopList"
+import withAuth from "../utils/auth"
 
 const MainTabs = createBottomTabNavigator({
     Friends: {
@@ -24,7 +25,7 @@ const MainTabs = createBottomTabNavigator({
         screen: Notifications
     },
     Profile: {
-        screen: Profile
+        screen: withAuth(Profile)
     },
 }, {
     initialRouteName: "GameList",

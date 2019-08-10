@@ -1,6 +1,6 @@
 type Game @model
 @key(name: "ByUser", fields: ["user", "started_on"], queryField: "gamesByUser")
- {
+{
 	id: ID
 	title: String!
 	playerCount: Int!
@@ -15,6 +15,7 @@ type Game @model
 	user: String
 	started_on: AWSDateTime
 	players: [String]
+	last_played_on: AWSDateTime
 }
 
 type Hand @model

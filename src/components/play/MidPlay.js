@@ -8,7 +8,6 @@ class MidPlay extends Component {
     render(){
         return(
             <View>
-            
                 <Query 
                     query={getGame} 
                     variables={{ id: "item-test-1"}}
@@ -22,10 +21,9 @@ class MidPlay extends Component {
                             <View style={styles.main}>
                                 
                                 <CardBack/>
-
                                     <CardBack
                                       rotate={-30}
-                                      backgroundColor="#D4D4D4"
+                                      backgroundColor="#DCE9BE"
                                     >
                                         <Text>
                                             2 

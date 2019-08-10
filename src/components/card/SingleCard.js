@@ -7,13 +7,6 @@ import entities from "html-entities"
 const { AllHtmlEntities } = entities
 const AnimatedView = animated(View)
 
-const type = [
-  { id: 0, type: 'clubs', suit: '&clubs;', color: '#696969' },
-  { id: 1, type: 'hearts', suit: '&hearts;', color: '#D00000' },
-  { id: 2, type: 'diams', suit: '&diams;', color: '#D00000' },
-  { id: 3, type: 'spades', suit: '&spades;', color: '#696969' },
-]
-
 class SingleCard extends Component {
 
   state = {
@@ -71,7 +64,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 5,
     position: 'absolute', 
-    backgroundColor: "#D4D4D4"
+    backgroundColor: "#DCE9BE"
    // top: 100
 
   },

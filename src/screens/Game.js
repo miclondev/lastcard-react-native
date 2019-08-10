@@ -3,22 +3,13 @@ import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from "react-nati
 import PlayerDeck from "../components/play/PlayerDeck"
 import BackDeck from "../components/play/BackDeck"
 import MidPlay from "../components/play/MidPlay"
-import { Feather, Entypo } from '@expo/vector-icons';
+
 import Loading from "../components/Loading"
 
 import { Query } from "react-apollo"
 import getGame from "../queries/game/getGame"
 
 const width = Dimensions.get('window').width
-
-
-const IconTouch = ({ name, action }) => (
-    <TouchableOpacity
-        onPress={() => action()}
-    >
-        <Feather name={name} size={40} color="#FDE375" />
-    </TouchableOpacity>
-)
 
 class Game extends Component {
 
@@ -67,23 +58,6 @@ class Game extends Component {
                             <View style={styles.bottom}>
                                 <PlayerDeck gameId={gameId} />
                             </View>
-
-                            <View style={styles.topBar}>
-                                    <Entypo name="circle-with-cross" size={52} color="#FDE375" />
-                                    <Entypo name="message" size={52} color="#FDE375" />
-                            </View>
-
-                            <View style={styles.buttons}>
-
-                                <IconTouch name="check-square" action={this.props.logOut} />
-
-                                <IconTouch name={this.state.canPlay ? "share" : "power"}
-                                    action={this.onPressPlay} />
-
-                                <IconTouch name={this.state.canSwitch ? "toggle-left" : "toggle-right"}
-                                    action={this.onPressSwitch} />
-                            </View>
-
                         </View>
                     )
                 }}
@@ -98,7 +72,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignContent: 'center',
-        backgroundColor: '#252833'
+        backgroundColor: '#2E2633'
     },
     top: {
         // backgroundColor: 'red',
@@ -112,18 +86,7 @@ const styles = StyleSheet.create({
         //backgroundColor: 'grey',
         flex: 1
     },
-    buttons: {
-        backgroundColor: '#252833',
-        height: 60,
-        width,
-        position: 'absolute',
-        bottom: 0,
-        //alignSelf: 'stretch',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        
-    },
+
     topBar:{
         paddingTop: 60,
         alignItems: 'center',

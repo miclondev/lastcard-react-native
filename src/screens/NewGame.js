@@ -6,6 +6,9 @@ import createGame from "../mutations/createGame"
 
 import { Input, Icon, Button, CheckBox, Slider } from "react-native-elements"
 
+import getUserGames from "../queries/game/getUserGames"
+
+
 import moment from "moment"
 
 class NewGame extends Component {
@@ -88,11 +91,17 @@ class NewGame extends Component {
                                                 started_on: moment().format(),
                                                 user: this.props.userId
                                             }
+                                            , refetchQueries: [{
+                                                query: getUserGames,
+                                                variables: {
+                                                    user: this.props.userId
+                                                }
+                                            }]
                                     }).then(res => {
-                                        console.log(res)
                                         this.setState({loading: false}, () => {
                                             this.props.navigation.navigate("GameList")
                                         })
+
                                     })
                                     .catch(err => console.log(err))}
                                 }

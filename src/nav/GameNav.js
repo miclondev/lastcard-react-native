@@ -15,22 +15,34 @@ const GameNavigator = createStackNavigator({
      })
     },
     GameOptions: {
-      screen: checkAuth(GameOptions)
+      screen: checkAuth(GameOptions),
+      navigationOptions: () => ({
+        // header: null,
+         tabBarVisible: false,
+          // headerMode: 'none',
+          headerTransparent: true
+        })
     },
     NewGame: {
-      screen: checkAuth(NewGame)
+      screen: checkAuth(NewGame),
+      navigationOptions: () => ({
+        // header: null,
+         tabBarVisible: false,
+          // headerMode: 'none',
+          headerTransparent: true
+        })
     },
     Game: {
       screen: checkAuth(Game),
       navigationOptions: () => ({
-       header: null,
-       tabBarVisible: false
+      // header: null,
+       tabBarVisible: false,
         // headerMode: 'none',
-        // headerTransparent: true
+        headerTransparent: true
       })
     }
 }, {
- // initialRouteName: "Game", 
+  //initialRouteName: "Game", 
   navigationOptions: ({ navigation }) => {
     let tabBarVisible = true;
     if (navigation.state.index > 0) {
@@ -38,6 +50,9 @@ const GameNavigator = createStackNavigator({
     }
     return {
       tabBarVisible,
+      cardStyle: {
+        backgoundColor: "#2E2633"
+      }
     };
   }
 })

@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#555152',
         marginBottom:20,
         borderRadius: 5,
+        padding: 10
         //flex: 1
     },
     text: {

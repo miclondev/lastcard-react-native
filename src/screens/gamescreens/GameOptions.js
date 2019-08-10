@@ -18,6 +18,7 @@ class GameOptions extends Component {
 
     gotoGame = (id, started) => {
         if(started){
+            //navigate if game already started
             this.props.navigation.navigate("Game",{
                 gameId: id
             })
@@ -119,9 +120,6 @@ class GameOptions extends Component {
         const { navigation } = this.props;
         const gameId = navigation.getParam('gameId', "e35a5ec6-a6a0-4e3a-bc00-0048e12cf1d1");
 
-
-        
-        
         return (
             <View style={styles.body}>
                 <Query query={getGame} variables={{ id: gameId }}>
@@ -148,6 +146,12 @@ class GameOptions extends Component {
                                             color="white"
                                         />
                                     }
+                                    buttonStyle={{
+                                        backgroundColor: '#99173C'
+                                    }}
+                                    titleStyle={{
+                                        color: '#EFFFCD'
+                                    }}
                                     title="Invite Opponent"
                                     raised
                                 />
@@ -161,6 +165,12 @@ class GameOptions extends Component {
                                             color="white"
                                         />
                                     }
+                                    buttonStyle={{
+                                        backgroundColor: '#99173C'
+                                    }}
+                                    titleStyle={{
+                                        color: '#EFFFCD'
+                                    }}
                                     title={gameStarted ? "Continue Game" : "Start Game"}
                                     raised
                                     onPress={() => this.gotoGame(gameStarted, getGame.id)}
@@ -182,7 +192,8 @@ class GameOptions extends Component {
 const styles = StyleSheet.create({
     body: {
         backgroundColor: '#2E2633',
-        flex: 1
+        flex: 1,
+        paddingTop: 70
     },
     main: {
         flexDirection: "column",
