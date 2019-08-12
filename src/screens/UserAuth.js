@@ -1,139 +1,102 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
-import { AuthSession } from 'expo';
-import jwtDecode from 'jwt-decode';
+import { StyleSheet, Text, View, Button, ActivityIndicator } from 'react-native';
+
 import { AsyncStorage } from 'react-native';
+import axios from "axios"
 
+import { Input, Icon } from "react-native-elements"
 
-import getUser from "../queries/user/getUser"
-
-import createProfile from "../mutations/createUser"
-import { withApollo } from "react-apollo"
-
-const auth0ClientId = 'f4WYtl8Js3BMEb375NISav30DqfcGEBY';
-const auth0Domain = 'https://dev-sjm7bapo.eu.auth0.com';
-
-function toQueryString(params) {
-    return '?' + Object.entries(params)
-      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-      .join('&');
-}
+import { Query, graphql } from "react-apollo"
 
 class UserAuth extends React.Component {
+
     state = {
-      name: null,
-      id: null,
-      image: null
+      number: "0768853979",
+      conf: "8407",
+      confirm: false,
+      loading: false,
+      message: undefined
     };
   
     login = async () => {
-      // Retrieve the redirect URL, add this to the callback URL list
-      // of your Auth0 application.
-      const redirectUrl = AuthSession.getRedirectUrl();
-      //console.log(`Redirect URL: ${redirectUrl}`);
-      
-      // Structure the auth parameters and URL
-      const queryParams = toQueryString({
-        client_id: auth0ClientId,
-        redirect_uri: redirectUrl,
-        response_type: 'id_token', // id_token will return a JWT token
-        scope: 'openid profile', // retrieve the user's profile
-        nonce: 'nonce', // ideally, this will be a random value
-      });
-
-      const authUrl = `${auth0Domain}/authorize` + queryParams;
-      // Perform the authentication
-      const response = await AuthSession.startAsync({ authUrl });
-     // console.log('Authentication response', response);
-  
-      //  console.log(response)
-
-      if (response.type === 'success') {
-        await this.handleResponse(response.params);
-        this.createUserProfile()
-      }
-
+        const { number } = this.state
+        this.setState({loading: true })
+        const res =  await axios.post(`https://qfv3tcu7ih.execute-api.eu-west-1.amazonaws.com/prod/number?type=login&number=${number}`)
+        if(res.data.response === "confirm"){
+          this.setState({ confirm: true, loading: false })
+        }
     };
 
 
-    createUserProfile = () => {
-       const { id, name, image } = this.state
-       console.log(id, name, image)
-
-      this.props.client.query({
-        query: getUser,
-        variables: {
-           id
+    confirm = async () => {
+      try{
+      const { number, conf } = this.state
+      this.setState({loading: true })
+      const res =  await axios.post(`https://qfv3tcu7ih.execute-api.eu-west-1.amazonaws.com/prod/confirm?type=confirm&number=${number}&conf=${conf}`)
+      console.log(res.data) 
+      if(res.data.response === "confirmed"){
+          await AsyncStorage.setItem("lastCardId", number)
+          this.goToProfile()
         }
-      }).then(res => console.log(res))
-
+      }catch(e){
+        console.log(e)
+     }
     }
 
-    
-  
-    handleResponse = async (response) => {
-      if (response.error) {
-        Alert('Authentication error', response.error_description || 'something went wrong');
-        return;
-      }
-  
-      // Retrieve the JWT token and decode it
-      const jwtToken = response.id_token;
-
-      const decoded = await jwtDecode(jwtToken);
-  
-      const { name, sub, picture } = decoded;
-      console.log(sub, name)
-
-        try {
-          await AsyncStorage.setItem("user", JSON.stringify(decoded))
-      
-          //console.log(res)
-
-          
-          // .then(res => {
-          //   console.log(res)
-            // if(res.getProfile){
-
-            //   this.props.navigation.navigate("Profile")
-            
-            // }else{
-              
-            //   console.log(sub, name, picture)
-
-            //   this.props.client.mutate({
-            //     mutation: createProfile,
-            //     variables: {
-            //       id: sub,
-            //       userID: sub,
-            //       name,
-            //       image: picture
-            //     }
-            //   }).then(res => {
-            //     console.log(res)
-            //     this.props.navigation.navigate("Profile")
-            //   })
-
-            // }
-          
-          // })
-        } catch (e) {
-          console.log(e)
-          // saving error
-        }
-      this.setState({ name, id: sub, image: picture });
-    };
+    goToProfile = () => this.props.navigation.navigate("Profile") 
   
     render() {
-      const { name } = this.state;
   
       return (
         <View style={styles.container}>
+
           {
-            name ?
-            <Text style={styles.title}>You are logged in, {name}!</Text> :
-            <Button title="Log in with Auth0" onPress={this.login} />
+            this.state.confirm ?
+            <View style={{ width: 400}}>
+
+                <Input
+                    label="Number"
+                    placeholder='Enter Number'
+                    onChangeText={number => this.setState({ conf: number })}
+                    value={this.state.conf}
+                    leftIcon={
+                        <Icon
+                        name='battery-full'
+                        size={34}
+                        color='black'
+                        />
+                    }
+                />
+                <Button title="Confirm" 
+                    onPress={this.confirm} 
+                />
+            
+            </View> :
+            <View style={{ width: 400 }}>
+               <Input
+                    label="Number"
+                    placeholder='Enter Number'
+                    onChangeText={number => this.setState({ number })}
+                    value={this.state.number}
+                    leftIcon={
+                        <Icon
+                        name='battery-full'
+                        size={34}
+                        color='black'
+                        />
+                    }
+                />
+                <Button title="Ingia Last Card" 
+                    onPress={this.login} 
+                />
+
+            </View>
           }
+
+          {
+            this.state.loading && <ActivityIndicator/>
+          }
+
         </View>
       );
     }
@@ -155,4 +118,4 @@ class UserAuth extends React.Component {
   
 
 
-export default withApollo(UserAuth)
+export default UserAuth

@@ -3,27 +3,22 @@ import { AsyncStorage } from "react-native"
 // import { } from "react-navigation"
 
 export default (ComposedComponent) => class CheckAuth extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
-            loggedIn: false,
-            userName: undefined,
-            userImage: undefined,
-            userId: undefined
+            loggedIn: false
         }
     }
 
     async componentDidMount() {
         await this.checkSignedIn()
-        await this.getUser()
     }
 
     checkSignedIn = async () => {
         try {
-            const value = await AsyncStorage.getItem("user")
-            if (value !== null) {
-                return this.setState({ loggedIn: true })
+            const userId = await AsyncStorage.getItem("lastCardId")
+            if (userId !== null) {
+                return this.setState({ loggedIn: true, userId })
             } else {
                 console.log("not signed in")
                 this.props.navigation.navigate("Auth")
@@ -33,34 +28,9 @@ export default (ComposedComponent) => class CheckAuth extends Component {
         }
     }
 
-    getUser = async () => {
-        try {
-            const user = await AsyncStorage.getItem("user")
-            if (user !== null) {
-                const person = JSON.parse(user)
-                return this.setState({
-                    userName: person.name,
-                    userImage: person.picture,
-                    userId: person.sub
-                })
-            }
-        } catch (e) {
-            console.log(e)
-            this.props.navigation.navigate("Auth")
-        }
-    }
-
     onLogout = async () => {
-        await AsyncStorage.removeItem("user")
-        this.setState({
-            userImage: undefined,
-            userName: undefined,
-            userId: undefined,
-            loggedIn: false
-        }, () => {
-            console.log("user has been signed out")
-            this.props.navigation.navigate("Auth")
-        })
+        await AsyncStorage.removeItem("lastCardId")
+        this.props.navigation.navigate("Auth")
     }
 
     render() {
@@ -68,8 +38,6 @@ export default (ComposedComponent) => class CheckAuth extends Component {
         return <ComposedComponent
             {...this.props}
             loggedIn={this.state.loggedIn}
-            userName={this.state.userName}
-            userImage={this.state.userImage}
             userId={this.state.userId}
             logOut={this.onLogout}
         />

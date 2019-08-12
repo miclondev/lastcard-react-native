@@ -4,9 +4,7 @@ import { Button } from "react-native-elements"
 
 class Profile extends Component {
     render(){
-        
 //        console.log(this.props)
-
         return(
             <View>
                 <Text>  Profile </Text>
