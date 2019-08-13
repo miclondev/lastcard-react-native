@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { View, Text, StyleSheet } from "react-native"
 
 class FriendSummary extends Component {
+
     render(){
         const { name, number } = this.props
         return(
@@ -14,7 +15,7 @@ class FriendSummary extends Component {
 
 const styles = StyleSheet.create({
     main: {
-        backgroundColor: "black"
+      height: 40
     },
     text: {
         color: 'white'

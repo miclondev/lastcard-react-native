@@ -15,7 +15,6 @@ class GameOptions extends Component {
         message: "invite player to game"
     }
 
-
     gotoGame = (id, started) => {
         if(started){
             //navigate if game already started

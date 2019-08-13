@@ -1,41 +1,83 @@
+import React from "react"
 import { createBottomTabNavigator } from "react-navigation"
 
-import Profile from "../screens/Profile"
+//tabs
 import GameNav from "./GameNav"
+import ChallengeTabs from "./ChallengeTabs"
+
+//screens
+import Profile from "../screens/Profile"
 import Notifications from "../screens/Notifications"
-import Friends from "../screens/Friends"
 import TopList from "../screens/TopList"
 import withAuth from "../utils/auth"
+import { Icon } from 'react-native-elements'
+
+//colors 
+import { darkAccent, AccentLight, lightAccent, lightColor } from "../functions/colors"
 
 const MainTabs = createBottomTabNavigator({
-    Friends: {
-        screen: Friends
+    Profile: {
+        screen: withAuth(Profile),
+        navigationOptions: () => ({
+            tabBarIcon: <Icon
+                    name='face-profile'
+                    color={lightColor}
+                    type="material-community"
+            />
+         })
     },
-    TopList: {
-        screen: TopList
+    Notifications: {
+        screen: Notifications,
+        navigationOptions: () => ({
+            tabBarIcon: <Icon
+                    name='md-notifications'
+                    type="ionicon"
+                    color={lightColor}
+            />
+         })
     },
     GameList: {
         screen: GameNav,
         navigationOptions: () => ({
             tabBarLabel: 'Game',
-            
+            tabBarIcon: <Icon
+                    name='cards-playing-outline'
+                    type="material-community"
+                    color={lightColor}
+            />
          })
     },
-    Notifications: {
-        screen: Notifications
+    Challenge: {
+        screen: ChallengeTabs,
+        navigationOptions: () => ({
+            tabBarIcon: <Icon
+                    name='ios-people'
+                    color={lightColor}
+                    type='ionicon'
+            />
+         })
     },
-    Profile: {
-        screen: withAuth(Profile)
-    },
+    TopList: {
+        screen: TopList,
+        navigationOptions: () => ({
+            tabBarIcon: <Icon
+                    name='list'
+                    color={lightColor}
+            />
+         })
+    }
 }, {
-    initialRouteName: "GameList",
+    initialRouteName: "Challenge",
     header: null,
     headerMode: 'none',
     tabBarOptions: {
-        activeBackgroundColor: '#cc2151',
-        inactiveBackgroundColor: '#99173C',
-        activeTintColor: '#EFFFCD',
-        inactiveTintColor: '#EFFFCD'
+        activeBackgroundColor: AccentLight,
+        inactiveBackgroundColor: darkAccent,
+        activeTintColor: lightColor,
+        inactiveTintColor: lightAccent,
+        style: {
+            borderTopColor: darkAccent
+        }
     }
 })
 

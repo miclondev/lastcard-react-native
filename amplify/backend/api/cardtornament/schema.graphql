@@ -15,7 +15,7 @@ type Game @model
 	user: String
 	started_on: AWSDateTime
 	players: [String]
-	last_played_on: AWSDateTime
+	diretion: String
 }
 
 type Hand @model
@@ -41,7 +41,7 @@ type Messages @model
 	sentOn: AWSDateTime
 }
 
-type Profile @model{
+type Profile @model @searchable{
 	id: ID
 	name: String
 	image: String
@@ -52,6 +52,19 @@ type Profile @model{
 	gamesWon: Int
 	gemesLost: Int
 	ranking: Int
+	last_played_on: AWSDateTime
+	inGame: Boolean
+	lastAvailable: AWSDateTime
+	points: Int
+	level: Int
+	trophies: [Trophy] @connection
+	canBeChallenged : Boolean
+}
+
+type Trophy @model {
+	id: ID
+	name: String
+	image: String
 }
 
 type Person {

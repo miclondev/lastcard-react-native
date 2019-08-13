@@ -1,6 +1,7 @@
 import React, { Component } from "react"
-import { View, Text, ActivityIndicator } from "react-native"
-import FriendSummary from "../components/friends/FriendSummary"
+import { View, Text, ScrollView, StyleSheet } from "react-native"
+import FriendSummary from "../../components/friends/FriendSummary"
+import Loading from "../../components/Loading"
 
 import * as Contacts from 'expo-contacts';
 import * as Permissions from 'expo-permissions'
@@ -9,7 +10,9 @@ class Friends extends Component {
 
     state = {
         contacts: [],
-        loading: false
+        loading: false,
+        pageSize: 40,
+        pageOffset: 0
     }
 
     async componentDidMount(){
@@ -40,8 +43,11 @@ class Friends extends Component {
     }
 
     getContacts = async () => {
+        const { pageOffset, pageSize } = this.state
         const { data } = await Contacts.getContactsAsync({
-            fields: [Contacts.Fields.Emails],
+            fields: [Contacts.Fields.PhoneNumbers],
+            pageSize,
+            pageOffset
         });
         this.setState({
             contacts: data
@@ -49,20 +55,35 @@ class Friends extends Component {
     }
 
     render(){
+        //console.log(this.state.contacts)
         return(
-            <View>
+            <View style={styles.main}>
                 <Text>  Friends  </Text>
+                
                     {
-                        this.stateloading ? <ActivityIndicator/> :
-                        this.state.contacts.map(f => <FriendSummary
-                            name={f.firstName}
-                            key={f.id}
-                        />)
+                        this.state.loading ? <Loading/> :
+                        <ScrollView> 
+                            {this.state.contacts.map(f =>
+                                    <FriendSummary
+                                        name={f.name}
+                                        key={f.id}
+                                        id={f.id}
+                                    />
+                            
+                            )}
+                        </ScrollView>
                     }
-              
+             
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    main: {
+        flex: 1,
+        backgroundColor: '#2E2633'
+    }
+})
 
 export default Friends
