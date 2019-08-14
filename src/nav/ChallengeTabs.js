@@ -18,7 +18,7 @@ const ChallengeTabs = createMaterialTopTabNavigator({
         })
     }
 }, {
-    initialRouteName: "Contacts",
+    //initialRouteName: "Contacts",
     lazy: true,
     tabBarOptions: {
         labelStyle: {

@@ -10,6 +10,7 @@ export default gql`
         $started_on: AWSDateTime
         $started: Boolean
         $finished: Boolean
+        $players: [String]
     ) {
         createGame(input: {
             title: $title
@@ -20,6 +21,7 @@ export default gql`
             started_on: $started_on
             started: $started
             finished: $finished
+            players: $players
         }) {
         id
         title
@@ -29,6 +31,7 @@ export default gql`
         started
         started_on
         private
+        players
         }
     }
 `

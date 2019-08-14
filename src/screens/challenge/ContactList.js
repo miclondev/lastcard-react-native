@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { View, Text, ScrollView, StyleSheet } from "react-native"
-import FriendSummary from "../../components/friends/FriendSummary"
+import PersonSmall from "../../components/people/PersonSmall"
 import Loading from "../../components/Loading"
 
 import * as Contacts from 'expo-contacts';
@@ -64,12 +64,12 @@ class Friends extends Component {
                         this.state.loading ? <Loading/> :
                         <ScrollView> 
                             {this.state.contacts.map(f =>
-                                    <FriendSummary
+                                    <PersonSmall
                                         name={f.name}
                                         key={f.id}
                                         id={f.id}
+                                        status="Invite"
                                     />
-                            
                             )}
                         </ScrollView>
                     }

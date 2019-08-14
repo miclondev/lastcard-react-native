@@ -17,6 +17,7 @@ export const getGame = `query GetGame($id: ID!) {
     user
     started_on
     players
+    diretion
   }
 }
 `;
@@ -41,6 +42,7 @@ export const listGames = `query ListGames(
       user
       started_on
       players
+      diretion
     }
     nextToken
   }
@@ -67,6 +69,7 @@ export const getHand = `query GetHand($id: ID!) {
       user
       started_on
       players
+      diretion
     }
     gameId
     user
@@ -100,6 +103,7 @@ export const listHands = `query ListHands(
         user
         started_on
         players
+        diretion
       }
       gameId
       user
@@ -127,6 +131,7 @@ export const getMessages = `query GetMessages($id: ID!) {
       user
       started_on
       players
+      diretion
     }
     gameId
     user
@@ -158,6 +163,7 @@ export const listMessagess = `query ListMessagess(
         user
         started_on
         players
+        diretion
       }
       gameId
       user
@@ -184,6 +190,20 @@ export const getProfile = `query GetProfile($id: ID!) {
     gamesWon
     gemesLost
     ranking
+    last_played_on
+    inGame
+    lastAvailable
+    points
+    level
+    trophies {
+      items {
+        id
+        name
+        image
+      }
+      nextToken
+    }
+    canBeChallenged
   }
 }
 `;
@@ -208,6 +228,38 @@ export const listProfiles = `query ListProfiles(
       gamesWon
       gemesLost
       ranking
+      last_played_on
+      inGame
+      lastAvailable
+      points
+      level
+      trophies {
+        nextToken
+      }
+      canBeChallenged
+    }
+    nextToken
+  }
+}
+`;
+export const getTrophy = `query GetTrophy($id: ID!) {
+  getTrophy(id: $id) {
+    id
+    name
+    image
+  }
+}
+`;
+export const listTrophys = `query ListTrophys(
+  $filter: ModelTrophyFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTrophys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      image
     }
     nextToken
   }
@@ -242,6 +294,7 @@ export const gamesByUser = `query GamesByUser(
       user
       started_on
       players
+      diretion
     }
     nextToken
   }
@@ -281,6 +334,7 @@ export const handsByGame = `query HandsByGame(
         user
         started_on
         players
+        diretion
       }
       gameId
       user
@@ -321,11 +375,53 @@ export const messagesByGame = `query MessagesByGame(
         user
         started_on
         players
+        diretion
       }
       gameId
       user
       content
       sentOn
+    }
+    nextToken
+  }
+}
+`;
+export const searchProfiles = `query SearchProfiles(
+  $filter: SearchableProfileFilterInput
+  $sort: SearchableProfileSortInput
+  $limit: Int
+  $nextToken: Int
+) {
+  searchProfiles(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      image
+      userID
+      followers
+      following
+      friends {
+        name
+        image
+        id
+      }
+      gamesWon
+      gemesLost
+      ranking
+      last_played_on
+      inGame
+      lastAvailable
+      points
+      level
+      trophies {
+        nextToken
+      }
+      canBeChallenged
     }
     nextToken
   }

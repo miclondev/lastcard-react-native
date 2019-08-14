@@ -24,9 +24,10 @@ class GameList extends Component {
                     //console.log(data, error)
                     return (
                         <View style={styles.main}>
+                           
                             <View style={styles.header}>
                                 <Text style={styles.text}> Your Games </Text>
-                                <Button
+                                {/* <Button
                                     icon={{
                                         name: "open-in-new",
                                         size: 15,
@@ -40,7 +41,7 @@ class GameList extends Component {
                                     }}
                                     title="Create A New Game"
                                     onPress={() => this.props.navigation.navigate("NewGame")}
-                                />
+                                /> */}
                             </View>
 
 
