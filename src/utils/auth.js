@@ -6,7 +6,8 @@ export default (ComposedComponent) => class CheckAuth extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loggedIn: false
+            loggedIn: false,
+            userId: undefined
         }
     }
 

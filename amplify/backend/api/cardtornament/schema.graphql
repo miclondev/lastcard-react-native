@@ -15,7 +15,7 @@ type Game @model
 	user: String
 	started_on: AWSDateTime
 	players: [String]
-	diretion: String
+	direction: String
 }
 
 type Hand @model
@@ -58,7 +58,7 @@ type Profile @model @searchable{
 	points: Int
 	level: Int
 	trophies: [Trophy] @connection
-	canBeChallenged : Boolean
+	canBeChallenged: Boolean
 }
 
 type Trophy @model {

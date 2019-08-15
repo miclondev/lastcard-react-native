@@ -3,7 +3,7 @@ import gql from "graphql-tag"
 export default gql`
     mutation CreateGame(
         $title: String!
-        $players: Int!
+        $playerCount: Int!
         $user: String
         $gameType: String
         $private: Boolean
@@ -14,7 +14,7 @@ export default gql`
     ) {
         createGame(input: {
             title: $title
-            playerCount: $players
+            playerCount: $playerCount
             user: $user
             gameType: $gameType
             private: $private

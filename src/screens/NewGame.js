@@ -27,7 +27,6 @@ class NewGame extends Component {
     }
 
     render() {
-
         // console.log(this.props)
         const { navigation } = this.props;
 
@@ -70,7 +69,7 @@ class NewGame extends Component {
                                                 createGame({
                                                     variables: {
                                                         title: "Last Card Game",
-                                                        players: 2,
+                                                        playerCount: 2,
                                                         gameType: "classic",
                                                         private: this.state.private,
                                                         started_on: moment().format(),

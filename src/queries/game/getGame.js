@@ -15,6 +15,7 @@ query GetGame($id: ID!) {
             cards
             onPlay
             user
+            players
     }
 }
 `

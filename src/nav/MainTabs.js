@@ -67,7 +67,7 @@ const MainTabs = createBottomTabNavigator({
          })
     }
 }, {
-    initialRouteName: "Challenge",
+    initialRouteName: "GameList",
     header: null,
     headerMode: 'none',
     tabBarOptions: {

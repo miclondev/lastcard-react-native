@@ -17,6 +17,26 @@ export const getGame = `query GetGame($id: ID!) {
     user
     started_on
     players
+    playersProfile {
+      items {
+        id
+        name
+        image
+        userID
+        followers
+        following
+        gamesWon
+        gemesLost
+        ranking
+        last_played_on
+        inGame
+        lastAvailable
+        points
+        level
+        canBeChallenged
+      }
+      nextToken
+    }
     diretion
   }
 }
@@ -42,6 +62,9 @@ export const listGames = `query ListGames(
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     nextToken
@@ -69,6 +92,9 @@ export const getHand = `query GetHand($id: ID!) {
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     gameId
@@ -131,6 +157,9 @@ export const getMessages = `query GetMessages($id: ID!) {
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     gameId
@@ -294,6 +323,9 @@ export const gamesByUser = `query GamesByUser(
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     nextToken

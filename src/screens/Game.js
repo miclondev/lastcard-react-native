@@ -14,16 +14,6 @@ const width = Dimensions.get('window').width
 class Game extends Component {
 
     state = {
-        canPlay: true,
-        canSwitch: false,
-        isActiveCards: false,
-        availableCards: [],
-        initialized: false,
-        initialPlay: 4,
-        players: 2,
-        p1Cards: [],
-        p2Cards: [],
-        cardsOnPlay: [],
         loading: true
     }
 
@@ -38,31 +28,25 @@ class Game extends Component {
     render() {
         //console.log(this.props.currentGame)
         const { navigation } = this.props;
-        const gameId = navigation.getParam('gameId', "e35a5ec6-a6a0-4e3a-bc00-0048e12cf1d1");
 
-        return (
-            <Query query={getGame} variables={{id: gameId}}>
-                {({ error, loading, data }) => {
-                    if (loading) return <Loading/>
-                    return (
-                        <View style={styles.main}>
+        const id = navigation.getParam('gameId');
 
-                            <View style={styles.top}>
-                                <BackDeck gameId={gameId} />
-                            </View>
+        console.log(id)
 
-                            <View style={styles.mid}>
-                                <MidPlay gameId={gameId} />
-                            </View>
+        return  this.props.loggedIn ? <View style={styles.main}>
+                <View style={styles.top}>
+                    <BackDeck gameId={id} />
+                </View>
 
-                            <View style={styles.bottom}>
-                                <PlayerDeck gameId={gameId} />
-                            </View>
-                        </View>
-                    )
-                }}
-            </Query>
-        )
+                <View style={styles.mid}>
+                    <MidPlay gameId={id} />
+                </View>
+
+                <View style={styles.bottom}>
+                    <PlayerDeck gameId={id} user={this.props.userId}/>
+                </View>
+            </View> :
+            <Loading/>
     }
 }
 
@@ -86,8 +70,7 @@ const styles = StyleSheet.create({
         //backgroundColor: 'grey',
         flex: 1
     },
-
-    topBar:{
+    topBar: {
         paddingTop: 60,
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -97,7 +80,7 @@ const styles = StyleSheet.create({
         width,
         height: 60,
         paddingLeft: 10,
-        paddingRight:10
+        paddingRight: 10
     }
 })
 

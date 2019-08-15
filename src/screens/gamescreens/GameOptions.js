@@ -6,183 +6,152 @@ import Loading from "../../components/Loading"
 
 import getGame from "../../queries/game/getGame"
 import updateGame from "../../mutations/updateGame"
-import createHand from "../../mutations/createGame"
+import createHand from "../../mutations/createHand"
 import cardDeck from "../../data/cards.json"
 
 class GameOptions extends Component {
 
     state = {
-        message: "invite player to game"
+        message: "invite player to game",
+        player1Create: false,
+        player2Create: false,
+        gameUpate: false
     }
 
-    gotoGame = (id, started) => {
-        if(started){
+    gotoGame = async () => {
+        const { id, started } = this.props.game
+        if (started) {
+            console.log("started")
             //navigate if game already started
-            this.props.navigation.navigate("Game",{
+            this.props.navigation.navigate("Game", {
                 gameId: id
             })
-        }else{
-            //check there is more than one player
-
-            if(this.checkPlayers() > 1){
-
-
-            }else{
-                this.setState({
-                    message: "Plase Invite Player to game"
-                })
-            }
-            
+        } else {
+            await this.initialCardHandOut()
+            this.props.navigation.navigate("Game", {
+                gameId: id
+            })
         }
     }
 
-
-    checkPlayers = () => 2
-
-        initialCardHandOut = async (gameId) => {
-
-            const initialPlay = 4
-            let player1Cards = []
-            let player2Cards = []
-            let onPlay = []
-            let remainingCards = []
-
-            let cards = this.shuffle(cardDeck)
-    
-            for(let i = 0; i < initialPlay; i++){
-                player1Cards.push(cards[i].id)
-                cards.splice(i, 1)
-            }
-    
-            for(let i = 0; i < initialPlay; i++){
-                player2Cards.push(cards[i].id)
-                cards.splice(i, 1)
-            }
-
-            onPlay.push(cards[0].id)
-    
-            cards.splice(0, 1)
-            
-            for(let i=0; i< cards.length; i++){
-                remainingCards.push(cards[i].id)
-            }
-    
-           await this.props.createHand({
-                variables:{
-                    game: gameId,
-                    gameId: "game-id014423",
-                    user: 'user-1',
-                    number: 1,
-                    cards: player1Cards
-                }
-            })
-            //.then(res => console.log(res))
-    
-          await this.props.createHand({
-                variables:{
-                    game: gameId,
-                    gameId: gameId,
-                    user: 'user-2',
-                    number: 2,
-                    cards: player2Cards
-                }
-            })
-            //.then(res => console.log(res))
-    
-          await this.props.updateGame({
-                variables:{
-                    id: "item-test-1",
-                    cards: remainingCards,
-                    onPlay,
-                    started: true
-                }
-            })
-            //.then(res => console.log(res))
-    
-            this.setState({ loading: false })
+    initialCardHandOut = async () => {
+        const { game } = this.props
+        const { players } = game
+        const initialPlay = 4
+        let player1Cards = []
+        let player2Cards = []
+        let onPlay = []
+        let remainingCards = []
+        let cards = this.shuffle(cardDeck)
+        for (let i = 0; i < initialPlay; i++) {
+            player1Cards.push(cards[i].id)
+            cards.splice(i, 1)
         }
 
-
-        shuffle = (toShuffle) => {
-            let cards = [...toShuffle]
-            let m = cards.length, t, i
-            while(m){
-                i = Math.floor(Math.random() * m--)
-                t = cards[m]
-                cards[m] = cards[i]
-                cards[i] = t
-            }
-            return cards
+        for (let i = 0; i < initialPlay; i++) {
+            player2Cards.push(cards[i].id)
+            cards.splice(i, 1)
         }
-    
+        onPlay.push(cards[0].id)
+        cards.splice(0, 1)
+        for (let i = 0; i < cards.length; i++) {
+            remainingCards.push(cards[i].id)
+        }
+
+        console.log({
+            game: game.id,
+            gameId: game.id,
+            user: players[0],
+            number: 1,
+            cards: player1Cards
+        })
+
+        await this.props.createHand({
+            variables: {
+                game: game.id,
+                gameId: game.id,
+                user: players[0],
+                number: 1,
+                cards: player1Cards
+            }
+        }).then(res => {
+            console.log(res)
+            this.setState({player1Create: true})
+        })
+
+        await this.props.createHand({
+            variables: {
+                game: game.id,
+                gameId: game.id,
+                user: players[1],
+                number: 2,
+                cards: player2Cards
+            }
+        }).then(res => {
+            console.log(res)
+            this.setState({player2Create: true})
+        })
+
+        await this.props.updateGame({
+            variables: {
+                id: game.id,
+                cards: remainingCards,
+                onPlay,
+                started: true
+            }
+        })
+        .then(res => {
+            this.setState({ loading: false, gameUpate: true })
+        })
+    }
+
+    shuffle = (toShuffle) => {
+        let cards = [...toShuffle]
+        let m = cards.length, t, i
+        while (m) {
+            i = Math.floor(Math.random() * m--)
+            t = cards[m]
+            cards[m] = cards[i]
+            cards[i] = t
+        }
+        return cards
+    }
+
     render() {
-        const { navigation } = this.props;
-        const gameId = navigation.getParam('gameId', "e35a5ec6-a6a0-4e3a-bc00-0048e12cf1d1");
+       // console.log("game", this.props.game)
+        const { game } = this.props
+
+        //console.log(game)
 
         return (
             <View style={styles.body}>
-                <Query query={getGame} variables={{ id: gameId }}>
-                    {({ error, loading, data }) => {
-                        console.log(error)
-                        if (loading) return <Loading/>
-                        console.log(data)
-                        
-                        const { getGame } = data
-                        const gameStarted = getGame.started || false
 
-                        return (
-                            <View style={styles.main}>
-                                <View>
+                <View style={styles.main}>
+               
+                    <Button
+                        containerStyle={styles.button}
+                        icon={
+                            <Icon
+                                name="keyboard-capslock"
+                                size={15}
+                                color="white"
+                            />
+                        }
+                        buttonStyle={{
+                            backgroundColor: '#99173C'
+                        }}
+                        titleStyle={{
+                            color: '#EFFFCD'
+                        }}
+                        title={game.started ? "Continue Game" : "Start Game"}
+                        raised
+                        onPress={() => this.gotoGame(game.gameStarted, game.id)}
+                    />
 
-                                </View>
-
-                                <Button
-                                    containerStyle={styles.button}
-                                    icon={
-                                        <Icon
-                                            name="grid-on"
-                                            size={15}
-                                            color="white"
-                                        />
-                                    }
-                                    buttonStyle={{
-                                        backgroundColor: '#99173C'
-                                    }}
-                                    titleStyle={{
-                                        color: '#EFFFCD'
-                                    }}
-                                    title="Invite Opponent"
-                                    raised
-                                />
-
-                                <Button
-                                    containerStyle={styles.button}
-                                    icon={
-                                        <Icon
-                                            name="keyboard-capslock"
-                                            size={15}
-                                            color="white"
-                                        />
-                                    }
-                                    buttonStyle={{
-                                        backgroundColor: '#99173C'
-                                    }}
-                                    titleStyle={{
-                                        color: '#EFFFCD'
-                                    }}
-                                    title={gameStarted ? "Continue Game" : "Start Game"}
-                                    raised
-                                    onPress={() => this.gotoGame(gameStarted, getGame.id)}
-                                />
-
-                                <Text>
-                                    {this.state.message}
-                                </Text>
-                            </View>
-                        )
-                    }}
-
-                </Query>
+                    <Text>
+                        {this.state.message}
+                    </Text>
+                </View>
             </View>
         )
     }
@@ -213,8 +182,21 @@ export default compose(
     graphql(createHand, {
         name: "createHand"
     }),
-    graphql(updateGame,{
+    graphql(updateGame, {
         name: "updateGame"
+    }),
+    graphql(getGame, {
+        name: "getGame",
+        options: props => {
+            const { navigation } = props;
+            const id = navigation.getParam('gameId', '6b63d5ca-7822-442b-91f2-4b3bc88da22d');
+            return {
+                variables: { id }
+            }
+        },
+        props: props => ({
+            loading: props.getGame.loading,
+            game: props.getGame.getGame ? props.getGame.getGame : {}
+        })
     })
-
 )(GameOptions)

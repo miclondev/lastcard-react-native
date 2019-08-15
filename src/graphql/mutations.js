@@ -17,6 +17,26 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     user
     started_on
     players
+    playersProfile {
+      items {
+        id
+        name
+        image
+        userID
+        followers
+        following
+        gamesWon
+        gemesLost
+        ranking
+        last_played_on
+        inGame
+        lastAvailable
+        points
+        level
+        canBeChallenged
+      }
+      nextToken
+    }
     diretion
   }
 }
@@ -37,6 +57,26 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     user
     started_on
     players
+    playersProfile {
+      items {
+        id
+        name
+        image
+        userID
+        followers
+        following
+        gamesWon
+        gemesLost
+        ranking
+        last_played_on
+        inGame
+        lastAvailable
+        points
+        level
+        canBeChallenged
+      }
+      nextToken
+    }
     diretion
   }
 }
@@ -57,6 +97,26 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     user
     started_on
     players
+    playersProfile {
+      items {
+        id
+        name
+        image
+        userID
+        followers
+        following
+        gamesWon
+        gemesLost
+        ranking
+        last_played_on
+        inGame
+        lastAvailable
+        points
+        level
+        canBeChallenged
+      }
+      nextToken
+    }
     diretion
   }
 }
@@ -82,6 +142,9 @@ export const createHand = `mutation CreateHand($input: CreateHandInput!) {
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     gameId
@@ -111,6 +174,9 @@ export const updateHand = `mutation UpdateHand($input: UpdateHandInput!) {
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     gameId
@@ -140,6 +206,9 @@ export const deleteHand = `mutation DeleteHand($input: DeleteHandInput!) {
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     gameId
@@ -166,6 +235,9 @@ export const createMessages = `mutation CreateMessages($input: CreateMessagesInp
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     gameId
@@ -193,6 +265,9 @@ export const updateMessages = `mutation UpdateMessages($input: UpdateMessagesInp
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     gameId
@@ -220,6 +295,9 @@ export const deleteMessages = `mutation DeleteMessages($input: DeleteMessagesInp
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     gameId

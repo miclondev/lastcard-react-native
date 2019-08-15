@@ -1,8 +1,11 @@
 import React, { Component } from "react"
 import { View, Text, StyleSheet } from "react-native"
 import CardBack from "../card/CardBack"
+import Card from "../card/Card"
 import { Query } from "react-apollo"
 import getGame from "../../queries/game/getGame"
+
+import cards from "../../data/cards.json"
 
 class MidPlay extends Component {
     render(){
@@ -10,25 +13,24 @@ class MidPlay extends Component {
             <View>
                 <Query 
                     query={getGame} 
-                    variables={{ id: "item-test-1"}}
+                    variables={{ id: this.props.gameId }}
                     fetchPolicy="cache-first"
                 >
                     {({ error, loading, data}) => {
                         if(error) console.log(error)
                         if(loading) return <Text>Loading....</Text>
-                       // console.log(data)
+                        console.log(data)
+
+                        const { onPlay } = data.getGame
+                        const lastPlayed = onPlay[onPlay.length-1]
+
                         return(
                             <View style={styles.main}>
-                                
                                 <CardBack/>
-                                    <CardBack
-                                      rotate={-30}
-                                      backgroundColor="#DCE9BE"
-                                    >
-                                        <Text>
-                                            2 
-                                        </Text>
-                                    </CardBack>
+                                    <Card
+                                        value={cards[lastPlayed].value}
+                                        suit={cards[lastPlayed].icon}
+                                    />
                             </View>
                             )
                     }}

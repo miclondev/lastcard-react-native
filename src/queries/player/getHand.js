@@ -1,14 +1,18 @@
 import gql from "graphql-tag"
 
 export default gql`
-    query GetHand($id: ID!) {
-    getHand(id: $id) {
+query handsByGame ($game: String, $user: String){
+  handsByGame(gameId: $game, user:{
+    eq: $user
+  }){
+    items {
       id
       myCards
       available
       game {
           id
       }
-   }
+    }
+  }
 }
 `

@@ -17,6 +17,26 @@ export const onCreateGame = `subscription OnCreateGame {
     user
     started_on
     players
+    playersProfile {
+      items {
+        id
+        name
+        image
+        userID
+        followers
+        following
+        gamesWon
+        gemesLost
+        ranking
+        last_played_on
+        inGame
+        lastAvailable
+        points
+        level
+        canBeChallenged
+      }
+      nextToken
+    }
     diretion
   }
 }
@@ -37,6 +57,26 @@ export const onUpdateGame = `subscription OnUpdateGame {
     user
     started_on
     players
+    playersProfile {
+      items {
+        id
+        name
+        image
+        userID
+        followers
+        following
+        gamesWon
+        gemesLost
+        ranking
+        last_played_on
+        inGame
+        lastAvailable
+        points
+        level
+        canBeChallenged
+      }
+      nextToken
+    }
     diretion
   }
 }
@@ -57,6 +97,26 @@ export const onDeleteGame = `subscription OnDeleteGame {
     user
     started_on
     players
+    playersProfile {
+      items {
+        id
+        name
+        image
+        userID
+        followers
+        following
+        gamesWon
+        gemesLost
+        ranking
+        last_played_on
+        inGame
+        lastAvailable
+        points
+        level
+        canBeChallenged
+      }
+      nextToken
+    }
     diretion
   }
 }
@@ -82,6 +142,9 @@ export const onCreateHand = `subscription OnCreateHand {
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     gameId
@@ -111,6 +174,9 @@ export const onUpdateHand = `subscription OnUpdateHand {
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     gameId
@@ -140,6 +206,9 @@ export const onDeleteHand = `subscription OnDeleteHand {
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     gameId
@@ -166,6 +235,9 @@ export const onCreateMessages = `subscription OnCreateMessages {
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     gameId
@@ -193,6 +265,9 @@ export const onUpdateMessages = `subscription OnUpdateMessages {
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     gameId
@@ -220,6 +295,9 @@ export const onDeleteMessages = `subscription OnDeleteMessages {
       user
       started_on
       players
+      playersProfile {
+        nextToken
+      }
       diretion
     }
     gameId
