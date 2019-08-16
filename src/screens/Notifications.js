@@ -1,10 +1,11 @@
 import React, { Component } from "react"
-import { View, Text } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
+import { darkColor, darkAccent  } from "../functions/colors"
 
 class Notifications extends Component {
     render(){
         return(
-            <View>
+            <View style={styles.main}>
                 <Text>  
                     Notifications
                 </Text>
@@ -12,5 +13,12 @@ class Notifications extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    main: {
+        backgroundColor: darkColor,
+        flex: 1
+    }
+})
 
 export default Notifications

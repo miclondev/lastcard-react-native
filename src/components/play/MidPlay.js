@@ -7,6 +7,27 @@ import getGame from "../../queries/game/getGame"
 
 import cards from "../../data/cards.json"
 
+
+// const RemainingCards = ({cards}) =>  cards.map((c, i) => <CardBack style={{
+//             position: 'absolute',
+//             right: 20*i
+//         }}
+//             key={i}
+//         /> 
+// )
+
+const remStyles= StyleSheet.create({
+    main: {
+        flexDirection: 'row',
+        position: 'relative',
+        backgroundColor: 'black',
+        width: 500
+    },
+    card: {
+        position: 'absolute'
+    }
+})
+
 class MidPlay extends Component {
     render(){
         return(
@@ -21,16 +42,19 @@ class MidPlay extends Component {
                         if(loading) return <Text>Loading....</Text>
                         console.log(data)
 
-                        const { onPlay } = data.getGame
+                        const { onPlay, cards } = data.getGame
                         const lastPlayed = onPlay[onPlay.length-1]
 
                         return(
                             <View style={styles.main}>
-                                <CardBack/>
+
+                                {/* <RemainingCards cards={cards}/> */}
+                                   
                                     <Card
                                         value={cards[lastPlayed].value}
                                         suit={cards[lastPlayed].icon}
                                     />
+                                    
                             </View>
                             )
                     }}

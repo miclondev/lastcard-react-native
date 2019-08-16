@@ -5,10 +5,12 @@ class CardBack extends Component {
     render(){
         const { height =160, width= 100, rotate=10, backgroundColor ='#99173C', id=0, style } = this.props
         return(
-            <View style={{...styles.main,
+            <View style={{
+                ...style,
+            ...styles.main,
              height, width,
              backgroundColor, transform: [{rotate: `${rotate}deg`}],
-                ...style,
+                
                 left: 20*id,
              }}>
                 {this.props.children}

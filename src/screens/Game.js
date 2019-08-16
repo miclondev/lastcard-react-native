@@ -9,6 +9,8 @@ import Loading from "../components/Loading"
 import { Query } from "react-apollo"
 import getGame from "../queries/game/getGame"
 
+import { darkColor, darkAccent  } from "../functions/colors"
+
 const width = Dimensions.get('window').width
 
 class Game extends Component {
@@ -29,7 +31,7 @@ class Game extends Component {
         //console.log(this.props.currentGame)
         const { navigation } = this.props;
 
-        const id = navigation.getParam('gameId');
+        const id = navigation.getParam('gameId', 'b0386190-1874-40e9-8c11-545b592d507c');
 
         console.log(id)
 
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignContent: 'center',
-        backgroundColor: '#2E2633'
+        backgroundColor: darkColor
     },
     top: {
         // backgroundColor: 'red',

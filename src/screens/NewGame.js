@@ -6,6 +6,8 @@ import createGame from "../mutations/createGame"
 
 import { Input, Icon, Button, CheckBox, ButtonGroup } from "react-native-elements"
 
+import { darkColor, darkAccent  } from "../functions/colors"
+
 import getUserGames from "../queries/game/getUserGames"
 
 

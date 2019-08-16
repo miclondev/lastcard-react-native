@@ -8,6 +8,9 @@ import cards from "../../data/cards.json"
 
 import { Entypo } from '@expo/vector-icons';
 
+
+import { onSelectCard } from "../../functions/playCards"
+
 const width = Dimensions.get('window').width
 
 class PlayerDeck extends Component {
@@ -18,7 +21,8 @@ class PlayerDeck extends Component {
         myCards: [],
         selectedCards: [],
         currentCards: [],
-        sort: false
+        sort: false,
+        message: undefined
     }
 
     componentDidMount() {
@@ -55,22 +59,48 @@ class PlayerDeck extends Component {
         })
     }
 
+
+    canSelect = (num) => {
+        let currentSelect = [...this.state.selectedCards]
+        if (currentSelect.length === 0) {
+           return true
+        }else{
+            let can = onSelectCard(cards[num], currentSelect)
+            return can
+        }
+    }
+
     onSelectCard = (num) => {
-        this.setState(prevState => {
-            let card = prevState.myCards.findIndex(a => a === num)
-            let cards = [...prevState.myCards]
-            cards.splice(card, 1)
-            let selectedCards = [...prevState.selectedCards, num]
-            return {
-                myCards: cards,
-                selectedCards,
-                action: "Sort Cards"
+        console.log(cards[num])
+        let currentSelect = [...this.state.selectedCards]
+        if (currentSelect.length === 0) {
+            currentSelect.push(cards[num])
+        } else {
+            console.log(currentSelect)
+            let canSelect = onSelectCard(cards[num], currentSelect)
+            console.log(canSelect)
+            if (canSelect) {
+                this.setState(prevState => {
+                    let card = prevState.myCards.findIndex(a => a === num)
+                    let cards = [...prevState.myCards]
+                    cards.splice(card, 1)
+                    return {
+                        myCards: cards,
+                        selectedCards: currentSelect,
+                        action: "Sort Cards"
+                    }
+                })
+            } else {
+                this.setState({ message: "select card with same number or suit" })
             }
         }
-        )
+
+
     }
 
     onDeSelectCard = (num) => {
+
+
         this.setState(prevState => {
             let card = prevState.selectedCards.findIndex(a => a === num)
             let selectedCards = [...prevState.selectedCards]
@@ -124,6 +154,7 @@ class PlayerDeck extends Component {
                                 suit={cards[c].icon}
                                 num={i}
                                 c={c}
+                                canSelect={this.canSelect(c)}
                                 onSelect={this.onSelectCard}
                                 onDeSelect={this.onDeSelectCard}
                             />

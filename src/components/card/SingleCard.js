@@ -13,8 +13,11 @@ class SingleCard extends Component {
     selected: false
   }
 
-  onPress = () => {
-    const { onSelect, onDeSelect, noAction, c  } = this.props
+onPress = () => {
+    const { onSelect, onDeSelect, noAction, c, canSelect  } = this.props
+     
+   //console.log(canSelect)
+    
     if(!noAction){
       this.setState({selected: !this.state.selected}, () => {
           if(this.state.selected){

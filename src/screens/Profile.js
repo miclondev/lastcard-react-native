@@ -1,13 +1,13 @@
 import React, { Component } from "react"
-import { View, Text } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
+import { darkColor, darkAccent  } from "../functions/colors"
 import { Button } from "react-native-elements"
 
 class Profile extends Component {
     render(){
-//        console.log(this.props)
         return(
-            <View>
-                <Text>  Profile </Text>
+            <View style={styles.main}>
+               <Text>  Profile </Text>
                 <View style={{ marginTop: 100 }}>
                         <Button
                             title="Log Out"
@@ -18,5 +18,12 @@ class Profile extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    main: {
+        backgroundColor: darkColor,
+        flex: 1
+    }
+})
 
 export default Profile
