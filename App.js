@@ -14,8 +14,13 @@ const client = new AWSAppSyncClient({
   }
 })
 
-class App extends Component {
-  render(){
+// function AppState(){
+//   return(
+//     <MainNav/>
+//   )
+// }
+
+function App() {
     return(
       <ApolloProvider client={client}>
         <Rehydrated>
@@ -23,7 +28,6 @@ class App extends Component {
         </Rehydrated>
       </ApolloProvider>
     )
-  }
 }
 
 export default App

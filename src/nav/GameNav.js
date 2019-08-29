@@ -42,7 +42,7 @@ const GameNavigator = createStackNavigator({
       })
     }
 }, {
-  initialRouteName: "Game", 
+  //initialRouteName: "Game", 
   navigationOptions: ({ navigation }) => {
     let tabBarVisible = true;
     if (navigation.state.index > 0) {

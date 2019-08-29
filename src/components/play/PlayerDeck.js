@@ -63,55 +63,43 @@ class PlayerDeck extends Component {
     canSelect = (num) => {
         let currentSelect = [...this.state.selectedCards]
         if (currentSelect.length === 0) {
-           return true
-        }else{
-            let can = onSelectCard(cards[num], currentSelect)
+            return true
+        } else {
+            let can = onSelectCard(num, currentSelect)
             return can
         }
     }
 
     onSelectCard = (num) => {
-        console.log(cards[num])
         let currentSelect = [...this.state.selectedCards]
-        if (currentSelect.length === 0) {
-            currentSelect.push(cards[num])
+        let cardsOnHand = [...this.state.myCards]
+        let card = cardsOnHand.findIndex(a => a === num)
+        let canSelect = onSelectCard(num, currentSelect)
+        console.log(canSelect)
+        if (canSelect || currentSelect.length === 0) {
+            console.log("selected")
+            cardsOnHand.splice(card, 1)
+            currentSelect.push(num)
+            this.setState({
+                myCards: cardsOnHand,
+                selectedCards: currentSelect
+            })
         } else {
-            console.log(currentSelect)
-            let canSelect = onSelectCard(cards[num], currentSelect)
-            console.log(canSelect)
-            if (canSelect) {
-                this.setState(prevState => {
-                    let card = prevState.myCards.findIndex(a => a === num)
-                    let cards = [...prevState.myCards]
-                    cards.splice(card, 1)
-                    return {
-                        myCards: cards,
-                        selectedCards: currentSelect,
-                        action: "Sort Cards"
-                    }
-                })
-            } else {
-                this.setState({ message: "select card with same number or suit" })
-            }
+            this.setState({ message: "select card with same number or suit" })
         }
-
-
     }
 
     onDeSelectCard = (num) => {
+        let currentSelect = [...this.state.selectedCards]
+        let cardsOnHand = [...this.state.myCards]
+        let card = currentSelect.findIndex(a => a === num)
+        currentSelect.splice(card, 1)
+        cardsOnHand.push(num)
 
-
-        this.setState(prevState => {
-            let card = prevState.selectedCards.findIndex(a => a === num)
-            let selectedCards = [...prevState.selectedCards]
-            selectedCards.splice(card, 1)
-            let cards = [prevState.myCards, num]
-            return {
-                selectedCards,
-                myCards: cards
-            }
-        }
-        )
+        this.setState({
+            myCards: cardsOnHand,
+            selectedCards: currentSelect
+        })
     }
 
     onPlayCards = () => {
@@ -154,7 +142,7 @@ class PlayerDeck extends Component {
                                 suit={cards[c].icon}
                                 num={i}
                                 c={c}
-                                canSelect={this.canSelect(c)}
+                                canSelect={this.canSelect}
                                 onSelect={this.onSelectCard}
                                 onDeSelect={this.onDeSelectCard}
                             />
@@ -196,7 +184,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-
     },
     action: {
         backgroundColor: "#99173C",

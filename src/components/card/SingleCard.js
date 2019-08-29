@@ -9,16 +9,14 @@ const AnimatedView = animated(View)
 
 class SingleCard extends Component {
 
-  state = {
-    selected: false
-  }
+state = {
+  selected: false
+}
 
 onPress = () => {
-    const { onSelect, onDeSelect, noAction, c, canSelect  } = this.props
-     
+    const { onSelect, onDeSelect, c, canSelect  } = this.props
    //console.log(canSelect)
-    
-    if(!noAction){
+    if(canSelect(c)){
       this.setState({selected: !this.state.selected}, () => {
           if(this.state.selected){
               onSelect(c)
@@ -69,7 +67,6 @@ const styles = StyleSheet.create({
     position: 'absolute', 
     backgroundColor: "#DCE9BE"
    // top: 100
-
   },
   type: {
     fontSize: 100,

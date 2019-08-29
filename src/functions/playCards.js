@@ -1,10 +1,12 @@
+import cards from "../data/cards.json"
+
 export const onSelectCard = (card, selected) => {
     for (let i = 0; i < selected.length; i++) {
-        if (card.value === selected[i].value) {
+        if (cards[card].value === cards[selected[i]].value) {
             return true
         }
-        if (card.suit === selected[i].suit) {
-            return
+        if (cards[card].suit === cards[selected[i]].suit) {
+            return true
         }
     }
     return false
