@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { useContext } from "react"
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from "react-native"
 import PlayerDeck from "../components/play/PlayerDeck"
 import BackDeck from "../components/play/BackDeck"
@@ -6,36 +6,32 @@ import MidPlay from "../components/play/MidPlay"
 
 import Loading from "../components/Loading"
 
-import { Query } from "react-apollo"
-import getGame from "../queries/game/getGame"
+import colors, { darkColor, darkAccent } from "../functions/colors"
 
-import { darkColor, darkAccent  } from "../functions/colors"
+import { ThemeContext } from "../context/ThemeContext"
+import { GameProvider } from "../context/GameContext"
+import { UserContext } from "../context/UserContext"
+
 
 const width = Dimensions.get('window').width
 
-class Game extends Component {
+function Game(props) {
 
-    state = {
-        loading: true
-    }
+    const { theme } = useContext(ThemeContext)
+    const { loggedIn } = useContext(UserContext)
 
-    onPressPlay = () => this.setState({ canPlay: !this.state.canPlay })
+    console.log(thme)
 
-    onPressSwitch = () => this.setState({ canSwitch: !this.state.canSwitch })
+    //console.log(this.props.currentGame)
+    const { navigation } = this.props;
 
-    async componentDidMount() {
-        console.log("componentdidmount")
-    }
+    const id = navigation.getParam('gameId', 'b0386190-1874-40e9-8c11-545b592d507c');
 
-    render() {
-        //console.log(this.props.currentGame)
-        const { navigation } = this.props;
+    // console.log(id)
 
-        const id = navigation.getParam('gameId', 'b0386190-1874-40e9-8c11-545b592d507c');
-
-        console.log(id)
-
-        return  this.props.loggedIn ? <View style={styles.main}>
+    return (
+        <GameProvider>
+            loggedIn ? <View style={{ ...styles.main, backgroundColor: colors[theme].darkColor }}>
                 <View style={styles.top}>
                     <BackDeck gameId={id} />
                 </View>
@@ -45,11 +41,12 @@ class Game extends Component {
                 </View>
 
                 <View style={styles.bottom}>
-                    <PlayerDeck gameId={id} user={this.props.userId}/>
+                    <PlayerDeck gameId={id} user={this.props.userId} />
                 </View>
             </View> :
-            <Loading/>
-    }
+            <Loading />
+        </GameProvider>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -57,8 +54,7 @@ const styles = StyleSheet.create({
         flex: 3,
         flexDirection: 'column',
         justifyContent: 'space-between',
-        alignContent: 'center',
-        backgroundColor: darkColor
+        alignContent: 'center'
     },
     top: {
         // backgroundColor: 'red',

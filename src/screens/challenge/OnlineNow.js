@@ -4,17 +4,17 @@ import PersonSmall from "../../components/people/PersonSmall"
 import { darkColor } from "../../functions/colors"
 
 class OnlineNow extends Component {
-    render(){
-        return(
+    render() {
+        return (
             <View style={styles.main}>
-                <Text> OnlineNow </Text>
-            <View>
-                <PersonSmall
-                    name="Malicks5"
-                    id="0764174513"
-                    status="accepting challenge"
-                />
-            </View>
+                <Text> Online Now </Text>
+                <View>
+                    <PersonSmall
+                        name="Malicks5"
+                        id="0764174513"
+                        status="accepting challenge"
+                    />
+                </View>
             </View>
         )
     }

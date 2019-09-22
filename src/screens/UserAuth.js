@@ -6,7 +6,7 @@ import axios from "axios"
 
 import { Input, Icon } from "react-native-elements"
 
-import { Query, graphql } from "react-apollo"
+
 
 class UserAuth extends React.Component {
 
@@ -26,7 +26,6 @@ class UserAuth extends React.Component {
           this.setState({ confirm: true, loading: false })
         }
     };
-
 
     confirm = async () => {
       try{

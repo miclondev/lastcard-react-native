@@ -13,18 +13,27 @@ export const onSelectCard = (card, selected) => {
 }
 
 
-const onPlayCards = (cards) => {
-    //check if cards order can be played
+const canPlay = (playCards, lastPlayed) => {
 
+    let belowCard = playCards[playCards.length-1]
+    
+    if(cards[belowCard].value === cards[lastPlayed].value){
+        return true
+    }
 
-    //if true return true
+    if(cards[belowCard].suit === cards[lastPlayed].suit){
+        return true
+    }
+
+    return false
 }
 
-const cardFuntion = (card, player) => {
+const cardFuntion = (lastPlayed) => {
     //
-    if (card.value === 2) {
+    if (cards[lastPlayed].value === 2) {
         return handOutCards(2)
     }
+
     if (card.value === "joker") {
         return handOutCards(5)
     }
@@ -40,10 +49,6 @@ const cardFuntion = (card, player) => {
     if (card.value === "J") {
         //ask 
     }
-}
-
-const cardCanBePlayed = () => {
-
 }
 
 const nextPlayer = (num) => {

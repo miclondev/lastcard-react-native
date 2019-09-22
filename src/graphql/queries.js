@@ -17,27 +17,7 @@ export const getGame = `query GetGame($id: ID!) {
     user
     started_on
     players
-    playersProfile {
-      items {
-        id
-        name
-        image
-        userID
-        followers
-        following
-        gamesWon
-        gemesLost
-        ranking
-        last_played_on
-        inGame
-        lastAvailable
-        points
-        level
-        canBeChallenged
-      }
-      nextToken
-    }
-    diretion
+    direction
   }
 }
 `;
@@ -62,10 +42,7 @@ export const listGames = `query ListGames(
       user
       started_on
       players
-      playersProfile {
-        nextToken
-      }
-      diretion
+      direction
     }
     nextToken
   }
@@ -92,10 +69,7 @@ export const getHand = `query GetHand($id: ID!) {
       user
       started_on
       players
-      playersProfile {
-        nextToken
-      }
-      diretion
+      direction
     }
     gameId
     user
@@ -129,7 +103,7 @@ export const listHands = `query ListHands(
         user
         started_on
         players
-        diretion
+        direction
       }
       gameId
       user
@@ -157,10 +131,7 @@ export const getMessages = `query GetMessages($id: ID!) {
       user
       started_on
       players
-      playersProfile {
-        nextToken
-      }
-      diretion
+      direction
     }
     gameId
     user
@@ -192,7 +163,7 @@ export const listMessagess = `query ListMessagess(
         user
         started_on
         players
-        diretion
+        direction
       }
       gameId
       user
@@ -323,10 +294,7 @@ export const gamesByUser = `query GamesByUser(
       user
       started_on
       players
-      playersProfile {
-        nextToken
-      }
-      diretion
+      direction
     }
     nextToken
   }
@@ -366,7 +334,7 @@ export const handsByGame = `query HandsByGame(
         user
         started_on
         players
-        diretion
+        direction
       }
       gameId
       user
@@ -407,7 +375,7 @@ export const messagesByGame = `query MessagesByGame(
         user
         started_on
         players
-        diretion
+        direction
       }
       gameId
       user
