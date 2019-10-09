@@ -386,15 +386,17 @@ export const messagesByGame = `query MessagesByGame(
   }
 }
 `;
-export const searchProfiles = `query SearchProfiles(
-  $filter: SearchableProfileFilterInput
-  $sort: SearchableProfileSortInput
+export const profileByAvailable = `query ProfileByAvailable(
+  $lastAvailable: AWSDateTime
+  $level: ModelIntKeyConditionInput
+  $filter: ModelProfileFilterInput
   $limit: Int
-  $nextToken: Int
+  $nextToken: String
 ) {
-  searchProfiles(
+  profileByAvailable(
+    lastAvailable: $lastAvailable
+    level: $level
     filter: $filter
-    sort: $sort
     limit: $limit
     nextToken: $nextToken
   ) {

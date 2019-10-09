@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import { View, Text, StyleSheet } from "react-native"
 import entities from "html-entities"
 
@@ -13,26 +13,25 @@ function NumSuit({ value, suit, color }) {
     )
 }
 
-class Card extends Component {
-    render(){
-        const { height =160, width= 100, rotate=10, backgroundColor ='#99173C', id=0, style } = this.props
-        const { suit, value } = this.props 
-        const suitRender = AllHtmlEntities.decode(suit)
-        return(
-            <View style={{...styles.main,
-             height, width,
-             backgroundColor,
-                ...style,
-                left: 20*id,
-             }}>
-                <NumSuit value={value} suit={suitRender}/>
-                    <View >
-                      <Text style={styles.type}>{suitRender}</Text>
-                    </View> 
-                  <NumSuit value={value} suit={suitRender}/> 
+function Card(props) {
+    const { height = 160, width = 100, rotate = 10, backgroundColor = '#99173C', id = 0, style } = props
+    const { suit, value } = props
+    const suitRender = AllHtmlEntities.decode(suit)
+    return (
+        <View style={{
+            ...styles.main,
+            height, width,
+            backgroundColor,
+            ...style,
+            left: 20 * id,
+        }}>
+            <NumSuit value={value} suit={suitRender} />
+            <View >
+                <Text style={styles.type}>{suitRender}</Text>
             </View>
-        )
-    }
+            <NumSuit value={value} suit={suitRender} />
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.45,
         shadowRadius: 2.41,
-        elevation:4
+        elevation: 4
     }
 })
 

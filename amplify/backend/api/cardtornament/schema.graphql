@@ -41,7 +41,9 @@ type Messages @model
 	sentOn: AWSDateTime
 }
 
-type Profile @model @searchable{
+type Profile @model 
+@key(name: "profileLast", fields: ["lastAvailable", "level"], queryField: "profileByAvailable")
+{
 	id: ID
 	name: String
 	image: String

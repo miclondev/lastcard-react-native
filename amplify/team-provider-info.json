@@ -22,5 +22,17 @@
             "StackName": "cardtornament-dev-20190829075523",
             "StackId": "arn:aws:cloudformation:eu-west-1:565902844611:stack/cardtornament-dev-20190829075523/38354880-ca19-11e9-b2b5-0673c4cbbe82"
         }
+    },
+    "develop": {
+        "awscloudformation": {
+            "AuthRoleName": "cardtornament-develop-20190922172621-authRole",
+            "UnauthRoleArn": "arn:aws:iam::119358183577:role/cardtornament-develop-20190922172621-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::119358183577:role/cardtornament-develop-20190922172621-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "cardtornament-develop-20190922172621-deployment",
+            "UnauthRoleName": "cardtornament-develop-20190922172621-unauthRole",
+            "StackName": "cardtornament-develop-20190922172621",
+            "StackId": "arn:aws:cloudformation:eu-west-1:119358183577:stack/cardtornament-develop-20190922172621/f4614200-dd44-11e9-aa74-0ae78d106d3e"
+        }
     }
 }
