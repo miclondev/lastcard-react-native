@@ -1,60 +1,62 @@
+import { createStackNavigator } from 'react-navigation';
+import Game from '../screens/Game';
+import GameList from '../screens/GameList';
+import NewGame from '../screens/NewGame';
+import GameOptions from '../screens/gamescreens/GameOptions';
 
-import { createStackNavigator } from "react-navigation"
-import Game from "../screens/Game"
-import GameList from "../screens/GameList"
-import NewGame from "../screens/NewGame"
-import GameOptions from "../screens/gamescreens/GameOptions"
+import checkAuth from '../utils/auth';
 
-import checkAuth from "../utils/auth"
-
-const GameNavigator = createStackNavigator({
+const GameNavigator = createStackNavigator(
+  {
     GameList: {
-      screen: checkAuth(GameList),
+      screen: GameList,
       navigationOptions: () => ({
         header: null
-     })
+      })
     },
     GameOptions: {
-      screen: checkAuth(GameOptions),
+      screen: GameOptions,
       navigationOptions: () => ({
         // header: null,
-         tabBarVisible: false,
-          // headerMode: 'none',
-          headerTransparent: true
-        })
+        tabBarVisible: false,
+        // headerMode: 'none',
+        headerTransparent: true
+      })
     },
     NewGame: {
-      screen: checkAuth(NewGame),
+      screen: NewGame,
       navigationOptions: () => ({
         // header: null,
-         tabBarVisible: false,
-          // headerMode: 'none',
-          headerTransparent: true
-        })
+        tabBarVisible: false,
+        // headerMode: 'none',
+        headerTransparent: true
+      })
     },
     Game: {
-      screen: checkAuth(Game),
+      screen: Game,
       navigationOptions: () => ({
-      // header: null,
-       tabBarVisible: false,
+        // header: null,
+        tabBarVisible: false,
         // headerMode: 'none',
         headerTransparent: true
       })
     }
-}, {
-  //initialRouteName: "Game", 
-  navigationOptions: ({ navigation }) => {
-    let tabBarVisible = true;
-    if (navigation.state.index > 0) {
-      tabBarVisible = false;
-    }
-    return {
-      tabBarVisible,
-      cardStyle: {
-        backgoundColor: "#2E2633"
+  },
+  {
+    //initialRouteName: "Game",
+    navigationOptions: ({ navigation }) => {
+      let tabBarVisible = true;
+      if (navigation.state.index > 0) {
+        tabBarVisible = false;
       }
-    };
+      return {
+        tabBarVisible,
+        cardStyle: {
+          backgoundColor: '#2E2633'
+        }
+      };
+    }
   }
-})
+);
 
-export default GameNavigator
+export default GameNavigator;

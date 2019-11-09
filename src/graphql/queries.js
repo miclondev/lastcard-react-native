@@ -1,4 +1,4 @@
-// eslint-disable
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
 export const getGame = `query GetGame($id: ID!) {
@@ -268,6 +268,7 @@ export const listTrophys = `query ListTrophys(
 export const gamesByUser = `query GamesByUser(
   $user: String
   $started_on: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
   $filter: ModelGameFilterInput
   $limit: Int
   $nextToken: String
@@ -275,6 +276,7 @@ export const gamesByUser = `query GamesByUser(
   gamesByUser(
     user: $user
     started_on: $started_on
+    sortDirection: $sortDirection
     filter: $filter
     limit: $limit
     nextToken: $nextToken
@@ -303,6 +305,7 @@ export const gamesByUser = `query GamesByUser(
 export const handsByGame = `query HandsByGame(
   $gameId: String
   $user: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
   $filter: ModelHandFilterInput
   $limit: Int
   $nextToken: String
@@ -310,6 +313,7 @@ export const handsByGame = `query HandsByGame(
   handsByGame(
     gameId: $gameId
     user: $user
+    sortDirection: $sortDirection
     filter: $filter
     limit: $limit
     nextToken: $nextToken
@@ -347,6 +351,7 @@ export const handsByGame = `query HandsByGame(
 export const messagesByGame = `query MessagesByGame(
   $gameId: String
   $sentOn: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
   $filter: ModelMessagesFilterInput
   $limit: Int
   $nextToken: String
@@ -354,6 +359,7 @@ export const messagesByGame = `query MessagesByGame(
   messagesByGame(
     gameId: $gameId
     sentOn: $sentOn
+    sortDirection: $sortDirection
     filter: $filter
     limit: $limit
     nextToken: $nextToken
@@ -389,6 +395,7 @@ export const messagesByGame = `query MessagesByGame(
 export const profileByAvailable = `query ProfileByAvailable(
   $lastAvailable: AWSDateTime
   $level: ModelIntKeyConditionInput
+  $sortDirection: ModelSortDirection
   $filter: ModelProfileFilterInput
   $limit: Int
   $nextToken: String
@@ -396,6 +403,7 @@ export const profileByAvailable = `query ProfileByAvailable(
   profileByAvailable(
     lastAvailable: $lastAvailable
     level: $level
+    sortDirection: $sortDirection
     filter: $filter
     limit: $limit
     nextToken: $nextToken
