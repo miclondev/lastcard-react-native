@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-//import Lottie from 'lottie-react-native';
+import Lottie from 'lottie-react-native';
 
 class Loading extends Component {
   componentDidMount() {
@@ -15,16 +15,16 @@ class Loading extends Component {
   render() {
     return (
       <View style={styles.main}>
-        {/* <Lottie
-                    ref={animation => {
-                        this.animation = animation;
-                    }}
-                    style={{
-                        width: 400,
-                        height: 400,
-                    }}
-                    source={require('../../assets/1854-loading-02.json')}
-                /> */}
+        <Lottie
+          ref={animation => {
+            this.animation = animation;
+          }}
+          style={{
+            width: 400,
+            height: 400
+          }}
+          source={require('../../assets/1854-loading-02.json')}
+        />
       </View>
     );
   }

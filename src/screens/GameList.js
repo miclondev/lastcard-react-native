@@ -1,56 +1,57 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Button, ListItem } from 'react-native-elements';
 import Loading from '../components/Loading';
 import { useQuery } from 'react-apollo';
 import getUserGames from '../queries/game/getUserGames';
+import colors from '../functions/colors';
+import { ThemeContext } from '../context/ThemeContext';
 
 function GameList(props) {
+  const { theme } = useContext(ThemeContext);
   const { loading, error, data } = useQuery(getUserGames, {
     variables: { user: '0768853979' }
   });
-
-  console.log(loading, error, data);
-
-  //   console.log(this.props.userId);
-
-  //   if (loading) return <Loading />;
+  if (loading) return <Loading />;
 
   return (
-    <View style={styles.main}>
+    <View style={{ ...styles.main, backgroundColor: colors[theme].darkColor }}>
       <View style={styles.header}>
         <Text style={styles.text}> Your Games </Text>
-        {/* <Button
-                                    icon={{
-                                        name: "open-in-new",
-                                        size: 15,
-                                        color: "white"
-                                    }}
-                                    buttonStyle={{
-                                        backgroundColor: '#99173C'
-                                    }}
-                                    titleStyle={{
-                                        color: '#EFFFCD'
-                                    }}
-                                    title="Create A New Game"
-                                    onPress={() => this.props.navigation.navigate("NewGame")}
-                                /> */}
+        <Button
+          icon={{
+            name: 'open-in-new',
+            size: 15,
+            color: 'white'
+          }}
+          buttonStyle={{
+            backgroundColor: '#99173C'
+          }}
+          titleStyle={{
+            color: '#EFFFCD'
+          }}
+          title="Create A New Game"
+          onPress={() => props.navigation.navigate('NewGame')}
+        />
       </View>
 
       <View style={styles.games}>
-        {/* {data.gamesByUser.items.map(g => (
+        {data.gamesByUser.items.map(g => (
           <TouchableOpacity
             key={g.id}
-            style={styles.game}
+            style={{
+              ...styles.game,
+              backgroundColor: colors[theme].darkVarient
+            }}
             onPress={() =>
-              this.props.navigation.navigate('GameOptions', {
+              props.navigation.navigate('GameOptions', {
                 gameId: g.id
               })
             }
           >
             <Text style={styles.text}> {g.title}</Text>
           </TouchableOpacity>
-        ))} */}
+        ))}
       </View>
     </View>
   );
@@ -61,7 +62,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 5,
     paddingRight: 5,
-    backgroundColor: '#2E2633',
     paddingTop: 40
   },
   header: {

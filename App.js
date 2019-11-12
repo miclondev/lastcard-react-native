@@ -1,18 +1,22 @@
 import React from 'react';
-//import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/react-hooks';
 
 import awsmobile from './aws-exports';
-import MainNav from './src/MainNav';
-import { ApolloProvider } from 'react-apollo';
+
+import GameNav from './src/nav/GameNav';
+
 import ApolloClient from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import { createAuthLink } from 'aws-appsync-auth-link';
 import { createSubscriptionHandshakeLink } from 'aws-appsync-subscription-link';
 import { ApolloLink } from 'apollo-link';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { Rehydrated } from 'aws-appsync-react';
+
+import { ThemeProvider } from './src/context/ThemeContext';
+import { UserProvider } from './src/context/UserContext';
 
 const url = awsmobile.aws_appsync_graphqlEndpoint;
+
 const region = awsmobile.aws_appsync_region;
 const auth = {
   type: awsmobile.aws_appsync_authenticationType,
@@ -35,20 +39,18 @@ const client = new ApolloClient({
 
 function AppState() {
   return (
-    // <ThemeProvider>
-    //   <UserProvider>
-    <MainNav />
-    //   </UserProvider>
-    // </ThemeProvider>
+    <ThemeProvider>
+      <UserProvider>
+        <GameNav />
+      </UserProvider>
+    </ThemeProvider>
   );
 }
 
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Rehydrated>
-        <MainNav />
-      </Rehydrated>
+      <AppState />
     </ApolloProvider>
   );
 }

@@ -1,4 +1,4 @@
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Game from '../screens/Game';
 import GameList from '../screens/GameList';
 import NewGame from '../screens/NewGame';
@@ -59,4 +59,4 @@ const GameNavigator = createStackNavigator(
   }
 );
 
-export default GameNavigator;
+export default createAppContainer(GameNavigator);
