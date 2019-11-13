@@ -11,8 +11,8 @@ const GameNavigator = createStackNavigator(
     GameList: {
       screen: GameList,
       navigationOptions: () => ({
-        header: null
-      })
+        header: null,
+      }),
     },
     GameOptions: {
       screen: GameOptions,
@@ -20,8 +20,8 @@ const GameNavigator = createStackNavigator(
         // header: null,
         tabBarVisible: false,
         // headerMode: 'none',
-        headerTransparent: true
-      })
+        headerTransparent: true,
+      }),
     },
     NewGame: {
       screen: NewGame,
@@ -29,8 +29,8 @@ const GameNavigator = createStackNavigator(
         // header: null,
         tabBarVisible: false,
         // headerMode: 'none',
-        headerTransparent: true
-      })
+        headerTransparent: true,
+      }),
     },
     Game: {
       screen: Game,
@@ -38,9 +38,9 @@ const GameNavigator = createStackNavigator(
         // header: null,
         tabBarVisible: false,
         // headerMode: 'none',
-        headerTransparent: true
-      })
-    }
+        headerTransparent: true,
+      }),
+    },
   },
   {
     //initialRouteName: "Game",
@@ -52,11 +52,11 @@ const GameNavigator = createStackNavigator(
       return {
         tabBarVisible,
         cardStyle: {
-          backgoundColor: '#2E2633'
-        }
+          backgoundColor: '#2E2633',
+        },
       };
-    }
+    },
   }
 );
 
-export default createAppContainer(GameNavigator);
+export default GameNavigator;

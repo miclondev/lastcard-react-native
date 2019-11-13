@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Button, ListItem } from 'react-native-elements';
 import Loading from '../components/Loading';
@@ -6,13 +6,39 @@ import { useQuery } from 'react-apollo';
 import getUserGames from '../queries/game/getUserGames';
 import colors from '../functions/colors';
 import { ThemeContext } from '../context/ThemeContext';
+import { UserContext } from '../context/UserContext';
 
 function GameList(props) {
   const { theme } = useContext(ThemeContext);
+
+  const { userId, loggedIn, checkSignedIn, getUserId } = useContext(
+    UserContext
+  );
+  console.log(userId, loggedIn, checkSignedIn);
+
+  useEffect(() => {
+    async function checkUser() {
+      const user = await getUserId();
+      if (!user) {
+        props.navigation.navigate('Auth');
+      }
+      return user;
+    }
+    checkUser();
+  }, []);
+
   const { loading, error, data } = useQuery(getUserGames, {
-    variables: { user: '0768853979' }
+    variables: { user: userId },
   });
+
   if (loading) return <Loading />;
+
+  if (error)
+    return (
+      <View>
+        <Text>Error</Text>
+      </View>
+    );
 
   return (
     <View style={{ ...styles.main, backgroundColor: colors[theme].darkColor }}>
@@ -22,13 +48,13 @@ function GameList(props) {
           icon={{
             name: 'open-in-new',
             size: 15,
-            color: 'white'
+            color: 'white',
           }}
           buttonStyle={{
-            backgroundColor: '#99173C'
+            backgroundColor: '#99173C',
           }}
           titleStyle={{
-            color: '#EFFFCD'
+            color: '#EFFFCD',
           }}
           title="Create A New Game"
           onPress={() => props.navigation.navigate('NewGame')}
@@ -41,11 +67,11 @@ function GameList(props) {
             key={g.id}
             style={{
               ...styles.game,
-              backgroundColor: colors[theme].darkVarient
+              backgroundColor: colors[theme].darkVarient,
             }}
             onPress={() =>
               props.navigation.navigate('GameOptions', {
-                gameId: g.id
+                gameId: g.id,
               })
             }
           >
@@ -62,13 +88,13 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 5,
     paddingRight: 5,
-    paddingTop: 40
+    paddingTop: 40,
   },
   header: {
     alignItems: 'center',
     justifyContent: 'space-between',
     // flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   games: {
     flexDirection: 'row',
@@ -78,7 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingLeft: 5,
     paddingRight: 5,
-    paddingTop: 30
+    paddingTop: 30,
   },
   game: {
     height: 150,
@@ -88,11 +114,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#555152',
     marginBottom: 20,
     borderRadius: 5,
-    padding: 10
+    padding: 10,
     //flex: 1
   },
   text: {
-    color: '#EFFFCD'
-  }
+    color: '#EFFFCD',
+  },
 });
 export default GameList;

@@ -4,7 +4,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import awsmobile from './aws-exports';
 
 import GameNav from './src/nav/GameNav';
-
+import MainNav from './src/MainNav';
 import ApolloClient from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import { createAuthLink } from 'aws-appsync-auth-link';
@@ -20,28 +20,28 @@ const url = awsmobile.aws_appsync_graphqlEndpoint;
 const region = awsmobile.aws_appsync_region;
 const auth = {
   type: awsmobile.aws_appsync_authenticationType,
-  apiKey: awsmobile.aws_appsync_apiKey
+  apiKey: awsmobile.aws_appsync_apiKey,
 };
 
 const httpLink = createHttpLink({ uri: url });
 
 const link = ApolloLink.from([
   createAuthLink({ url, region, auth }),
-  createSubscriptionHandshakeLink(url, httpLink)
+  createSubscriptionHandshakeLink(url, httpLink),
 ]);
 
 const client = new ApolloClient({
   link,
   cache: new InMemoryCache({
-    dataIdFromObject: object => object.key || null
-  })
+    dataIdFromObject: object => object.key || null,
+  }),
 });
 
 function AppState() {
   return (
     <ThemeProvider>
       <UserProvider>
-        <GameNav />
+        <MainNav />
       </UserProvider>
     </ThemeProvider>
   );

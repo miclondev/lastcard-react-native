@@ -1,10 +1,38 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from 'react';
+import { AsyncStorage } from 'react-native';
 
 export const UserContext = createContext();
 
 export function UserProvider(props) {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(undefined);
+
+  async function getUserId() {
+    try {
+      const value = await AsyncStorage.getItem('lastCardId');
+      if (value !== null) {
+        // We have data!!
+        signIn(value);
+        return value;
+      }
+    } catch (error) {
+      return undefined;
+      // Error retrieving data
+    }
+  }
+
+  async function signIn(num) {
+    //run a bunch of code in here
+    setLoggedIn(true);
+    setUserId(num);
+  }
+
+  async function SingOut() {
+    console.log('sign Out');
+  }
+
   return (
-    <UserContext.Provider value={{ userId: "0768853979", loggedIn: true }}>
+    <UserContext.Provider value={{ userId, loggedIn, signIn, getUserId }}>
       {props.children}
     </UserContext.Provider>
   );
