@@ -18,6 +18,7 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     started_on
     players
     direction
+    played
   }
 }
 `;
@@ -38,6 +39,7 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     started_on
     players
     direction
+    played
   }
 }
 `;
@@ -58,6 +60,7 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     started_on
     players
     direction
+    played
   }
 }
 `;
@@ -83,10 +86,12 @@ export const createHand = `mutation CreateHand($input: CreateHandInput!) {
       started_on
       players
       direction
+      played
     }
     gameId
     user
     playerNumber
+    createdAt
   }
 }
 `;
@@ -112,10 +117,12 @@ export const updateHand = `mutation UpdateHand($input: UpdateHandInput!) {
       started_on
       players
       direction
+      played
     }
     gameId
     user
     playerNumber
+    createdAt
   }
 }
 `;
@@ -141,10 +148,12 @@ export const deleteHand = `mutation DeleteHand($input: DeleteHandInput!) {
       started_on
       players
       direction
+      played
     }
     gameId
     user
     playerNumber
+    createdAt
   }
 }
 `;
@@ -167,6 +176,7 @@ export const createMessages = `mutation CreateMessages($input: CreateMessagesInp
       started_on
       players
       direction
+      played
     }
     gameId
     user
@@ -194,6 +204,7 @@ export const updateMessages = `mutation UpdateMessages($input: UpdateMessagesInp
       started_on
       players
       direction
+      played
     }
     gameId
     user
@@ -221,6 +232,7 @@ export const deleteMessages = `mutation DeleteMessages($input: DeleteMessagesInp
       started_on
       players
       direction
+      played
     }
     gameId
     user

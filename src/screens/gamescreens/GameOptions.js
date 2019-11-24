@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Button, Icon } from "react-native-elements";
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Button, Icon } from 'react-native-elements';
 
-import Loading from "../../components/Loading";
+import Loading from '../../components/Loading';
 
-import GameQuery from "../../queries/game/getGame";
-import UpdateQuery from "../../mutations/updateGame";
-import CreateMutation from "../../mutations/createHand";
-import cardDeck from "../../data/cards.json";
-import { shuffle } from "../../functions/playCards";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import GameQuery from '../../queries/game/getGame';
+import UpdateQuery from '../../mutations/updateGame';
+import CreateMutation from '../../mutations/createHand';
+import cardDeck from '../../data/cards.json';
+import { shuffle } from '../../functions/playCards';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 
 function GameOptions(props) {
   const { loading, error, data } = useQuery(GameQuery, {
     variables: {
-      id: props.navigation.getParam("gameId")
-    }
+      id: props.navigation.getParam('gameId'),
+    },
   });
   const [updateGame] = useMutation(UpdateQuery);
   const [createHand] = useMutation(CreateMutation);
 
-  console.log(data);
+  //console.log(data);
   if (loading) return <Loading />;
 
   // state = {
@@ -33,15 +33,15 @@ function GameOptions(props) {
   const gotoGame = async () => {
     const { id, started } = data.getGame;
     if (started) {
-      console.log("started");
+      console.log('started');
       //navigate if game already started
-      props.navigation.navigate("Game", {
-        gameId: id
+      props.navigation.navigate('Game', {
+        gameId: id,
       });
     } else {
       await initialCardHandOut();
-      props.navigation.navigate("Game", {
-        gameId: id
+      props.navigation.navigate('Game', {
+        gameId: id,
       });
     }
   };
@@ -79,7 +79,7 @@ function GameOptions(props) {
       gameId: getGame.id,
       user: players[0],
       number: 1,
-      cards: player1Cards
+      cards: player1Cards,
     });
 
     await createHand({
@@ -88,8 +88,8 @@ function GameOptions(props) {
         gameId: getGame.id,
         user: players[0],
         number: 1,
-        cards: player1Cards
-      }
+        cards: player1Cards,
+      },
     }).then(res => {
       console.log(res);
       // this.setState({ player1Create: true });
@@ -101,8 +101,8 @@ function GameOptions(props) {
         gameId: getGame.id,
         user: players[1],
         number: 2,
-        cards: player2Cards
-      }
+        cards: player2Cards,
+      },
     }).then(res => {
       console.log(res);
       // this.setState({ player2Create: true });
@@ -113,8 +113,8 @@ function GameOptions(props) {
         id: getGame.id,
         cards: remainingCards,
         onPlay,
-        started: true
-      }
+        started: true,
+      },
     }).then(res => {
       console.log(res);
       // this.setState({ loading: false, gameUpate: true });
@@ -135,12 +135,12 @@ function GameOptions(props) {
           containerStyle={styles.button}
           icon={<Icon name="keyboard-capslock" size={15} color="white" />}
           buttonStyle={{
-            backgroundColor: "#99173C"
+            backgroundColor: '#99173C',
           }}
           titleStyle={{
-            color: "#EFFFCD"
+            color: '#EFFFCD',
           }}
-          title={getGame.started ? "Continue Game" : "Start Game"}
+          title={getGame.started ? 'Continue Game' : 'Start Game'}
           raised
           onPress={() => gotoGame(getGame.gameStarted, getGame.id)}
         />
@@ -153,22 +153,22 @@ function GameOptions(props) {
 
 const styles = StyleSheet.create({
   body: {
-    backgroundColor: "#2E2633",
+    backgroundColor: '#2E2633',
     flex: 1,
-    paddingTop: 70
+    paddingTop: 70,
   },
   main: {
-    flexDirection: "column",
+    flexDirection: 'column',
     //flex: 2,
-    alignItems: "stretch",
-    justifyContent: "space-around",
+    alignItems: 'stretch',
+    justifyContent: 'space-around',
     padding: 20,
     //height: 500
-    backgroundColor: "#2E2633"
+    backgroundColor: '#2E2633',
   },
   button: {
-    marginBottom: 50
-  }
+    marginBottom: 50,
+  },
 });
 
 export default GameOptions;

@@ -23,16 +23,21 @@ export function UserProvider(props) {
 
   async function signIn(num) {
     //run a bunch of code in here
+    await AsyncStorage.setItem('lastCardId', num);
     setLoggedIn(true);
     setUserId(num);
   }
 
-  async function SingOut() {
-    console.log('sign Out');
+  async function signOut() {
+    await AsyncStorage.removeItem('lastCardId');
+    setLoggedIn(true);
+    setUserId(undefined);
   }
 
   return (
-    <UserContext.Provider value={{ userId, loggedIn, signIn, getUserId }}>
+    <UserContext.Provider
+      value={{ userId, loggedIn, signIn, getUserId, signOut }}
+    >
       {props.children}
     </UserContext.Provider>
   );

@@ -18,6 +18,7 @@ export const onCreateGame = `subscription OnCreateGame {
     started_on
     players
     direction
+    played
   }
 }
 `;
@@ -38,6 +39,7 @@ export const onUpdateGame = `subscription OnUpdateGame {
     started_on
     players
     direction
+    played
   }
 }
 `;
@@ -58,6 +60,7 @@ export const onDeleteGame = `subscription OnDeleteGame {
     started_on
     players
     direction
+    played
   }
 }
 `;
@@ -83,10 +86,12 @@ export const onCreateHand = `subscription OnCreateHand {
       started_on
       players
       direction
+      played
     }
     gameId
     user
     playerNumber
+    createdAt
   }
 }
 `;
@@ -112,10 +117,12 @@ export const onUpdateHand = `subscription OnUpdateHand {
       started_on
       players
       direction
+      played
     }
     gameId
     user
     playerNumber
+    createdAt
   }
 }
 `;
@@ -141,10 +148,12 @@ export const onDeleteHand = `subscription OnDeleteHand {
       started_on
       players
       direction
+      played
     }
     gameId
     user
     playerNumber
+    createdAt
   }
 }
 `;
@@ -167,6 +176,7 @@ export const onCreateMessages = `subscription OnCreateMessages {
       started_on
       players
       direction
+      played
     }
     gameId
     user
@@ -194,6 +204,7 @@ export const onUpdateMessages = `subscription OnUpdateMessages {
       started_on
       players
       direction
+      played
     }
     gameId
     user
@@ -221,6 +232,7 @@ export const onDeleteMessages = `subscription OnDeleteMessages {
       started_on
       players
       direction
+      played
     }
     gameId
     user

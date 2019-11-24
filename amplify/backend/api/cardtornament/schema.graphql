@@ -1,76 +1,96 @@
-type Game @model
-@key(name: "ByUser", fields: ["user", "started_on"], queryField: "gamesByUser")
-{
-	id: ID
-	title: String!
-	playerCount: Int!
-	winner: String
-	startCards: Int
-	gameType: String
-	private: Boolean
-	finished: Boolean
-	started: Boolean
-	cards: [Int]
-	onPlay: [Int]
-	user: String
-	started_on: AWSDateTime
-	players: [String]
-	direction: String
+type Game
+  @model
+  @key(
+    name: "ByUser"
+    fields: ["user", "started_on"]
+    queryField: "gamesByUser"
+  ) {
+  id: ID
+  title: String!
+  playerCount: Int!
+  winner: String
+  startCards: Int
+  gameType: String
+  private: Boolean
+  finished: Boolean
+  started: Boolean
+  cards: [Int]
+  onPlay: [Int]
+  user: String
+  started_on: AWSDateTime
+  players: [String]
+  direction: String
+  played: [Int]
 }
 
-type Hand @model
-	@key(name: "ByGame", fields: ["gameId", "user"], queryField: "handsByGame")
- {
-	id: ID
-	myCards: [Int]
-	available: [Int]
-	selectedCards: [Int] 
-	game: Game @connection
-	gameId: String
-	user: String
-	playerNumber: Int
+type Hand
+  @model
+  @key(name: "ByGame", fields: ["gameId", "user"], queryField: "handsByGame")
+  @key(
+    name: "byUser"
+    fields: ["user", "createdAt"]
+    queryField: "handsByUser"
+  ) {
+  id: ID
+  myCards: [Int]
+  available: [Int]
+  selectedCards: [Int]
+  game: Game @connection
+  gameId: String
+  user: String
+  playerNumber: Int
+  createdAt: AWSDateTime
 }
 
-type Messages @model
-@key(name: "GameMessages", fields: ["gameId", "sentOn"], queryField: "messagesByGame"){
-	id: ID
-	game: Game @connection
-	gameId: String
-	user: String
-	content: String
-	sentOn: AWSDateTime
+type Messages
+  @model
+  @key(
+    name: "GameMessages"
+    fields: ["gameId", "sentOn"]
+    queryField: "messagesByGame"
+  ) {
+  id: ID
+  game: Game @connection
+  gameId: String
+  user: String
+  content: String
+  sentOn: AWSDateTime
 }
 
-type Profile @model 
-@key(name: "profileLast", fields: ["lastAvailable", "level"], queryField: "profileByAvailable")
-{
-	id: ID
-	name: String
-	image: String
-	userID: String
-	followers: Int
-	following: Int
-	friends: [Person]
-	gamesWon: Int
-	gemesLost: Int
-	ranking: Int
-	last_played_on: AWSDateTime
-	inGame: Boolean
-	lastAvailable: AWSDateTime
-	points: Int
-	level: Int
-	trophies: [Trophy] @connection
-	canBeChallenged: Boolean
+type Profile
+  @model
+  @key(
+    name: "profileLast"
+    fields: ["lastAvailable", "level"]
+    queryField: "profileByAvailable"
+  ) {
+  id: ID
+  name: String
+  image: String
+  userID: String
+  followers: Int
+  following: Int
+  friends: [Person]
+  gamesWon: Int
+  gemesLost: Int
+  ranking: Int
+  last_played_on: AWSDateTime
+  inGame: Boolean
+  lastAvailable: AWSDateTime
+  points: Int
+  level: Int
+  trophies: [Trophy] @connection
+  canBeChallenged: Boolean
 }
 
 type Trophy @model {
-	id: ID
-	name: String
-	image: String
+  id: ID
+  name: String
+  image: String
 }
 
 type Person {
-	name: String
-	image: String
-	id: String
+  name: String
+  image: String
+  id: String
 }

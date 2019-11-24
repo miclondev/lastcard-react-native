@@ -14,11 +14,11 @@ function GameList(props) {
   const { userId, loggedIn, checkSignedIn, getUserId } = useContext(
     UserContext
   );
-  console.log(userId, loggedIn, checkSignedIn);
 
   useEffect(() => {
     async function checkUser() {
       const user = await getUserId();
+      console.log(user);
       if (!user) {
         props.navigation.navigate('Auth');
       }
@@ -40,9 +40,13 @@ function GameList(props) {
       </View>
     );
 
+  console.log(data);
+
+  //  return <View />;
+
   return (
     <View style={{ ...styles.main, backgroundColor: colors[theme].darkColor }}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <Text style={styles.text}> Your Games </Text>
         <Button
           icon={{
@@ -59,23 +63,23 @@ function GameList(props) {
           title="Create A New Game"
           onPress={() => props.navigation.navigate('NewGame')}
         />
-      </View>
+      </View> */}
 
       <View style={styles.games}>
-        {data.gamesByUser.items.map(g => (
+        {data.handsByUser.items.map(g => (
           <TouchableOpacity
-            key={g.id}
+            key={g.game.id}
             style={{
               ...styles.game,
               backgroundColor: colors[theme].darkVarient,
             }}
             onPress={() =>
               props.navigation.navigate('GameOptions', {
-                gameId: g.id,
+                gameId: g.game.id,
               })
             }
           >
-            <Text style={styles.text}> {g.title}</Text>
+            <Text style={styles.text}>{g.game.id}</Text>
           </TouchableOpacity>
         ))}
       </View>

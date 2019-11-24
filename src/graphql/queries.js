@@ -18,6 +18,7 @@ export const getGame = `query GetGame($id: ID!) {
     started_on
     players
     direction
+    played
   }
 }
 `;
@@ -43,6 +44,7 @@ export const listGames = `query ListGames(
       started_on
       players
       direction
+      played
     }
     nextToken
   }
@@ -70,10 +72,12 @@ export const getHand = `query GetHand($id: ID!) {
       started_on
       players
       direction
+      played
     }
     gameId
     user
     playerNumber
+    createdAt
   }
 }
 `;
@@ -104,10 +108,12 @@ export const listHands = `query ListHands(
         started_on
         players
         direction
+        played
       }
       gameId
       user
       playerNumber
+      createdAt
     }
     nextToken
   }
@@ -132,6 +138,7 @@ export const getMessages = `query GetMessages($id: ID!) {
       started_on
       players
       direction
+      played
     }
     gameId
     user
@@ -164,6 +171,7 @@ export const listMessagess = `query ListMessagess(
         started_on
         players
         direction
+        played
       }
       gameId
       user
@@ -297,6 +305,7 @@ export const gamesByUser = `query GamesByUser(
       started_on
       players
       direction
+      played
     }
     nextToken
   }
@@ -339,10 +348,60 @@ export const handsByGame = `query HandsByGame(
         started_on
         players
         direction
+        played
       }
       gameId
       user
       playerNumber
+      createdAt
+    }
+    nextToken
+  }
+}
+`;
+export const handsByUser = `query HandsByUser(
+  $user: String
+  $createdAt: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelHandFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  handsByUser(
+    user: $user
+    createdAt: $createdAt
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      myCards
+      available
+      selectedCards
+      game {
+        id
+        title
+        playerCount
+        winner
+        startCards
+        gameType
+        private
+        finished
+        started
+        cards
+        onPlay
+        user
+        started_on
+        players
+        direction
+        played
+      }
+      gameId
+      user
+      playerNumber
+      createdAt
     }
     nextToken
   }
@@ -382,6 +441,7 @@ export const messagesByGame = `query MessagesByGame(
         started_on
         players
         direction
+        played
       }
       gameId
       user

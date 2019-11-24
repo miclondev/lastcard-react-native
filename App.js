@@ -14,6 +14,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 
 import { ThemeProvider } from './src/context/ThemeContext';
 import { UserProvider } from './src/context/UserContext';
+import { GameProvider } from './src/context/GameContext';
 
 const url = awsmobile.aws_appsync_graphqlEndpoint;
 
@@ -41,7 +42,9 @@ function AppState() {
   return (
     <ThemeProvider>
       <UserProvider>
-        <MainNav />
+        <GameProvider>
+          <MainNav />
+        </GameProvider>
       </UserProvider>
     </ThemeProvider>
   );
