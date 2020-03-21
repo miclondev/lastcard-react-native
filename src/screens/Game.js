@@ -9,47 +9,26 @@ import {
 import PlayerDeck from '../components/play/PlayerDeck';
 import BackDeck from '../components/play/BackDeck';
 import MidPlay from '../components/play/MidPlay';
-
 import Loading from '../components/Loading';
-
 import colors, { darkColor, darkAccent } from '../functions/colors';
-
 import { ThemeContext } from '../context/ThemeContext';
-import { GameContext } from '../context/GameContext';
-import { UserContext } from '../context/UserContext';
-import { useQuery } from '@apollo/react-hooks';
-import getGame from '../queries/game/getGame';
+
 const width = Dimensions.get('window').width;
 
 function Game(props) {
   const { theme } = useContext(ThemeContext);
-  const { loggedIn } = useContext(UserContext);
-  const { game, setGame } = useContext(GameContext);
-  const { navigation } = props;
-  const id = navigation.getParam('gameId');
-
-  const { error, loading, data } = useQuery(getGame, {
-    variables: { id },
-  });
-
-  if (loading) return <Loading />;
-
-  useEffect(() => {
-    setGame(data.getGame);
-  }, [JSON.stringify(data.getGame)]);
-
   return (
     <View style={{ ...styles.main, backgroundColor: colors[theme].darkColor }}>
       <View style={styles.top}>
-        <BackDeck gameId={id} />
+        <BackDeck />
       </View>
 
       <View style={styles.mid}>
-        <MidPlay gameId={id} />
+        <MidPlay />
       </View>
 
       <View style={styles.bottom}>
-        <PlayerDeck gameId={id} user="0768853979" />
+        <PlayerDeck />
       </View>
     </View>
   );

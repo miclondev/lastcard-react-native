@@ -13,9 +13,9 @@ import getHand from '../../queries/player/getHand';
 import cards from '../../data/cards.json';
 
 import { Entypo } from '@expo/vector-icons';
-import { useQuery } from '@apollo/react-hooks';
 import { onSelectCard } from '../../functions/playCards';
 import { UserContext } from '../../context/UserContext';
+import { GameContext } from '../../context/GameContext';
 
 const width = Dimensions.get('window').width;
 
@@ -23,25 +23,24 @@ function PlayerDeck(props) {
   const [myCards, setMyCards] = useState([]);
   const [currentCards, setCurrentCards] = useState([]);
   const { userId } = useContext(UserContext);
+  const { game, hands } = useContext(GameContext);
+
   console.log(userId);
 
-  const { error, loading, data } = useQuery(getHand, {
-    variables: {
-      game: props.gameId,
-      user: userId,
-    },
-  });
-
-  //   if (loading) return <Loading />;
+  return <View />;
 
   useEffect(() => {
-    if (!loading) {
-      const { myCards } = data.handsByGame.items[0];
-      console.log(myCards);
-      setMyCards(myCards);
-      setCurrentCards(myCards);
-    }
+    //find hand by user
+    const index = hands.findIndex(a => a.user === userId);
+    setMyCards(hands[index].myCards)
+
+    //   const myCards = data ? data.handsByGame.items[0].myCards : [];
+    //   console.log(myCards);
+    //   // setMyCards(myCards);
+    //   // setCurrentCards(myCards);
   }, []);
+
+  // console.log(error, loading, data);
 
   // state = {
   //     action: "Select Cards",

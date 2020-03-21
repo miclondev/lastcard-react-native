@@ -4,11 +4,10 @@ export const GameContext = createContext();
 
 export const GameProvider = props => {
   const [game, setGame] = useState(undefined);
-
-  const changeGame = game => setGame(game);
+  const [hands, setHands] = useState(undefined);
 
   return (
-    <GameContext.Provider value={{ game, setGame }}>
+    <GameContext.Provider value={{ game, setGame, hands, setHands }}>
       {props.children}
     </GameContext.Provider>
   );

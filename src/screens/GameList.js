@@ -18,7 +18,7 @@ function GameList(props) {
   useEffect(() => {
     async function checkUser() {
       const user = await getUserId();
-      console.log(user);
+      //console.log(user);
       if (!user) {
         props.navigation.navigate('Auth');
       }
@@ -40,7 +40,7 @@ function GameList(props) {
       </View>
     );
 
-  console.log(data);
+  //console.log(data);
 
   //  return <View />;
 

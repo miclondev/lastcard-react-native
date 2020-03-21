@@ -28,7 +28,11 @@ const remStyles= StyleSheet.create({
     }
 })
 
-class MidPlay extends Component {
+function MidPlay(){
+    return<View/>
+}
+
+class Mind extends Component {
     render(){
         return(
             <View>

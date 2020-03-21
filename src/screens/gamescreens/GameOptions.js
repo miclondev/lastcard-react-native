@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 
@@ -10,28 +10,32 @@ import CreateMutation from '../../mutations/createHand';
 import cardDeck from '../../data/cards.json';
 import { shuffle } from '../../functions/playCards';
 import { useQuery, useMutation } from '@apollo/react-hooks';
+import { GameContext } from '../../context/GameContext';
 
 function GameOptions(props) {
+  //get context
+  const { setGame, setHands } = useContext(GameContext);
+
   const { loading, error, data } = useQuery(GameQuery, {
     variables: {
       id: props.navigation.getParam('gameId'),
+      game: props.navigation.getParam('gameId'),
     },
   });
   const [updateGame] = useMutation(UpdateQuery);
   const [createHand] = useMutation(CreateMutation);
 
-  //console.log(data);
+  useEffect(() => {
+    if (!loading && !error) {
+      setGame(data.game);
+      setHands(data.hands);
+    }
+  }, [loading]);
+
   if (loading) return <Loading />;
 
-  // state = {
-  //   message: 'invite player to game',
-  //   player1Create: false,
-  //   player2Create: false,
-  //   gameUpate: false
-  // };
-
   const gotoGame = async () => {
-    const { id, started } = data.getGame;
+    const { id, started } = data.game;
     if (started) {
       console.log('started');
       //navigate if game already started
@@ -46,9 +50,10 @@ function GameOptions(props) {
     }
   };
 
+  ///create a new game
   const initialCardHandOut = async () => {
-    const { getGame } = data;
-    const { players } = getGame;
+    const { game } = data;
+    const { players } = game;
     const initialPlay = 4;
     let player1Cards = [];
     let player2Cards = [];
@@ -74,60 +79,37 @@ function GameOptions(props) {
       remainingCards.push(cards[i].id);
     }
 
-    console.log({
-      game: getGame.id,
-      gameId: getGame.id,
-      user: players[0],
-      number: 1,
-      cards: player1Cards,
-    });
-
     await createHand({
       variables: {
-        game: getGame.id,
-        gameId: getGame.id,
+        game: game.id,
+        gameId: game.id,
         user: players[0],
         number: 1,
         cards: player1Cards,
       },
-    }).then(res => {
-      console.log(res);
-      // this.setState({ player1Create: true });
     });
 
     await createHand({
       variables: {
-        game: getGame.id,
-        gameId: getGame.id,
+        game: game.id,
+        gameId: game.id,
         user: players[1],
         number: 2,
         cards: player2Cards,
       },
-    }).then(res => {
-      console.log(res);
-      // this.setState({ player2Create: true });
     });
 
     await updateGame({
       variables: {
-        id: getGame.id,
+        id: game.id,
         cards: remainingCards,
         onPlay,
         started: true,
       },
-    }).then(res => {
-      console.log(res);
-      // this.setState({ loading: false, gameUpate: true });
     });
   };
 
-  // console.log("game", this.props.game)
-  const { getGame } = data;
-
-  //console.log(game)
-
-  // return <div />;
-
+  const { game } = data;
   return (
     <View style={styles.body}>
       <View style={styles.main}>
@@ -140,9 +122,9 @@ function GameOptions(props) {
           titleStyle={{
             color: '#EFFFCD',
           }}
-          title={getGame.started ? 'Continue Game' : 'Start Game'}
+          title={game.started ? 'Continue Game' : 'Start Game'}
           raised
-          onPress={() => gotoGame(getGame.gameStarted, getGame.id)}
+          onPress={() => gotoGame(game.gameStarted, game.id)}
         />
 
         <Text> start game</Text>
@@ -172,29 +154,3 @@ const styles = StyleSheet.create({
 });
 
 export default GameOptions;
-
-// compose(
-//   graphql(createHand, {
-//     name: 'createHand'
-//   }),
-//   graphql(updateGame, {
-//     name: 'updateGame'
-//   }),
-//   graphql(getGame, {
-//     name: 'getGame',
-//     options: props => {
-//       const { navigation } = props;
-//       const id = navigation.getParam(
-//         'gameId',
-//         '6b63d5ca-7822-442b-91f2-4b3bc88da22d'
-//       );
-//       return {
-//         variables: { id }
-//       };
-//     },
-//     props: props => ({
-//       loading: props.getGame.loading,
-//       game: props.getGame.getGame ? props.getGame.getGame : {}
-//     })
-//   })
-// )(GameOptions);
