@@ -20,7 +20,7 @@
     "aws-appsync-auth-link": "^1.0.1",
     "aws-appsync-react": "^1.2.9",
     "aws-appsync-subscription-link": "^1.0.1",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "expo": "^34.0.1",
     "expo-contacts": "~6.0.0",
     "expo-permissions": "~6.0.0",
